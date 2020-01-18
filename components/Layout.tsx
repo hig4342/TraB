@@ -1,6 +1,8 @@
 import * as React from 'react'
 import { Layout } from 'antd'
+import Navbar from '@components/Navbar'
 import 'antd/dist/antd.css'
+import '@assets/Layout.less'
 
 const { Header, Footer, Content } = Layout;
 
@@ -8,9 +10,9 @@ const AppLayout: React.SFC = ({children}) => {
   return (
     <Layout>
       <Header>
-        <p>상단</p>
+        <Navbar />
       </Header>
-      <Content>
+      <Content className="container">
         {children}
       </Content>
       <Footer>

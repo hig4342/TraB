@@ -1,10 +1,12 @@
 import * as React from 'react'
 import Link from 'next/link'
+import Router from 'next/router'
 import axios from 'axios'
 import { NextPage } from 'next'
 import { Input, Form, Button, message } from 'antd'
 import { Store, ValidateErrorEntity } from 'rc-field-form/lib/interface';
 import useUser from '@hooks/useUser'
+import { User } from '@reducers/userReducer'
 
 const SigninPage: NextPage = () => {
 
@@ -13,7 +15,9 @@ const SigninPage: NextPage = () => {
   const onFinish = (values: Store) => {
     console.log('Success:', values);
     axios.post('/api/auth/signin', values).then( result => {
-      onLogin({user: result.data})
+      const user: User = result.data
+      onLogin(user)
+      Router.push('/')
     })
   };
 

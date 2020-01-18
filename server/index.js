@@ -28,12 +28,14 @@ passport.use(new LocalStrategy({
   session: true,
 },(req, email, password, done) => {
   models.User.findOne({
-    where: {email: email}
+    attributes: { exclude: ['salt'] },
+    where: { email: email }
   }).then( result => {
-    const user = result.dataValues
-    if (!user) {
-      return done(null, false, { message: '존재하지 않는 아이디입니다.' })
+    console.log(result)
+    if (!result) {
+      return done(null, false, { message: '존재하지 않는 이메일입니다.' })
     }
+    const user = result.dataValues
     if (user.password !== password) { 
       return done(null, false, { message: '비밀번호가 틀렸습니다.' })
     }
@@ -48,13 +50,14 @@ passport.serializeUser((user, done) => {
 })
 
 passport.deserializeUser((user, done) => {
-  models.User.findOne({
-    where: {id: user.id}
-  }).then( result => {
-    done(null, result)
-  }).catch( err => {
-    done(err)
-  })
+  done(null, user)
+  // models.User.findOne({
+  //   where: {id: user.id}
+  // }).then( result => {
+  //   done(null, result)
+  // }).catch( err => {
+  //   done(err)
+  // })
 })
 
 app.prepare().then(() => {
@@ -69,6 +72,14 @@ app.prepare().then(() => {
   server.use(passport.initialize())
   server.use(passport.session())
   
+  router.get('/auth/signin', async (ctx, next) => {
+    if(ctx.isAuthenticated()) {
+      ctx.redirect('back')
+    }
+    await app.render(ctx.req, ctx.res, '/auth/signin', ctx.query)
+    ctx.respond = false
+  })
+
   router.all('*', async ctx => {
     await handle(ctx.req, ctx.res)
     ctx.respond = false

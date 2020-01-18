@@ -12,7 +12,7 @@ module.exports = withCSS(withLess({
     config.resolve.alias['@components'] = path.join(__dirname, 'components')
     config.resolve.alias['@pages'] = path.join(__dirname, 'pages')
     config.resolve.alias['@models'] = path.join(__dirname, 'models')
-    config.resolve.alias['@modules'] = path.join(__dirname, 'modules')
+    config.resolve.alias['@reducers'] = path.join(__dirname, 'reducers')
     config.resolve.alias['@hooks'] = path.join(__dirname, 'hooks')
 
     return config

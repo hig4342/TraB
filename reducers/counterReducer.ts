@@ -19,7 +19,7 @@ const initialState: CounterState = {
   count: 0
 };
 
-const counterReducer = (state: CounterState = initialState, action: CounterAction) => {
+const counterReducer = (state = initialState, action: CounterAction) => {
   switch (action.type) {
     case INCREASE:
       return { count: state.count + 1 };
