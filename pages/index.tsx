@@ -1,9 +1,9 @@
 import * as React from 'react'
-import Link from 'next/link'
 import axios from 'axios'
 import { NextPage } from 'next'
-import Counter from '@components/Counter'
 import NoticeSwiper from '@components/NoticeSwiper'
+import CurrentSituation from '@components/CurrentSituation'
+import Descriptions from '@components/Descriptions'
 
 type Board = {
   id: number;
@@ -13,27 +13,26 @@ type Board = {
 
 type Props = {
   notices: Board[]
-  inline?: boolean
+  planners: {
+    domestic: number
+    foreign: number
+  }
 }
 
-const IndexPage: NextPage<Props> = ({notices}) => {
+const IndexPage: NextPage<Props> = ({notices, planners}) => {
 
   return (
-    <div>
+    <div className='index-page'>
       <NoticeSwiper items={notices}/>
-      <h1>메인화면</h1>
-      <p>
-        <Link href="/auth/signin">
-          <a>로그인</a>
-        </Link>
-      </p>
-      <Counter />
+      <CurrentSituation planners={planners} designers={3}/>
+      <NoticeSwiper inline items={notices} />
+      <Descriptions />
     </div>
   )
 }
 
 IndexPage.getInitialProps = async () => {
-  const noticeResponse = await axios.get('https://api.unsplash.com/photos/?client_id=e3de30ec2ae17d45b25dfc2b9e10eae85591e332d281df76ca3d4119cb81c48e')
+  const noticeResponse = await axios.get('https://api.unsplash.com/photos/random/?client_id=e3de30ec2ae17d45b25dfc2b9e10eae85591e332d281df76ca3d4119cb81c48e&count=10')
   const notices = noticeResponse.data.map((notice: any) => ({
     id: notice.id,
     board_state: 1,
@@ -41,8 +40,11 @@ IndexPage.getInitialProps = async () => {
     created_at: notice.created_at,
     updated_at: notice.updated_at
   }))
+
+  const planners = await axios.get('/api/planners/count')
   return {
-    notices: notices
+    notices: notices,
+    planners: planners.data
   }
 }
 

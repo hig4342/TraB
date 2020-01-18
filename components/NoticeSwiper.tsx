@@ -4,6 +4,7 @@ import { SwiperOptions } from 'swiper'
 import Link from 'next/link';
 
 import 'swiper/css/swiper.css'
+import '@assets/NoticeSwiper.less'
 
 type Board = {
   id: number;

@@ -11,6 +11,41 @@
   font-size: medium;
 }
 
+input[type=password] {
+  font-family: sans-serif;
+}
+
+h1 {
+  &.big-title {
+    text-align: center;
+    font-size: 36px;
+    margin-top: 1rem;
+    margin-bottom: 4rem;
+  }
+  &.small-title {
+    font-size: 28px;
+    line-height: 48px;
+    display: inline-flex;
+    &::before {
+      content:"";
+      width: 35px;
+      height: 48px;
+      background-image: url('/small_logo.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      margin-right: 1rem;
+    }
+  }
+}
+
+h4 {
+  &.sub-title {
+    font-size: 20px;
+    margin-bottom: 4rem;
+  }
+}
+
 @media (max-width: 575.98px) {
   .container {
     width: 100%;

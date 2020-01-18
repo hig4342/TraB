@@ -7,8 +7,8 @@ const passport = require('koa-passport')
 const LocalStrategy = require('passport-local').Strategy
 const models = require('../models')
 
-const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
+const port = dev ? 80 : 3000
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
