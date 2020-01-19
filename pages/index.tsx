@@ -32,6 +32,7 @@ const IndexPage: NextPage<Props> = ({notices, planners}) => {
 }
 
 IndexPage.getInitialProps = async () => {
+  const baseUrl = process.env.NODE_ENV === 'production' ? 'https://trab.co.kr' : ''
   const noticeResponse = await axios.get('https://api.unsplash.com/photos/random/?client_id=e3de30ec2ae17d45b25dfc2b9e10eae85591e332d281df76ca3d4119cb81c48e&count=10')
   const notices = noticeResponse.data.map((notice: any) => ({
     id: notice.id,
@@ -41,7 +42,7 @@ IndexPage.getInitialProps = async () => {
     updated_at: notice.updated_at
   }))
 
-  const planners = await axios.get('/api/planners/count')
+  const planners = await axios.get(baseUrl + '/api/planners/count')
   return {
     notices: notices,
     planners: planners.data
