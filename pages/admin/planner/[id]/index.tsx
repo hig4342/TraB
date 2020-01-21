@@ -3,7 +3,7 @@ import axios from 'axios'
 import { NextPage } from 'next'
 import { Planner, Theme } from 'type'
 import DesignerDescription from '@components/DesignerDescription'
-import PlannerContent from '@components/admin/PlannerContent'
+import AdminPlannerContent from '@components/AdminPlannerContent'
 
 type Props = {
   planner: Planner;
@@ -17,7 +17,7 @@ const AdminPlanner: NextPage<Props> = ({planner, themes})=> {
   return (
     <div className='planner' style={{width: '100%'}}>
       <DesignerDescription designer={planner.User} plannerId={planner.id}/>
-      <PlannerContent planner={planner} themes={themes}/>
+      <AdminPlannerContent planner={planner} themes={themes}/>
     </div>
   )
 }
