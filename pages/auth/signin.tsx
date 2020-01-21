@@ -2,8 +2,9 @@ import * as React from 'react'
 import Link from 'next/link'
 import Router from 'next/router'
 import axios from 'axios'
+import jwtDecode from 'jwt-decode'
 import { NextPage } from 'next'
-import { Input, Form, Button, message } from 'antd'
+import { Input, Form, Button, message, Checkbox } from 'antd'
 import { Store, ValidateErrorEntity } from 'rc-field-form/lib/interface';
 import useUser from '@hooks/useUser'
 import { User } from '@reducers/userReducer'
@@ -15,7 +16,12 @@ const SigninPage: NextPage = () => {
   const onFinish = (values: Store) => {
     console.log('Success:', values);
     axios.post('/api/auth/signin', values).then( result => {
-      const user: User = result.data
+      const usertoken = result.data
+      sessionStorage.setItem('usertoken', usertoken)
+      if(values.remember){
+        localStorage.setItem('usertoken', usertoken)
+      }
+      const user: User = jwtDecode(usertoken)
       onLogin(user)
       Router.push('/')
     })
@@ -60,6 +66,12 @@ const SigninPage: NextPage = () => {
           rules={[{ required: true, message: '비밀번호를 입력해주세요' }]}
         >
           <Input.Password />
+        </Form.Item>
+        <Form.Item
+          name='remember'
+          valuePropName="checked"
+        >
+          <Checkbox>로그인 상태 유지</Checkbox>
         </Form.Item>
         <Form.Item
           wrapperCol={{offset: 4, span: 6}}

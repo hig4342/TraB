@@ -2,14 +2,13 @@ import * as React from 'react'
 import axios from 'axios'
 import { NextPage } from 'next'
 import NoticeSwiper from '@components/NoticeSwiper'
+import ShowandPlan from '@components/ShowandPlan'
 import CurrentSituation from '@components/CurrentSituation'
+import Services from '@components/Services'
 import Descriptions from '@components/Descriptions'
+import { Board } from 'type'
 
-type Board = {
-  id: number;
-  board_state: number;
-  banner_image: string;
-}
+const baseUrl = process.env.NODE_ENV === 'production' ? 'https://trab.co.kr' : ''
 
 type Props = {
   notices: Board[]
@@ -25,6 +24,8 @@ const IndexPage: NextPage<Props> = ({notices, planners}) => {
     <div className='index-page'>
       <NoticeSwiper items={notices}/>
       <CurrentSituation planners={planners} designers={3}/>
+      <ShowandPlan />
+      <Services />
       <NoticeSwiper inline items={notices} />
       <Descriptions />
     </div>
@@ -32,19 +33,10 @@ const IndexPage: NextPage<Props> = ({notices, planners}) => {
 }
 
 IndexPage.getInitialProps = async () => {
-  const baseUrl = process.env.NODE_ENV === 'production' ? 'https://trab.co.kr' : ''
-  const noticeResponse = await axios.get('https://api.unsplash.com/photos/random/?client_id=e3de30ec2ae17d45b25dfc2b9e10eae85591e332d281df76ca3d4119cb81c48e&count=10')
-  const notices = noticeResponse.data.map((notice: any) => ({
-    id: notice.id,
-    board_state: 1,
-    banner_image: notice.urls.raw+'&fit=crop&w=1080&h=270&q=80',
-    created_at: notice.created_at,
-    updated_at: notice.updated_at
-  }))
-
+  const notices = await axios.get(baseUrl + '/api/boards/notices')
   const planners = await axios.get(baseUrl + '/api/planners/count')
   return {
-    notices: notices,
+    notices: notices.data,
     planners: planners.data
   }
 }

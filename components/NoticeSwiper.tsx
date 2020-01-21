@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Swiper from 'react-id-swiper';
 import { SwiperOptions } from 'swiper'
-import Link from 'next/link';
+//import Link from 'next/link';
 
 import 'swiper/css/swiper.css'
 import '@assets/NoticeSwiper.less'
@@ -45,15 +45,15 @@ const NoticeSwiper: React.SFC<Props> = ({items, inline=false})=> {
     <Swiper {...options} containerClass={"notice-swiper swiper-container" + (inline ? ' inline' : '')}>
       {
         items.map((item) => {
-          if(item.board_state === 1){
+          // if(item.board_state === 1){
             return (
               <div className='item-wrapper' key={item.id}><img src={item.banner_image} /></div>
             )
-          } else {
-            return (
-              <div className='item-wrapper' key={item.id}><Link href={`/board/${item.id}`}><img src={item.banner_image} /></Link></div>
-            )
-          }
+          // } else {
+          //   return (
+          //     <div className='item-wrapper' key={item.id}><Link href={`/board/${item.id}`}><img src={item.banner_image} /></Link></div>
+          //   )
+          // }
         })
       }
     </Swiper>

@@ -1,0 +1,48 @@
+.services {
+  margin-top: 13rem;
+  margin-bottom: 6rem;
+  .selling-service {
+    .write-planner {
+      padding: 0 1rem;
+      img {
+        width: 100%;
+      }
+    }
+    .selling-information {
+      text-align: center;
+      font-size: 18px;
+      color: black;
+      position:absolute;
+      width: 100%;
+      top:50%;
+      transform: translate(0, -50%);
+      div {
+        line-height: 55px;
+      }
+    }
+    @media (max-width: 575.98px) {
+      .selling-information {
+        font-size: 14px;
+      }
+    }
+    .button-wrapper {
+      padding: 4rem 0;
+      text-align: center;
+      .selling-button {
+        font-size: 20px;
+        width: 250px;
+        height: 60px;
+        border-radius: 30px;
+        color: white;
+        background: linear-gradient( 150deg, rgb(142, 175, 236), rgb(117, 219, 185));
+        border: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 575.98px) {
+  .services {
+    margin-top: 5rem;
+  }
+}

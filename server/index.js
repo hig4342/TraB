@@ -5,7 +5,7 @@ const bodyParser = require('koa-bodyparser')
 const session = require('koa-session')
 const passport = require('koa-passport')
 const LocalStrategy = require('passport-local').Strategy
-const models = require('../models')
+const Models = require('../models')
 
 const dev = process.env.NODE_ENV !== 'production'
 const port = dev ? 80 : 3000
@@ -14,7 +14,7 @@ const handle = app.getRequestHandler()
 
 const api = require('./api')
 
-models.sequelize.sync().then( () => {
+Models.sequelize.sync().then( () => {
   console.log(" DB 연결 성공")
 }).catch(err => {
   console.log("연결 실패")
@@ -27,7 +27,7 @@ passport.use(new LocalStrategy({
   passReqToCallback: true,
   session: true,
 },(req, email, password, done) => {
-  models.User.findOne({
+  Models.User.findOne({
     attributes: { exclude: ['salt'] },
     where: { email: email }
   }).then( result => {
@@ -51,7 +51,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser((user, done) => {
   done(null, user)
-  // models.User.findOne({
+  // Models.User.findOne({
   //   where: {id: user.id}
   // }).then( result => {
   //   done(null, result)
@@ -65,7 +65,7 @@ app.prepare().then(() => {
   const router = new Router()
 
   server.proxy = true
-  server.keys = ['yellowinq']
+  server.keys = ['TraBSecret']
 
   server.use(session(server))
   server.use(bodyParser())
@@ -78,6 +78,15 @@ app.prepare().then(() => {
     }
     await app.render(ctx.req, ctx.res, '/auth/signin', ctx.query)
     ctx.respond = false
+  })
+
+  router.get('/admin', async ctx => {
+    const { user } = ctx.state
+    if(user && user.state_id === 9999) {
+      await app.render(ctx.req, ctx.res, '/admin', ctx.query)
+    } else {
+      ctx.redirect('back')
+    }
   })
 
   router.all('*', async ctx => {

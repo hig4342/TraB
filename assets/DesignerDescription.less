@@ -1,0 +1,53 @@
+.designer-description {
+  margin-bottom: 10rem;
+  .image-wrapper {
+    img {
+      padding: 10px;
+      width: 100%;
+    }
+  }
+  .designer-information {
+    table {
+      border-collapse: separate;
+      border-spacing: 25px;
+      .ant-descriptions-item {
+        span {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+  .designer-profile {
+    min-height: 5rem;
+  }
+  .self-introduction{
+    margin-top: 1.5rem;
+    .planner-list {
+      margin: 2rem auto;
+      .ant-card-hoverable:hover {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+      }
+      .planner-card {
+        padding: 5px;
+        border-radius: 5px;
+        .ant-card-body {
+          padding: 5px;
+        }
+      }
+      .premium {
+        &::before {
+          content: 'P';
+          position: absolute;
+          background: #fbc518;
+          color: white;
+          font-weight: bold;
+          text-align: center;
+          width: 50px;
+          height: 25px;
+          border-radius: 0 0 25px 25px;
+          right: 10%;
+        }
+      }
+    }
+  }
+}
