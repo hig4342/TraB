@@ -4,6 +4,7 @@ const Router = require('koa-router')
 const bodyParser = require('koa-bodyparser')
 const session = require('koa-session')
 const passport = require('koa-passport')
+const bcrypt = require('bcrypt-nodejs')
 const LocalStrategy = require('passport-local').Strategy
 const Models = require('../models')
 

@@ -33,7 +33,7 @@ const Signup: NextPage = ()=> {
     console.log(data)
     axios.post('/api/auth/signup', data).then( result => {
       console.log(result)
-      if(result.status == 201) {
+      if(result.status == 200) {
         Router.push('/')
       }
     }).catch( err => {
