@@ -1,12 +1,17 @@
 import * as React from 'react'
-import _axios from 'axios'
+import axios from 'axios'
 import { NextPage } from 'next'
 import Link from 'next/link'
+import Router from 'next/router';
 import { Callbacks } from 'rc-field-form/lib/interface';
 import { Form, Input, Button, message } from 'antd'
 //import EditorWrapper from '@components/EditorWrapper'
 
 import dynamic from 'next/dynamic'
+import useUser from '@hooks/useUser';
+
+const baseUrl = process.env.NODE_ENV === 'production' ? 'https://trab.co.kr' : ''
+
 const EditorWrapper = dynamic(
   () => import('@components/EditorWrapper'),
   { ssr: false }
@@ -14,9 +19,19 @@ const EditorWrapper = dynamic(
 
 const Write: NextPage = ()=> {
   const [form] = Form.useForm()
+  const { user } = useUser()
 
   const onFinish: Callbacks['onFinish'] = (values) => {
     console.log(values);
+    const form = {
+      title: values.title,
+      content: values.content,
+      UserId: user.id,
+    }
+    axios.post(baseUrl+'/api/boards', form).then( result => {
+      console.log(result)
+      Router.push('/board')
+    })
   };
 
   const onFinishFailed: Callbacks['onFinishFailed'] = (errorInfo) => {

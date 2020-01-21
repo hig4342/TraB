@@ -5,6 +5,18 @@ const boards = new Router({
   prefix: '/api/boards'
 })
 
+boards.post('/', async ctx => {
+  const {title, content, UserId} = ctx.request.body
+  const result = await Models.Board.create({
+    title: title,
+    content: content,
+    UserId: UserId,
+    board_state: 3
+  })
+
+  ctx.body = result
+})
+
 boards.get('/notices', async ctx => {
   const result = await Models.Board.findAll({
     where: { board_state: 1 }
