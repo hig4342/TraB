@@ -2,7 +2,7 @@ const Router = require('koa-router')
 const Models = require('../../../models')
 
 const cities = new Router({
-  prefix: '/api/cities'
+  prefix: '/api/admin/users'
 })
 
 cities.get('/', async ctx => {

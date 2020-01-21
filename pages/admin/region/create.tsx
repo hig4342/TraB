@@ -6,6 +6,8 @@ import { NextPage } from 'next'
 import { Radio, Form, Input, Button } from 'antd'
 import { RadioChangeEvent } from 'antd/lib/radio'
 
+const baseUrl = process.env.NODE_ENV === 'production' ? 'https://trab.co.kr' : ''
+
 const Create: NextPage = ()=> {
 
   const [form] = Form.useForm()
@@ -26,7 +28,7 @@ const Create: NextPage = ()=> {
 
   const onFinish = (data: any) => {
     console.log(data)
-    axios.post('/api/admin/cities', {
+    axios.post(baseUrl+'/api/admin/cities', {
       country_name: data.country_name,
       city_name: data.city_name
     }).then( result => {

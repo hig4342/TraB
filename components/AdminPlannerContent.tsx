@@ -6,6 +6,8 @@ import Router from 'next/router'
 import UploadWrapper from '@components/UploadWrapper'
 import '@assets/AdminPlannerContent.less'
 
+const baseUrl = process.env.NODE_ENV === 'production' ? 'https://trab.co.kr' : ''
+
 import dynamic from 'next/dynamic'
 const EditorWrapper = dynamic(
   () => import('@components/EditorWrapper'),//import EditorWrapper from '@components/EditorWrapper'
@@ -27,28 +29,27 @@ const AdminPlannerContent: React.SFC<Props> = ({planner, themes}) => {
     let contents = contentlist
     contents[index] = e
     setContentlist(contents)
-    console.log(contentlist)
+    console.log("글", contentlist)
   }
 
   const handleImage = (e: string, index: number) => {
     let images = imagelist
     images[index] = e
     setImagelist(images)
-    console.log(imagelist)
+    console.log("사진", imagelist)
   }
   
   const onFinish = (value: any) => {
     console.log(value)
     const form = {
-      id: planner.id,
       title: value.title,
       country_name: value.country,
       city_name: value.city,
-      contents_image: value.images,
-      contents_text: value.contents,
-      themes_id: value.thmes_id
+      contents_image: imagelist,
+      contents_text: contentlist,
+      themes_id: value.themes_id
     }
-    axios.put('/api/admin/planners', form).then( result => {
+    axios.put(baseUrl + `/api/admin/planners/${planner.id}`, form).then( result => {
       console.log(result)
       Router.push('/admin/planner')
     }).catch( err => {
@@ -60,8 +61,17 @@ const AdminPlannerContent: React.SFC<Props> = ({planner, themes}) => {
     console.log(value)
   }
 
+  const rejectPlanner = () => {
+    axios.patch(baseUrl + `/api/admin/planners/${planner.id}/state`, {upload_state: 2}).then( result => {
+      console.log(result)
+      Router.push('/admin/planner')
+    }).catch( err => {
+      console.log(err)
+    })
+  }
+
   const allowPlanner = () => {
-    axios.patch('/api/admin/planners/allow', {id: planner.id, upload_state: 3}).then( result => {
+    axios.patch(baseUrl + `/api/admin/planners/${planner.id}/state`, {upload_state: 3}).then( result => {
       console.log(result)
       Router.push('/admin/planner')
     }).catch( err => {
@@ -70,7 +80,16 @@ const AdminPlannerContent: React.SFC<Props> = ({planner, themes}) => {
   }
 
   const changePremium = () => {
-    axios.patch('/api/admin/planners/allow', {id: planner.id, upload_state: 4}).then( result => {
+    axios.patch(baseUrl + `/api/admin/planners/${planner.id}/state`, {upload_state: 4}).then( result => {
+      console.log(result)
+      Router.push('/admin/planner')
+    }).catch( err => {
+      console.log(err)
+    })
+  }
+
+  const changeItp = () => {
+    axios.patch(baseUrl + `/api/admin/planners/${planner.id}/state`, {upload_state: 5}).then( result => {
       console.log(result)
       Router.push('/admin/planner')
     }).catch( err => {
@@ -159,8 +178,10 @@ const AdminPlannerContent: React.SFC<Props> = ({planner, themes}) => {
           ))
         }
         <Form.Item>
+          <Button onClick={rejectPlanner}>계획표 거부</Button>
           <Button onClick={allowPlanner}>계획표 승인</Button>
           <Button onClick={changePremium}>편한계획표 변경</Button>
+          <Button onClick={changeItp}>ITP 변경</Button>
           <Button htmlType='submit'>수정하기</Button>
           <Button>취소</Button>
         </Form.Item>

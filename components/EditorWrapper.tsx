@@ -25,6 +25,7 @@ const EditorWrapper: React.SFC<Props> = ({ handleContent, height=500, hyperlink=
   return (
     <Editor
       apiKey="4kbo2x8k4ytvqatkvvre1wtug7xnmzpuqz6c5i475w3jb815"
+      id='editor'
       value={content}
       onEditorChange={handleEditorChange}
       init={{
@@ -33,7 +34,7 @@ const EditorWrapper: React.SFC<Props> = ({ handleContent, height=500, hyperlink=
         plugins: [
           'advlist lists', 
           'charmap emoticons',
-          'searchreplace preview paste table placeholder',
+          'searchreplace preview paste table',
           'image imagetools media' + (hyperlink ? ' link autolink' : ''),
         ],
         toolbar1: '\

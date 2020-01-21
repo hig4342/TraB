@@ -22,6 +22,9 @@ type Props = {
 
 const PlannerList: React.SFC<Props> = ({items, country, city, themes})=> {
 
+  const [length, setLength] = React.useState(12)
+  const [visible, setVisible] = React.useState(items.length >= 12)
+
   const options: ColProps = {
     className: "planner-col",
     xs: { span: 24 },
@@ -47,10 +50,17 @@ const PlannerList: React.SFC<Props> = ({items, country, city, themes})=> {
     event.stopPropagation()
   }
 
+  const handleLength = () => {
+    setLength(length + 4)
+    if(items.length >= length) {
+      setVisible(false)
+    }
+  }
+
   return (
     <div className="planner-list">
       <Row justify="start" align="middle" gutter={[16, 16]}>
-        {items.map((item) => (
+        {items.slice(0, length).map((item) => (
           <Col {...options} key={item.id}>
             <Link href={`/planner/${item.id}`}>
               <Card
@@ -61,7 +71,7 @@ const PlannerList: React.SFC<Props> = ({items, country, city, themes})=> {
                     alt="planner-image"
                     src={item.contents_image[item.thumbnail-1]}
                     //onError={errorHandle}
-                    style={{height: '100%'}}
+                    style={{height: '100%', width: '100%'}}
                   /></div>
                 }
               >
@@ -78,8 +88,8 @@ const PlannerList: React.SFC<Props> = ({items, country, city, themes})=> {
           </Col>
         ))}
       </Row>
-      <div className="show-more-button">
-        <div className='text-wrapper'>
+      <div style={{display: visible ? 'block' : 'none'}} className="show-more-button">
+        <div onClick={handleLength} className='text-wrapper'>
           <div><FontAwesomeIcon size='2x' icon={faPlus}/></div>
           <div>more</div>
         </div>

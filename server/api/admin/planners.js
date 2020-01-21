@@ -88,7 +88,7 @@ planners.put('/:id', async ctx => {
     CountryId: CountryId,
     CityId: CityId,
     contents_image: contents_image,
-    contents_image: contents_text,
+    contents_text: contents_text,
     themes_id: themes_id
   }, {
     where: { id: id }
@@ -112,10 +112,10 @@ planners.patch('/:id/payment', async ctx => {
 
 planners.patch('/:id/state', async ctx => {
   const { id } = ctx.params
-  const { state_id } = ctx.request.body
+  const { upload_state } = ctx.request.body
 
   const result = await Models.Planner.update({
-    state_id: state_id
+    upload_state: upload_state
   }, {
     where: {id: id}
   })

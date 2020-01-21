@@ -9,6 +9,7 @@ const planners = new Router({
 
 planners.get('/domestic', async ctx => {
   const result = await Models.Planner.findAll({
+    order: [['createdAt', 'DESC']],
     where: { 
       upload_state: [3, 4, 5],
       CountryId: 1

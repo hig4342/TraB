@@ -268,31 +268,36 @@ const MyPage: NextPage = ()=> {
                   />
                 </Modal>
               </Form.Item>
-              <Form.Item
-                {...itemLayout}
-                label='은행'
-                required={false}
-                name='account_bank'
-                rules={[{ required: true, message: '은행명을 입력하세요!' }]}
-              >
-                <Input disabled={changeable} placeholder='은행명'/>
-              </Form.Item>
-              <Form.Item
-                {...itemLayout}
-                label='계좌번호'
-                required={false}
-                name='account_num'
-                rules={[{ required: true, message: '계좌번호를 입력하세요!' }]}
-              >
-                <Input disabled={changeable} placeholder='계좌번호'/>
-              </Form.Item>
-              <Form.Item
-                {...itemLayout}
-                label='자기소개'
-                name='profile'
-              >
-                <Input.TextArea disabled={changeable} placeholder='자기소개'/>
-              </Form.Item>
+              { user.state_id === 4 ?
+                <>
+                <Form.Item
+                  {...itemLayout}
+                  label='은행'
+                  required={false}
+                  name='account_bank'
+                  rules={[{ required: true, message: '은행명을 입력하세요!' }]}
+                >
+                  <Input disabled={changeable} placeholder='은행명'/>
+                </Form.Item>
+                <Form.Item
+                  {...itemLayout}
+                  label='계좌번호'
+                  required={false}
+                  name='account_num'
+                  rules={[{ required: true, message: '계좌번호를 입력하세요!' }]}
+                >
+                  <Input disabled={changeable} placeholder='계좌번호'/>
+                </Form.Item>
+                <Form.Item
+                  {...itemLayout}
+                  label='자기소개'
+                  name='profile'
+                >
+                  <Input.TextArea disabled={changeable} placeholder='자기소개'/>
+                </Form.Item>
+                </>
+                : null
+              }
               <Form.Item label='설계자 등록여부'>
                 <div>{user.state_id < 4 ? '미등록' : '등록완료'}</div>
               </Form.Item>

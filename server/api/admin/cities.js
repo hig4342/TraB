@@ -66,6 +66,8 @@ cities.patch('/:id', async ctx => {
   const result2 = await Models.City.update({
     CountryId: CountryId,
     city_name: city_name
+  }, { 
+    where: {id: id}
   })
   
   ctx.body = result2

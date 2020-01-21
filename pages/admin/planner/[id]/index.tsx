@@ -5,6 +5,8 @@ import { Planner, Theme } from 'type'
 import DesignerDescription from '@components/DesignerDescription'
 import AdminPlannerContent from '@components/AdminPlannerContent'
 
+const baseUrl = process.env.NODE_ENV === 'production' ? 'https://trab.co.kr' : ''
+
 type Props = {
   planner: Planner;
   themes: Theme[];
@@ -25,8 +27,8 @@ const AdminPlanner: NextPage<Props> = ({planner, themes})=> {
 AdminPlanner.getInitialProps = async (req) => {
   const id = req.query.id
 
-  const planner = await axios.get(`/api/admin/planners/${id}`)
-  const theme = await axios.get('/api/themes')
+  const planner = await axios.get(baseUrl+`/api/admin/planners/${id}`)
+  const theme = await axios.get(baseUrl+'/api/themes')
   return {
     planner: planner.data,
     themes: theme.data

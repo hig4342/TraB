@@ -1,20 +1,99 @@
-.nav-bar {
+header{
+  margin-left: 40px;
+  margin-right: 40px;
   .logo {
-    float: left;
-    display: inline-flex;
-    margin-left: 40px;
+    position: absolute;
+    cursor: pointer;
   }
-  .main-menu {
+  .mainmenu {
     float: right;
-    display: inline-flex;
-    margin-right: 40px;
-    .ant-menu-horizontal {
-      border: none;
-      line-height: 62px;
+    display: flex;
+    font-size: 16px;
+    .menu-item {
+      display: inline-block;
+      &+.menu-item::before{
+        content: '|';
+      }
+      .main-item {
+        color: black;
+        padding: 13px 20px;
+      }
+      .submenu {
+        display: none;
+        position: relative;
+        text-align: center;
+        z-index: 10;
+        .sub-item {
+          display: block;
+          color: black;
+          box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, 0.05);
+          background-color: white;
+          opacity: 0;
+          transition-duration: 0.1s;
+          animation: enter 0.2s ease forwards;
+          .loop(6);
+          &:last-child {
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+          }
+          &:hover {
+            color: blue;
+          }
+        }
+      }
+      &:hover .submenu{
+        display: block;
+      }
+    }
+  }
+  .mobile-menu {
+    display: none;
+    .menu-button {
+      padding-top: 7px;
+      font-size: 24px;
+    }
+  }
+  @media (max-width: 575.98px) {
+    .logo {
+      width: 50%;
+      left: 25%;
+      text-align: center;
+    }
+    .mainmenu {
+      display: none;
+    }
+    .mobile-menu {
+      display: block;
+      cursor: pointer;
+      z-index: 10;
+      float: right;
     }
   }
 }
 
-.ant-menu-submenu {
-  text-align: center;
+.menu-drawer {
+  .menu-list {
+    &>li {
+      margin: 1rem auto;
+    }
+  }
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: scaleY(0.98) translateY(10px);
+ }
+  to {
+    opacity: 1;
+    transform: none;
+ }
+}
+
+.loop(@n, @i: 1) when (@i =< @n) {
+  &:nth-child(@{i}){
+    animation-duration: 0.2s + 0.1s * (@i - 1);
+    animation-delay: 0.1s * (@i - 1);
+  }
+  .loop(@n, (@i + 1));
 }

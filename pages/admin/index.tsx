@@ -28,10 +28,10 @@ const Admin: NextPage = ()=> {
       </Row>
       <Row gutter={[16, 16]}>
         <Col span={8}>
-          <Link href='/admin/notice'><Button>공지 사항</Button></Link>
+          <Link href='/admin/board/notice'><Button>공지 사항</Button></Link>
         </Col>
         <Col span={8}>
-          <Link href='/admin/advertise'><Button>광고</Button></Link>
+          <Link href='/admin/board/advertise'><Button>광고</Button></Link>
         </Col>
       </Row>
     </div>

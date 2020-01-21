@@ -4,6 +4,8 @@ export type Board = {
   content: string;
   board_state: number;
   banner_image: string;
+  main_image: string;
+  ad_deadline: Date;
   ad_link: string;
   hit: number;
   BoardReplies: BoardReply[];

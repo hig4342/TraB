@@ -108,6 +108,7 @@ const AdminPlannerList: NextPage<Props> = ({planner_data})=> {
     title: '자세히보기',
     dataIndex: 'id',
     key: 'details',
+    align: 'center',
     render: (key: number) => (
       <Link href='/admin/planner/[id]' as={`/admin/planner/${key}`}><a>자세히보기</a></Link>
     )

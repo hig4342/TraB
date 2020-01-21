@@ -32,7 +32,7 @@ const PopupWrapper: React.SFC<Props> = ({signin=false, email=false, enroll=false
 
   if(!loginCheck && !emailCheck && !enrollCheck && !pendingCheck){
     return (
-      <Link href={callback}><a>{children}</a></Link>
+      <Link href={callback}><a className='main-item'>{children}</a></Link>
     )
   } else if (loginCheck) {
     return (

@@ -53,6 +53,30 @@ h4 {
   .container {
     width: 100%;
   }
+  h1 {
+    &.big-title {
+      font-size: 36px;
+      margin-top: 1rem;
+      margin-bottom: 4rem;
+    }
+    &.small-title {
+      font-size: 20px;
+      line-height: 40px;
+      &::before {
+        width: 30px;
+        height: 40px;
+        margin-left: 1rem;
+      }
+    }
+  }
+  h4 {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    &.sub-title {
+      font-size: 17px;
+      margin-bottom: 2rem;
+    }
+  }
 }
 
 @media (min-width: 576px) {

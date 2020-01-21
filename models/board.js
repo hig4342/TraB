@@ -21,9 +21,17 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
       type: DataTypes.STRING
     },
+    main_image: {
+      allowNull: true,
+      type: DataTypes.STRING
+    },
     ad_link: {
       allowNull: true,
       type: DataTypes.STRING
+    },
+    ad_deadline: {
+      allowNull: true,
+      type: DataTypes.DATE
     },
     hit: {
       allowNull: false,

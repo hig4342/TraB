@@ -6,6 +6,7 @@ import useUser from '@hooks/useUser'
 import { User } from '@reducers/userReducer'
 import 'antd/dist/antd.css'
 import '@assets/Layout.less'
+import Foot from './Foot'
 
 const { Header, Footer, Content } = Layout;
 
@@ -35,7 +36,7 @@ const AppLayout: React.SFC = ({children}) => {
         {children}
       </Content>
       <Footer>
-        <p>하단</p>
+        <Foot />
       </Footer>
     </Layout>
   )

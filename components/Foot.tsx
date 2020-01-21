@@ -1,50 +1,46 @@
 import * as React from 'react'
-import { Layout, Row, Col } from 'antd'
+import { Row, Col } from 'antd'
 import '@assets/Foot.less'
-
-const { Footer } = Layout;
 
 const Foot: React.SFC = ()=> {
   return (
-    <Footer>
-      <div className='information'>
-        <Row>
-          <Col span={8}>
-            <div>
-              <span>Not Afraid, Not Nervous, For Stable.</span>
-              <span>트래비(TraB)</span>
-            </div>
-            <div>
-              <span>대표: 송기훈, 김민수, 김수환</span>
-              <span>사업자 등록 번호: 662-24-00804</span>
-            </div>
-            <div>
-              <span>개인정보 책임자: 김수환</span>
-              <span>통신판매업 등록 신고:</span>
-            </div>
-            <div>
-              <span>고객 문의: 010-7506-3732</span>
-              <span>카카오 플러스 친구: 트래비(TraB) 고객센터</span>
-            </div>
-            <div>
-              <span>이메일: trab2019@naver.com</span>
-            </div>
-            <div>
-              <span>사업장 주소: 대전광역시 대덕구 한남로 12번길 창업마켓(창업존) 590203호</span>
-            </div>
-            <div>
-              <span>* 트래비(TraB)는 여행 플랫폼으로써 거래 중 발생하는 문제에 책임지지 않습니다.</span>
-            </div>
-          </Col>
-          <Col>
-            <div style={{marginTop: '5rem'}}>
-              <a target='_blank' href='/Trab_personal_information.html'>개인정보 이용동의서</a>
-              <a style={{marginLeft: 20}} target='_blank' href=''>회사 소개</a>
-            </div>
-          </Col>
-        </Row>
-      </div>
-    </Footer>
+    <div className='information'>
+      <Row>
+        <Col xs={24} md={8}>
+          <div>
+            <span>Not Afraid, Not Nervous, For Stable.</span>
+            <span>트래비(TraB)</span>
+          </div>
+          <div>
+            <span>대표: 송기훈, 김민수, 김수환</span>
+            <span>사업자 등록 번호: 662-24-00804</span>
+          </div>
+          <div>
+            <span>개인정보 책임자: 김수환</span>
+            <span>통신판매업 등록 신고:</span>
+          </div>
+          <div>
+            <span>고객 문의: 010-7506-3732</span>
+            <span>카카오 플러스 친구: 트래비(TraB) 고객센터</span>
+          </div>
+          <div>
+            <span>이메일: trab2019@naver.com</span>
+          </div>
+          <div>
+            <span>사업장 주소: 대전광역시 대덕구 한남로 12번길 창업마켓(창업존) 590203호</span>
+          </div>
+          <div>
+            <span>* 트래비(TraB)는 여행 플랫폼으로써 거래 중 발생하는 문제에 책임지지 않습니다.</span>
+          </div>
+        </Col>
+        <Col xs={24} md={8}>
+          <div style={{marginTop: '5rem'}}>
+            <a target='_blank' href='/Trab_personal_information.html'>개인정보 이용동의서</a>
+            <a style={{marginLeft: 20}} target='_blank' href=''>회사 소개</a>
+          </div>
+        </Col>
+      </Row>
+    </div>
   )
 }
 
