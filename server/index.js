@@ -13,6 +13,7 @@ const app = next({ dev })
 const handle = app.getRequestHandler()
 
 const api = require('./api')
+const admin = require('./api/admin')
 
 Models.sequelize.sync().then( () => {
   console.log(" DB 연결 성공")
@@ -36,7 +37,7 @@ passport.use(new LocalStrategy({
       return done(null, false, { message: '존재하지 않는 이메일입니다.' })
     }
     const user = result.dataValues
-    if (user.password !== password) { 
+    if (!bcrypt.compareSync(password,result.dataValues.password)) { 
       return done(null, false, { message: '비밀번호가 틀렸습니다.' })
     }
     return done(null, user)
@@ -100,6 +101,7 @@ app.prepare().then(() => {
   })
 
   server.use(api())
+  server.use(admin())
   server.use(router.routes())
   server.listen(port, err => {
     if (err) throw err

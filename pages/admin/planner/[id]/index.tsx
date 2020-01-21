@@ -1,0 +1,36 @@
+import * as React from 'react'
+import axios from 'axios'
+import { NextPage } from 'next'
+import { Planner, Theme } from 'type'
+import DesignerDescription from '@components/DesignerDescription'
+import PlannerContent from '@components/admin/PlannerContent'
+
+type Props = {
+  planner: Planner;
+  themes: Theme[];
+}
+
+const AdminPlanner: NextPage<Props> = ({planner, themes})=> {
+
+  console.log(planner.id)
+
+  return (
+    <div className='planner' style={{width: '100%'}}>
+      <DesignerDescription designer={planner.User} plannerId={planner.id}/>
+      <PlannerContent planner={planner} themes={themes}/>
+    </div>
+  )
+}
+
+AdminPlanner.getInitialProps = async (req) => {
+  const id = req.query.id
+
+  const planner = await axios.get(`/api/admin/planners/${id}`)
+  const theme = await axios.get('/api/themes')
+  return {
+    planner: planner.data,
+    themes: theme.data
+  }
+}
+
+export default AdminPlanner

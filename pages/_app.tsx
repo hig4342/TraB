@@ -1,5 +1,6 @@
 import React from 'react'
 import App, { AppContext } from "next/app";
+import Head from 'next/head'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import rootReducer from '@reducers/rootReducer'
@@ -22,6 +23,10 @@ class MyApp extends App {
 
     return (
       <Provider store={store}>
+        <Head>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <title>트래비 (TraB)</title>
+        </Head>
         <Layout>
           <Component {...pageProps} />
         </Layout>
