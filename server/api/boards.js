@@ -35,9 +35,11 @@ boards.get('/advertisements', async ctx => {
 
 boards.get('/posts', async ctx => {
   const notices = await Models.Board.findAll({
+    order: [['createdAt', 'DESC']],
     where: { board_state: 1 }
   })
   const posts = await Models.Board.findAll({
+    order: [['createdAt', 'DESC']],
     where: { board_state: 3 },
     include: [{
       model: Models.User,

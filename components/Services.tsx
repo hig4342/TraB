@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Button, Row, Col } from 'antd'
 import '@assets/Services.less'
-import Link from 'next/link'
+import PopupWrapper from '@components/PopupWrapper'
 
 const Services: React.SFC = ()=> {
 
@@ -26,7 +26,7 @@ const Services: React.SFC = ()=> {
           </Col>
         </Row>
         <div className='button-wrapper'>
-        <Link href='/planner/write'><Button className='selling-button'>여행계획표 판매하기</Button></Link>
+          <PopupWrapper signin email enroll pending callback='/planner/write'><Button className='selling-button'>여행계획표 판매하기</Button></PopupWrapper>
         </div>
       </div>
     </div>

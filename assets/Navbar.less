@@ -1,14 +1,16 @@
 header{
-  margin-left: 40px;
-  margin-right: 40px;
   .logo {
+    left: 40px;
     position: absolute;
     cursor: pointer;
   }
   .mainmenu {
+    margin-right: 40px;
     float: right;
     display: flex;
     font-size: 16px;
+    padding: 0;
+    margin-bottom: 0;
     .menu-item {
       display: inline-block;
       &+.menu-item::before{
@@ -17,11 +19,15 @@ header{
       .main-item {
         color: black;
         padding: 13px 20px;
+        &:hover {
+          color: #25a5fa;
+        }
       }
       .submenu {
         display: none;
         position: relative;
         text-align: center;
+        padding: 0;
         z-index: 10;
         .sub-item {
           display: block;
@@ -37,7 +43,7 @@ header{
             border-bottom-right-radius: 10px;
           }
           &:hover {
-            color: blue;
+            color: #25a5fa;
           }
         }
       }

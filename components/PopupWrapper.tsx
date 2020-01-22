@@ -37,7 +37,7 @@ const PopupWrapper: React.SFC<Props> = ({signin=false, email=false, enroll=false
   } else if (loginCheck) {
     return (
       <>
-        <span onClick={handleShow}>{children}</span>
+        <a className='main-item' onClick={handleShow}>{children}</a>
         <Modal
           className='popup'
           visible={visible}
@@ -63,7 +63,7 @@ const PopupWrapper: React.SFC<Props> = ({signin=false, email=false, enroll=false
   } else if (emailCheck) {
     return (
       <>
-        <span onClick={handleShow}>{children}</span>
+        <a className='main-item' onClick={handleShow}>{children}</a>
         <Modal
           className='popup'
           visible={visible}
@@ -89,7 +89,7 @@ const PopupWrapper: React.SFC<Props> = ({signin=false, email=false, enroll=false
   } else if (enrollCheck) {
     return (
       <>
-        <span onClick={handleShow}>{children}</span>
+        <a className='main-item' onClick={handleShow}>{children}</a>
         <Modal
           className='popup'
           visible={visible}
@@ -115,7 +115,7 @@ const PopupWrapper: React.SFC<Props> = ({signin=false, email=false, enroll=false
   } else {
     return (
       <>
-        <span onClick={handleShow}>{children}</span>
+        <a className='main-item' onClick={handleShow}>{children}</a>
         <Modal
           className='popup'
           visible={visible}

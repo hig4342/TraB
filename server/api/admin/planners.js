@@ -62,8 +62,9 @@ planners.put('/:id', async ctx => {
   const { id } = ctx.params
   const { title, country_name, city_name, contents_image, contents_text, themes_id } = ctx.request.body
 
+  const checked_country_name = country_name === '대한민국' ? '한국' : country_name
   let result1 = await Models.Country.findOne({
-    where: { country_name: country_name }
+    where: { country_name: checked_country_name }
   })
   if (result1 === null ) {
     result1 = await Models.Country.create({

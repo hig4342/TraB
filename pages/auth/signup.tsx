@@ -140,7 +140,7 @@ const Signup: NextPage = ()=> {
           >
             <Radio.Group buttonStyle='solid'>
               <Radio.Button className='man' value='1'>남</Radio.Button>
-              <Radio.Button className='woman' value='2'>녀</Radio.Button>
+              <Radio.Button className='woman' value='2'>여</Radio.Button>
             </Radio.Group>
           </Form.Item>
           <Form.Item
@@ -192,8 +192,20 @@ const Signup: NextPage = ()=> {
               />
             </Modal>
           </Form.Item>
-          <Form.Item>
-            <span><Checkbox style={{margin: '0 5px'}}/><a>개인 정보 활용</a> 및 <a>이용 약관</a>에 동의합니다.</span>
+          <Form.Item
+
+            name='caution'
+            valuePropName='checked'
+            rules={[{
+              validator: (_rule, value) => {
+                if(value) {
+                  return Promise.resolve();
+                }
+                return Promise.reject('유의사항에 동의하지 않으면 제출할 수 없습니다.')
+              }
+            }]}
+          >
+            <Checkbox><a target='_blank' href='/Trab_personal_information.html' style={{ fontSize: 16}}>개인 정보 활용에 동의합니다.</a></Checkbox>
           </Form.Item>
           <Form.Item>
             <Button block type="primary" htmlType="submit">

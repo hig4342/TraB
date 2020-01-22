@@ -4,6 +4,9 @@ import Head from 'next/head'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import rootReducer from '@reducers/rootReducer'
+import { config } from '@fortawesome/fontawesome-svg-core'
+import '@fortawesome/fontawesome-svg-core/styles.css'
+config.autoAddCss = false
 
 const store = createStore(rootReducer)
 

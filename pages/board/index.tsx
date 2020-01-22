@@ -57,9 +57,6 @@ const BoardPage: NextPage<Props> = ({ notices, posts })=> {
     align: 'center',
   }]
 
-  React.useEffect(() => {
-    console.log(posts)
-  }, [])
   return (
     <div className='board' style={{ width: '100%' }}>
       <NoticeSwiper items={notices} />

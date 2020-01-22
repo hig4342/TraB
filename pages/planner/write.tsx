@@ -3,20 +3,21 @@ import axios from 'axios'
 import { NextPage } from 'next'
 import Router from 'next/router'
 import Link from 'next/link'
-import jwtDecode from 'jwt-decode'
 import { Callbacks } from 'rc-field-form/lib/interface';
 import { Form, Input, Button, Checkbox, message } from 'antd'
 import { PlusOutlined, MinusOutlined } from '@ant-design/icons'
 import UploadWrapper from '@components/UploadWrapper'
+import EditorWrapper from '@components/EditorWrapper'
+import useUser from '@hooks/useUser'
 import '@assets/PlannerWrite.less'
 
 const baseUrl = process.env.NODE_ENV === 'production' ? 'https://trab.co.kr' : ''
 
-import dynamic from 'next/dynamic'
-const EditorWrapper = dynamic(
-  () => import('@components/EditorWrapper'),//import EditorWrapper from '@components/EditorWrapper'
-  { ssr: false }
-)
+// import dynamic from 'next/dynamic'
+// const EditorWrapper = dynamic(
+//   () => import('@components/EditorWrapper'),//import EditorWrapper from '@components/EditorWrapper'
+//   { ssr: false }
+// )
 
 let maxkey = 1;
 
@@ -25,13 +26,7 @@ const PlannerWrite: NextPage = ()=> {
   const [keylist, setKeylist] = React.useState<number[]>([0])
   const [imagelist, setImagelist] = React.useState<string[]>([])
   const [contentlist, setContentlist] = React.useState<string[]>([])
-  const [user, setUser] = React.useState<any>({id: 1})
-
-  React.useEffect(() => {
-    const token = sessionStorage.getItem('usertoken')
-    if(token) setUser(jwtDecode(token))
-  }, [])
-
+  const {user} = useUser()
 
   const onFinish: Callbacks['onFinish'] = (values) => {
     const country_name = values.country === '대한민국' ? '한국' : values.country

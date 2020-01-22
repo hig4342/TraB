@@ -213,7 +213,7 @@ const MyPage: NextPage = ()=> {
               >
                 <Radio.Group disabled={changeable} buttonStyle='solid'>
                   <Radio.Button className='man' value='1'>남</Radio.Button>
-                  <Radio.Button className='woman' value='2'>녀</Radio.Button>
+                  <Radio.Button className='woman' value='2'>여</Radio.Button>
                 </Radio.Group>
               </Form.Item>
               <Form.Item
