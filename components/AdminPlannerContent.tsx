@@ -9,6 +9,7 @@ import '@assets/AdminPlannerContent.less'
 const baseUrl = process.env.NODE_ENV === 'production' ? 'https://trab.co.kr' : ''
 
 import dynamic from 'next/dynamic'
+import { UploadFile } from 'antd/lib/upload/interface'
 const EditorWrapper = dynamic(
   () => import('@components/EditorWrapper'),//import EditorWrapper from '@components/EditorWrapper'
   { ssr: false }
@@ -22,21 +23,18 @@ type Props = {
 const AdminPlannerContent: React.SFC<Props> = ({planner, themes}) => {
 
   const [form] = Form.useForm()
-  const [imagelist, setImagelist] = React.useState<string[]>(planner.contents_image)
-  const [contentlist, setContentlist] = React.useState<string[]>(planner.contents_text)
 
-  const handleContent = (e: string, index: number) => {
-    let contents = contentlist
-    contents[index] = e
-    setContentlist(contents)
-    console.log("글", contentlist)
+  const handleThumnail = (fileList: UploadFile<any>[]) => {
+    console.log(fileList)
+    form.setFieldsValue({
+      thumbnail: fileList[0].url
+    })
   }
 
-  const handleImage = (e: string, index: number) => {
-    let images = imagelist
-    images[index] = e
-    setImagelist(images)
-    console.log("사진", imagelist)
+  const handleContents = (text: string) => {
+    form.setFieldsValue({
+      contents: text
+    })
   }
   
   const onFinish = (value: any) => {
@@ -45,8 +43,8 @@ const AdminPlannerContent: React.SFC<Props> = ({planner, themes}) => {
       title: value.title,
       country_name: value.country,
       city_name: value.city,
-      contents_image: imagelist,
-      contents_text: contentlist,
+      contents_image: value.thumbnail,
+      contents_text: value.contents,
       themes_id: value.themes_id
     }
     axios.put(baseUrl + `/api/admin/planners/${planner.id}`, form).then( result => {
@@ -108,8 +106,8 @@ const AdminPlannerContent: React.SFC<Props> = ({planner, themes}) => {
           country: planner.Country.country_name,
           city: planner.City.city_name,
           themes_id: planner.themes_id,
-          images: planner.contents_image,
-          contents: planner.contents_text
+          images: planner.thumbnail,
+          contents: planner.contents
         }}
       >
         <Form.Item
@@ -153,30 +151,24 @@ const AdminPlannerContent: React.SFC<Props> = ({planner, themes}) => {
             options={themes.map(theme => ({ label: theme.name, value: theme.id }))}
           />
         </Form.Item>
-        {
-          planner.contents_image.map((image_url, index) => (
-            <Form.Item
-              key={`keys-${index}`}
-            >
-              <Form.Item
-                name={`images[${index}]`}
-                key={`images-${index}`}
-                validateTrigger={['onChange', 'onBlur']}
-              >
-                <div className='upload-image-wrapper'>
-                  <UploadWrapper defaultUrl={image_url} index={index} handleImage={handleImage}/>
-                </div>
-              </Form.Item>
-              <Form.Item
-                name={`contents[${index}]`}
-                key={`contents-${index}`}
-                validateTrigger={['onChange', 'onBlur']}
-              >
-                <EditorWrapper index={index} handleContent={handleContent} defaultContent={planner.contents_text[index]}/>
-              </Form.Item>
-            </Form.Item>
-          ))
-        }
+        <Form.Item
+          label='대표 사진'
+          name='thumbnail'
+          required={false}
+          rules={[{ required: true, message: '썸네일에 들어갈 사진을 업로드해주세요.' },]}
+          labelCol={{xs: 3, sm: 2}}
+          wrapperCol={{xs: 21, sm: 6}}
+        >
+          <UploadWrapper handleThumnail={handleThumnail}/>  
+        </Form.Item>
+        <Form.Item
+          name='contents'
+          required={false}
+          rules={[{ required: true, message: '계획표를 써주세요' },]}
+          wrapperCol={{span: 24}}
+        >
+          <EditorWrapper handleContents={handleContents}/>
+        </Form.Item>
         <Form.Item>
           <Button onClick={rejectPlanner}>계획표 거부</Button>
           <Button onClick={allowPlanner}>계획표 승인</Button>

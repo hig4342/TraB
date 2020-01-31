@@ -1,5 +1,5 @@
 import * as React from 'react'
-import Swiper, { SwiperInstance } from 'react-id-swiper';
+import Swiper from 'react-id-swiper';
 import { SwiperOptions } from 'swiper'
 import Link from 'next/link';
 import { Modal } from 'antd';
@@ -15,7 +15,6 @@ type Props = {
 
 const NoticeSwiper: React.SFC<Props> = ({items, inline=false})=> {
 
-  const [swiper, setSwiper] = React.useState<SwiperInstance>(null)
   const [visible, setVisible] = React.useState(false)
   const [title, setTitle] = React.useState('')
   const [image, setImage] = React.useState('')
@@ -36,10 +35,11 @@ const NoticeSwiper: React.SFC<Props> = ({items, inline=false})=> {
       prevEl: '.swiper-button-prev',
     },
     spaceBetween: 30,
-    loop: true,
   }
 
   const handleShow = (item: Board) => {
+    setVisible(true)
+    setAutoplay(false)
     setTitle(item.title)
     setImage(item.main_image)
   }
@@ -49,27 +49,12 @@ const NoticeSwiper: React.SFC<Props> = ({items, inline=false})=> {
     setAutoplay(true)
   }
 
-  const handleSwiper = (nowswiper: SwiperInstance) => {
-    console.log(nowswiper)
-    setSwiper(nowswiper)
-  }
-
   return (
     <>
     <Swiper
       {...options}
-      getSwiper={handleSwiper}
       autoplay={autoplay}
       containerClass={"notice-swiper swiper-container" + (inline ? ' inline' : '')}
-      on={{
-        slideChange: () => {
-          console.log(swiper)
-        }
-        // click: () => {
-        //   setVisible(true)
-        //   setAutoplay(false)
-        // }
-      }}
     >
       {
         items.map((item, index) => {

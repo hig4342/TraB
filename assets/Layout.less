@@ -28,20 +28,28 @@ input[type=password] {
   top: 100px;
   z-index: 999;
   width: 0px;
-  height: 500px;
+  height: 400px;
   &::before {
-    content: "트래비 탭";
+    content: "";
+    //margin: 10px;
     position: absolute;
     text-align: center;
     font-size: 18px;
     width: 30px;
-    height: 120px;
+    height: 50px;
     background-color: white;
     transition: 0.3s;
+    background-image: url('/123.png');
+    background-position: center;
+    background-size: 50px 50px;
+    //border-radius: 100px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
   }
   &:hover {
     width: 100px;
     &::before {
+      //opacity: 0;
       margin-left: 100px;
     }
     .toolbar {
@@ -49,6 +57,7 @@ input[type=password] {
     }
   }
   .toolbar {
+    padding-top: 50px;
     position: absolute;
     width: 0;
     height: 100%;
@@ -56,6 +65,8 @@ input[type=password] {
     overflow: hidden;
     transition: 0.3s;
     div {
+      font-weight: bold;
+      margin: 10px auto;
       width: 100px;
     }
   }
