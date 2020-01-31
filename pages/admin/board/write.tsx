@@ -30,7 +30,7 @@ const AdminWrite: NextPage = ()=> {
   const [visible, setVisible] = React.useState(false)
   const [state, setState] = React.useState(false)
 
-  const onFinish: Callbacks['onFinish'] = (values) => {
+  const onFinish = () => {
     const data = {
       UserId: user.id,
       title: form.getFieldValue('title'),
