@@ -13,15 +13,11 @@ import '@assets/Designer.less'
 const baseUrl = process.env.NODE_ENV === 'production' ? 'https://trab.co.kr' : ''
 
 type Props = {
-  notices: Board[]
+  advertisements: Board[]
   designers: User[]
 }
 
-const Designer: NextPage<Props> = ({ notices, designers })=> {
-
-  React.useEffect(() => {
-    console.log(designers)
-  },[])
+const Designer: NextPage<Props> = ({ advertisements, designers })=> {
 
   // const [nation, setNation] = React.useState('')
   // const [country, setCountry] = React.useState('')
@@ -50,7 +46,7 @@ const Designer: NextPage<Props> = ({ notices, designers })=> {
 
   return (
     <div className='designer-list' style={{width: '100%'}}>
-      <NoticeSwiper items={notices}/>
+      <NoticeSwiper items={advertisements} inline/>
       <div className='new-designer'>
         <h1 className='big-title'>트래비(TraB) 여행 설계자</h1>
         {/* <CountrySelector value={nation} onChange={onChange}/> */}
@@ -82,10 +78,10 @@ const Designer: NextPage<Props> = ({ notices, designers })=> {
 }
 
 Designer.getInitialProps = async () => {
-  const notice = await axios.get( baseUrl + '/api/boards/notices')
+  const advertisements = await axios.get(baseUrl + '/api/boards/advertisements')
   const designer = await axios.get( baseUrl + '/api/users/designer')
   return {
-    notices: notice.data,
+    advertisements: advertisements.data,
     designers: designer.data
   }
 }

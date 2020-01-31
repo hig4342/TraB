@@ -53,6 +53,52 @@ planners.get('/foreign', async ctx => {
   ctx.body = result
 })
 
+planners.get('/domestic/hot', async ctx => {
+  const result = await Models.Planner.findAll({
+    order: [['createdAt', 'DESC']],
+    where: { 
+      upload_state: [3, 4, 5],
+      CountryId: 1
+    },
+    include: [{
+      model: Models.City
+    }, {
+      model: Models.Country
+    }, {
+      model: Models.Reply
+    }, { 
+      model: Models.User,
+      attributes: ['email', 'nickname']
+    }],
+    limit: 4
+  })
+
+  ctx.body = result
+})
+
+planners.get('/foreign/hot', async ctx => {
+  const result = await Models.Planner.findAll({
+    order: [['createdAt', 'DESC']],
+    where: { 
+      upload_state: [3, 4, 5],
+      [Op.not]: { CountryId: 1 }
+    },
+    include: [{
+      model: Models.City
+    }, {
+      model: Models.Country
+    }, {
+      model: Models.Reply
+    }, { 
+      model: Models.User,
+      attributes: ['email', 'nickname']
+    }],
+    limit: 4
+  })
+
+  ctx.body = result
+})
+
 planners.get('/count', async ctx => {
   const domestic = await Models.Planner.findAll({
     where: {

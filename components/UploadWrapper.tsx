@@ -12,16 +12,20 @@ type Props = {
   handleThumnail: (fileList: UploadFile<any>[]) => void;
 }
 
-const UploadImage: React.SFC<Props> = ({ defaultUrl='', handleThumnail }) => {
+const UploadImage: React.SFC<Props> = ({ defaultUrl, handleThumnail }) => {
+
+  React.useEffect(() => {
+    console.log('url: "' + defaultUrl + '"')
+  }, [])
  
   const [loading, setLoading] = React.useState(false)
   const [fileList, setFileList] = React.useState<UploadFile<any>[]>([{
     uid: '-1',
     size: 0,
-    name: defaultUrl.split('/')[defaultUrl.split('/').length-1],
+    name: defaultUrl ? defaultUrl.split('/')[defaultUrl.split('/').length-1] : '',
     status: 'done',
     url: defaultUrl,
-    type: `image/${defaultUrl.split('.')[defaultUrl.split('.').length-1]}`
+    type: defaultUrl ? `image/${defaultUrl.split('.')[defaultUrl.split('.').length-1]}` : ''
   }])
 
   const handleChange = (info: UploadChangeParam<UploadFile<any>>) => {
@@ -71,7 +75,7 @@ const UploadImage: React.SFC<Props> = ({ defaultUrl='', handleThumnail }) => {
             </div>
             :
             <div>
-              <img src={fileList[0].url} alt='image' style={{ width: '100%' }} />
+              <img src={fileList[0].url || '/placeholder-image.jpg'} alt='image' style={{ width: '100%' }} />
             </div>
         }
       </Upload.Dragger>

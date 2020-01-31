@@ -28,17 +28,19 @@ input[type=password] {
   top: 100px;
   z-index: 999;
   width: 0px;
-  height: 230px;
+  height: 242px;
   &::before {
     content: "";
     //margin: 10px;
     position: absolute;
     text-align: center;
+    z-index: 1;
     font-size: 18px;
     width: 30px;
     height: 50px;
     background-color: white;
     transition: 0.3s;
+    box-shadow: 2px 2px 2px 0.5px rgba(0, 0, 0, 0.2);
     background-image: url('/123.png');
     background-position: center;
     background-size: 50px 50px;
@@ -55,6 +57,7 @@ input[type=password] {
     }
   }
   .toolbar {
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
     position: absolute;
     width: 0;
     height: 100%;
@@ -67,6 +70,13 @@ input[type=password] {
       font-weight: bold;
       margin: 10px auto;
       width: 100px;
+    }
+    .ant-divider {
+      cursor: auto;
+      width: 60px;
+      min-width: 60px;
+      margin: 0px auto;
+      background: black;
     }
   }
 }

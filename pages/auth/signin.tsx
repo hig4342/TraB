@@ -1,13 +1,14 @@
 import * as React from 'react'
-import Link from 'next/link'
 import Router from 'next/router'
 import axios from 'axios'
 import jwtDecode from 'jwt-decode'
 import { NextPage } from 'next'
-import { Input, Form, Button, message, Checkbox } from 'antd'
+import { Input, Form, Button, message, Checkbox, Row, Col } from 'antd'
 import { Store, ValidateErrorEntity } from 'rc-field-form/lib/interface';
 import useUser from '@hooks/useUser'
 import { User } from '@reducers/userReducer'
+import '@assets/signin.less'
+import Link from 'next/link'
 
 const SigninPage: NextPage = () => {
 
@@ -31,54 +32,47 @@ const SigninPage: NextPage = () => {
     errorInfo.errorFields.forEach(error => message.warning(error.errors))
   };
 
-  const itemStyle = {
-    labelCol: { span: 4 },
-    wrapperCol: { span: 6 },
-  }
-
   return (
-    <div>
-      <h1>로그인창</h1>
-      <p>
-        <Link href="/">
-          <a>메인화면</a>
-        </Link>
-      </p>
-      <Form
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        name='signin_form'
-      >
-        <Form.Item
-          {...itemStyle}
-          label='이메일'
-          name='email'
-          required={false}
-          rules={[{ required: true, message: '이메일을 입력해주세요' }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          {...itemStyle}
-          label='비밀번호'
-          name='password'
-          required={false}
-          rules={[{ required: true, message: '비밀번호를 입력해주세요' }]}
-        >
-          <Input.Password />
-        </Form.Item>
-        <Form.Item
-          name='remember'
-          valuePropName="checked"
-        >
-          <Checkbox>로그인 상태 유지</Checkbox>
-        </Form.Item>
-        <Form.Item
-          wrapperCol={{offset: 4, span: 6}}
-        >
-          <Button type='primary' htmlType='submit' block>로그인</Button>
-        </Form.Item>
-      </Form>
+    <div className='signin-page'>
+      <Row justify='center' align='middle'>
+        <Col xs={22} sm={16} md={10} lg={9} xl={8} className='signin-wrapper'>
+          <Form
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            name='signin_form'
+            layout='vertical'
+          >
+            <Form.Item
+              label='이메일'
+              name='email'
+              required={false}
+              rules={[{ required: true, message: '이메일을 입력해주세요' }]}
+            >
+              <Input placeholder='이메일을 입력해주세요'/>
+            </Form.Item>
+            <Form.Item
+              label='비밀번호'
+              name='password'
+              required={false}
+              rules={[{ required: true, message: '비밀번호를 입력해주세요' }]}
+            >
+              <Input.Password placeholder='비밀번호를 입력해주세요'/>
+            </Form.Item>
+            <Form.Item
+              name='remember'
+              valuePropName="checked"
+            >
+              <Checkbox>로그인 상태 유지</Checkbox>
+            </Form.Item>
+            <Form.Item> 
+              <Button type='primary' htmlType='submit' block>로그인</Button>
+            </Form.Item>
+            <Form.Item>
+              <div style={{textAlign: 'center'}}><span>아직 트래비(TraB) 회원이 아니신가요? <Link href='auth/signup'><a>회원가입</a></Link></span></div>
+            </Form.Item>
+          </Form>
+        </Col>
+      </Row>
     </div>
   )
 }

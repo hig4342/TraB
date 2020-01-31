@@ -50,8 +50,8 @@ const FilterBox: React.SFC<Props> = ({ nation='domestic', items, themes, country
   }))
 
   return (
-    <div className='filter-box'>
-      <div>
+    <div className='filter-box-wrapper'>
+      <div className='filter-box'>
         <div className='filter-item' style={{ display: nation === 'foreign' ? 'block' : 'none'}}>
           <Row>
             <Col xs={24}>

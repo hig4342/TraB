@@ -62,7 +62,7 @@ const Themes: NextPage<Props> = ({themes})=> {
       axios.get('/api/admin/themes').then( result => {
         setThemedata(result.data)
         setVisible(false)
-        setConfirmLoading(true)
+        setConfirmLoading(false)
       })
     }).catch( err => {
       console.log(err)

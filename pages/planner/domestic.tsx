@@ -9,7 +9,7 @@ import { CheckboxValueType } from 'antd/lib/checkbox/Group'
 import FilterBox from '@components/FilterBox'
 import PlannerList from '@components/PlannerList'
 import '@assets/Planner.less'
-import HotPlannerList from '@components/HotPlannerList'
+//import HotPlannerList from '@components/HotPlannerList'
 import Banner from '@components/Banner'
 
 const NoticeSwiper = dynamic(
@@ -22,12 +22,12 @@ const baseUrl = process.env.NODE_ENV === 'production' ? 'https://trab.co.kr' : '
 type Props = {
   advertisements: Board[];
   planners: Planner[];
-  hotplanners: Planner[];
+  //hotplanners: Planner[];
   countries: Country[];
   themes: Theme[];
 }
 
-const Domestic_Planner: NextPage<Props> = ({ advertisements, planners, hotplanners, countries, themes })=> {
+const Domestic_Planner: NextPage<Props> = ({ advertisements, planners, countries, themes })=> {
 
   const [country, setCountry] = React.useState(0)
   const [city, setCity] = React.useState<Array<CheckboxValueType>>([])
@@ -53,13 +53,12 @@ const Domestic_Planner: NextPage<Props> = ({ advertisements, planners, hotplanne
     <div className='planner_list' style={{width: '100%'}}>
       <Banner />
       <NoticeSwiper items={advertisements} inline/>
-      <div className='hot-planner'>
+      {/* <div className='hot-planner'>
         <h1 className='small-title'>이번주 Hot한 계획표!</h1>
         <h4 className='sub-title'>금주에 가장 많은 사랑을 받은 여행 계획표들 입니다!</h4>
         <HotPlannerList items={hotplanners} />
-      </div>
+      </div> */}
       <div className='new-planner'>
-        <h1 className='big-title'>국내 여행계획표 열람하기</h1>
         <FilterBox
           items={countries}
           themes={themes}
@@ -79,14 +78,14 @@ const Domestic_Planner: NextPage<Props> = ({ advertisements, planners, hotplanne
 Domestic_Planner.getInitialProps = async () => {
   const advertisements = await axios.get(baseUrl + '/api/boards/advertisements')
   const planner = await axios.get(baseUrl + '/api/planners/domestic')
-  const hotplanner = await axios.get(baseUrl + '/api/planners/domestic')
+  //const hotplanner = await axios.get(baseUrl + '/api/planners/domestic/hot')
   const country = await axios.get(baseUrl + '/api/countries')
   const city = await axios.get(baseUrl + '/api/cities')
   const theme = await axios.get(baseUrl + '/api/themes')
   return {
     advertisements: advertisements.data,
     planners: planner.data,
-    hotplanners: hotplanner.data,
+    //hotplanners: hotplanner.data,
     countries: country.data,
     cities: city.data,
     themes: theme.data,

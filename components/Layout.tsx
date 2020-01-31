@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Layout } from 'antd'
+import { Layout, Divider } from 'antd'
 import Router from 'next/router'
 //import NProgress from 'nprogress'
 import Navbar from '@components/Navbar'
@@ -47,7 +47,9 @@ const AppLayout: React.SFC = ({children}) => {
       <div className='toolbar-wrapper'>
         <div className='toolbar'>
           <div><img src="/domestic.png" width='60' height='60'/>한국</div>
+          <Divider/>
           <div><img src="/foreign.png" width='60' height='60'/>외쿡</div>
+          <Divider/>
           <div><img style={{padding: 10}}src="/selling.png" width='60' height='60'/>판매</div>
         </div>
       </div>
