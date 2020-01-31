@@ -11,6 +11,7 @@ import MypagePlanner from '@components/MypagePlanner'
 import useUser from '@hooks/useUser'
 import { User } from '@reducers/userReducer'
 import '@assets/Mypage.less'
+import { UploadFile } from 'antd/lib/upload/interface'
 
 const MyPage: NextPage = ()=> {
 
@@ -147,8 +148,8 @@ const MyPage: NextPage = ()=> {
     labelCol: { span: 2 }
   }
 
-  const handleImage = (e: string) => {
-    setImage(e)
+  const handleThumnail = (fileList: UploadFile<any>[]) => {
+    setImage(fileList[0].url ? fileList[0].url : '')
   }
 
   return (
@@ -169,7 +170,7 @@ const MyPage: NextPage = ()=> {
                 name='profile_image'
               >
                 <div className='profile-image-wrapper' style={{minHeight: 400}}>
-                  <UploadWrapper disabled={changeable} index={1} handleImage={handleImage} defaultUrl={user.profile_image}/>
+                  <UploadWrapper handleThumnail={handleThumnail} defaultUrl={user.profile_image}/>
                 </div>
               </Form.Item>
             </Col>
