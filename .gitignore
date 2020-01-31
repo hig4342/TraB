@@ -7,6 +7,8 @@
 
 # testing
 /coverage
+localhost.crt
+localhost.key
 
 # next.js
 /.next/
