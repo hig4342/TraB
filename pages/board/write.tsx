@@ -39,9 +39,9 @@ const Write: NextPage = ()=> {
     console.log('Failed:', errorInfo);
   };
 
-  const handleContent = (content: string) => {
+  const handleContents = (text: string) => {
     form.setFieldsValue({
-      content: content
+      contents: text
     })
   }
 
@@ -71,7 +71,7 @@ const Write: NextPage = ()=> {
           name='content'
           rules={[{ required: true, message: '내용을 입력하세요!' },]}
         >
-          <EditorWrapper index={0} handleContent={handleContent}/>
+          <EditorWrapper handleContents={handleContents}/>
         </Form.Item>
         <Form.Item>
           <Button htmlType='submit'>작성하기</Button>
