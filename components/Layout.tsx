@@ -46,18 +46,9 @@ const AppLayout: React.SFC = ({children}) => {
       </Header>
       <div className='toolbar-wrapper'>
         <div className='toolbar'>
-          {/* <div><img src="/test.png" width='60' height='60'/></div>
-          <div><img src="/test.png" width='60' height='60'/></div>
-          <div><img src="/test.png" width='60' height='60'/></div> */}
-          {/* <div><img src="/test.png" width='30' height='30'/>한국</div>
-          <div><img src="/test.png" width='30' height='30'/>판매</div>
-          <div><img src="/test.png" width='30' height='30'/>외쿡</div> */}
-          <div><img src="/test.png" width='60' height='60'/>한국</div>
-          <div><img src="/test.png" width='60' height='60'/>판매</div>
-          <div><img src="/test.png" width='60' height='60'/>외쿡</div>
-          {/* <div>한국</div>
-          <div>판매</div>
-          <div>외쿡</div> */}
+          <div><img src="/domestic.png" width='60' height='60'/>한국</div>
+          <div><img src="/foreign.png" width='60' height='60'/>외쿡</div>
+          <div><img style={{padding: 10}}src="/selling.png" width='60' height='60'/>판매</div>
         </div>
       </div>
       {
