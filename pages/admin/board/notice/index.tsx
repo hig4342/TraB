@@ -1,7 +1,7 @@
 import * as React from 'react'
 import axios from 'axios'
 import { NextPage } from 'next'
-import { Table } from 'antd'
+import { Table, Button } from 'antd'
 import { Board } from 'type'
 import { ColumnsType } from 'antd/lib/table/interface'
 import Link from 'next/link'
@@ -70,6 +70,11 @@ const Notice: NextPage<Props> = ({notices})=> {
           }
         }}
         rowClassName='board-table-row'
+        footer={() => (
+          <div>
+            <Link href='/admin/board/write'><Button size='large'>글쓰기</Button></Link>
+          </div>
+        )}
       />
     </div>
   )

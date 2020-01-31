@@ -17,21 +17,17 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.INTEGER
     },
-    contents_image: {
+    thumbnail: {
       allowNull: false,
-      type: DataTypes.ARRAY(DataTypes.STRING)
+      type: DataTypes.STRING
     },
-    contents_text: {
+    contents: {
       allowNull: false,
-      type: DataTypes.ARRAY(DataTypes.TEXT)
+      type: DataTypes.TEXT
     },
     themes_id: {
       allowNull: false,
       type: DataTypes.ARRAY(DataTypes.INTEGER)
-    },
-    thumbnail: {
-      allowNull: false,
-      type: DataTypes.INTEGER
     },
     blog_name: {
       allowNull: true,

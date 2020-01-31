@@ -14,11 +14,6 @@ type Props = {
 }
 
 const Post: NextPage<Props> = ({post})=> {
-
-  React.useEffect(() => {
-    console.log(post)
-  }, [])
-
   
   return (
     <div className='post' style={{width: '100%'}}>

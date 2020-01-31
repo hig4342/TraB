@@ -27,8 +27,12 @@ class MyApp extends App {
     return (
       <Provider store={store}>
         <Head>
+          <title>트래비(TraB)</title>
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <title>트래비 (TraB)</title>
+          <meta name='og:title' content='트래비(TraB)' />
+          <meta name='og:description' content='여러분의 여행계획표를 맡겨보세요' />
+          <meta name='twitter:title' content='트래비(TraB)' />
+          <meta name='twitter:image' content='' />
         </Head>
         <Layout>
           <Component {...pageProps} />

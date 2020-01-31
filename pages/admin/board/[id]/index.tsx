@@ -38,8 +38,8 @@ const AdminPost: NextPage<Props> = ({post})=> {
     }
   }
 
-  const handleContent = (content: string, _index: number) => {
-    setContent(content)
+  const handleContent = (text: string) => {
+    setContent(text)
   }
 
   const handleShow = () => {
@@ -124,7 +124,7 @@ const AdminPost: NextPage<Props> = ({post})=> {
           </Upload.Dragger>
         </Form.Item>
         <Form.Item labelCol={{span: 24}} wrapperCol={{span: 24}} name='content' label='내용'>
-          <EditorWrapper index={0} handleContent={handleContent} defaultContent={post.content}/>
+          <EditorWrapper handleContents={handleContent} defaultContent={post.content}/>
         </Form.Item>
         <Form.Item>
           <Button onClick={handleShow}>수정하기</Button>

@@ -61,12 +61,11 @@ export type User = {
 export type Planner = {
   id: number;
   title: string;
-  contents_image: string[];
-  contents_text: string[];
+  thumbnail: string;
+  contents: string;
   themes_id: number[];
-  thumbnail: number;
-  blog_name?: string;
-  blog_link?: string;
+  blog_name: string;
+  blog_link: string;
   upload_state: number;
   payment_state: number;
   hit: number;

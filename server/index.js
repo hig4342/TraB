@@ -1,4 +1,6 @@
 const Koa = require('koa')
+const fs = require('fs')
+const http2 = require('http2');
 const next = require('next')
 const Router = require('koa-router')
 const bodyParser = require('koa-bodyparser')
@@ -104,8 +106,21 @@ app.prepare().then(() => {
   server.use(api())
   server.use(admin())
   server.use(router.routes())
-  server.listen(port, err => {
-    if (err) throw err
-    console.log(`> Ready on http://localhost:${port}`)
-  })
+
+  if(dev) {
+    const options = {
+      cert: fs.readFileSync(__dirname + '/localhost.crt'),
+      key: fs.readFileSync(__dirname + '/localhost.key')
+    }
+    http2.createSecureServer(options, server.callback()).listen(443, err => {
+      if (err) throw err
+      console.log(`> Ready on https://localhost`)
+    })
+  }
+  // else {
+    server.listen(port, err => {
+      if (err) throw err
+      console.log(`> Ready on http://localhost:${port}`)
+    })
+  // }
 })

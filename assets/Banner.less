@@ -1,0 +1,32 @@
+.banner-wrapper {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  height: 480px;
+  position: relative;
+  margin-bottom: 3rem;
+  .banner-image {
+    position: absolute;
+    img {
+      width: 100vw;
+      height: 480px;
+      filter: brightness(0.7);
+    }
+  }
+  .banner-text {
+    position: absolute;
+    z-index: 1;
+    height: 480px;
+    width: 100vw;
+    span {
+      display: block;
+      width: fit-content;
+      margin: calc((480px - 128px) / 2) auto;
+      padding: 24px 64px;
+      line-height: 80px;
+      background-color: rgba(255,255,255,0.2);
+      border-radius: 24px;
+      font-size: 48px;
+      color: white;
+    }
+  }
+}

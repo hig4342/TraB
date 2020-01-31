@@ -33,7 +33,6 @@ const upload = multer({
 
 file.post('/upload', upload.single('image'), async ctx => {
   try {
-    //console.log("req.file: ", ctx.req.file);
     ctx.body = ctx.req.file.location
   } catch (err) {
     ctx.status = 500

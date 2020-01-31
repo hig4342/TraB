@@ -1,30 +1,17 @@
 import * as React from 'react'
 import Link from'next/link'
-import { CheckboxValueType } from 'antd/lib/checkbox/Group'
 import { Card, Rate, Row, Col } from 'antd'
 import { ColProps } from 'antd/lib/grid'
 import { Planner } from 'type'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
 const { Meta } = Card
 import '../assets/PlannerList.less'
 import ITP from '@components/ITP'
 
 type Props = {
   items: Planner[];
-  country: number;
-  city: CheckboxValueType[];
-  themes: CheckboxValueType[];
 }
 
-// const errorHandle = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-//   e.currentTarget.src = 'placeholder-image.jpg'
-// }
-
-const PlannerList: React.SFC<Props> = ({items, country, city, themes})=> {
-
-  const [length, setLength] = React.useState(12)
-  const [visible, setVisible] = React.useState(items.length >= 12)
+const HotPlannerList: React.SFC<Props> = ({items})=> {
 
   const options: ColProps = {
     className: "planner-col",
@@ -35,29 +22,10 @@ const PlannerList: React.SFC<Props> = ({items, country, city, themes})=> {
     xl: { span: 6 },
   }
 
-  if(country !== 0) {
-    items = items.filter(item => item.Country.id == country)
-  }
-
-  if(city.length !== 0) {
-    items = items.filter(item => city.includes(item.City.id))
-  }
-
-  if(themes.length !== 0) {
-    items = items.filter(item => (item.themes_id.filter(theme => themes.includes(theme)).length !== 0))
-  }
-
-  const handleLength = () => {
-    setLength(length + 4)
-    if(items.length >= length) {
-      setVisible(false)
-    }
-  }
-
   return (
     <div className="planner-list">
       <Row justify="start" align="top" gutter={[16, 16]}>
-        {items.slice(0, length).map((item) => (
+        {items.map((item) => (
           <Col {...options} key={item.id}>
             <Link href={`/planner/${item.id}`}>
               <Card
@@ -82,14 +50,8 @@ const PlannerList: React.SFC<Props> = ({items, country, city, themes})=> {
           </Col>
         ))}
       </Row>
-      <div style={{display: visible ? 'block' : 'none'}} className="show-more-button">
-        <div onClick={handleLength} className='text-wrapper'>
-          <div><FontAwesomeIcon size='2x' icon={faPlus}/></div>
-          <div>more</div>
-        </div>
-      </div>
     </div>
   )
 }
 
-export default PlannerList
+export default HotPlannerList

@@ -20,6 +20,7 @@
     "aws-sdk": "^2.606.0",
     "axios": "^0.19.1",
     "bcrypt-nodejs": "0.0.3",
+    "cheerio": "^1.0.0-rc.3",
     "cross-env": "^6.0.3",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^2.2.0",
@@ -39,6 +40,7 @@
     "next-cookies": "^2.0.3",
     "next-session": "^2.2.0",
     "nodemailer": "^6.4.2",
+    "nprogress": "^0.2.0",
     "passport-local": "^1.0.0",
     "pg": "^7.17.1",
     "pg-hstore": "^2.3.3",
@@ -56,10 +58,12 @@
   },
   "devDependencies": {
     "@babel/core": "^7.8.3",
+    "@types/cheerio": "^0.22.15",
     "@types/jwt-decode": "^2.2.1",
     "@types/koa-passport": "^4.0.2",
     "@types/next-redux-saga": "^3.0.2",
     "@types/node": "^13.1.7",
+    "@types/nprogress": "^0.2.0",
     "@types/react": "^16.9.17",
     "@types/react-dom": "^16.9.4",
     "@types/react-html-parser": "^2.0.1",
@@ -76,7 +80,7 @@
     "eslint-plugin-react": "^7.18.0",
     "eslint-plugin-react-hooks": "^1.7.0",
     "install": "^0.13.0",
-    "npm": "^6.13.6",
+    "npm": "^6.13.7",
     "typescript": "^3.7.5"
   }
 }

@@ -42,7 +42,7 @@ const BoardCommentList: React.SFC<Props> = ({comments, board_id})=> {
             <Form.Item
               name='content'
             >
-              <TextArea rows={4} placeholder='댓글쓰는창'/>
+              <TextArea rows={4} placeholder='댓글'/>
             </Form.Item>
             <Form.Item>
               <Button size='large' htmlType='submit' className='button-color'>작성</Button>

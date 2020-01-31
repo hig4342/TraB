@@ -1,5 +1,7 @@
 const Router = require('koa-router')
 const Models = require('../../models')
+const axios = require('axios')
+const cheerio = require('cheerio')
 const Op = Models.Sequelize.Op
 const sequelize = Models.sequelize
 
@@ -31,6 +33,7 @@ planners.get('/domestic', async ctx => {
 
 planners.get('/foreign', async ctx => {
   const result = await Models.Planner.findAll({
+    order: [['createdAt', 'DESC']],
     where: { 
       upload_state: [3, 4, 5],
       [Op.not]: { CountryId: 1 }
@@ -73,6 +76,67 @@ planners.get('/count', async ctx => {
   ctx.body = count
 })
 
+planners.get('/new', async ctx => {
+  const result1 = await Models.Planner.findAll({
+    order: [['createdAt', 'DESC']],
+    where: { 
+      upload_state: [3, 4, 5],
+      CountryId: 1
+    },
+    include: [{
+      model: Models.City
+    }, {
+      model: Models.Country
+    }, {
+      model: Models.Reply
+    }, { 
+      model: Models.User,
+      attributes: ['email', 'nickname']
+    }],
+    limit: 7
+  })
+
+  const result2 = await Models.Planner.findAll({
+    order: [['createdAt', 'DESC']],
+    where: { 
+      upload_state: [3, 4, 5],
+      [Op.not]: { CountryId: 1 }
+    },
+    include: [{
+      model: Models.City
+    }, {
+      model: Models.Country
+    }, {
+      model: Models.Reply
+    }, { 
+      model: Models.User,
+      attributes: ['email', 'nickname']
+    }],
+    limit: 7
+  })
+
+  const result = {
+    domestic: result1,
+    foreign: result2
+  }
+
+  ctx.body = result
+})
+
+planners.get('/metadata', async ctx => {
+  const { url } = ctx.request.query
+  var metadata;
+  if( url ) {
+    const html = await axios.get(url)
+    const $ = cheerio.load(html.data)
+    metadata = {
+      title: $("meta[property='og:title']").attr("content"),
+      image: $("meta[property='og:image']").attr("content")
+    }
+  }
+  ctx.body = metadata
+})
+
 planners.get('/:id', async ctx => {
   const { id } = ctx.params
   
@@ -110,7 +174,7 @@ planners.get('/:id', async ctx => {
 })
 
 planners.post('/', async ctx => {
-  const {title, UserId, country_name, city_name, contents_image, contents_text} = ctx.request.body
+  const {title, UserId, country_name, city_name, thumbnail, contents, themes_id} = ctx.request.body
   
   let result1 = await Models.Country.findOne({
     where: { country_name: country_name }
@@ -138,13 +202,25 @@ planners.post('/', async ctx => {
     UserId: UserId,
     CountryId: CountryId,
     CityId: CityId,
-    contents_image: contents_image,
-    contents_text: contents_text,
-    themes_id: [],
-    thumbnail: 1,
+    thumbnail: thumbnail,
+    contents: contents,
+    themes_id: themes_id,
     blog_name: '',
     blog_link: '',
   })
+  ctx.body = result
+})
+
+planners.post('/reply', async ctx => {
+  const { PlannerId, UserId, content, rate } = ctx.request.body
+
+  const result = await Models.BoardReply.create({
+    PlannerId: PlannerId,
+    UserId: UserId,
+    content: content,
+    rate: rate
+  })
+
   ctx.body = result
 })
 

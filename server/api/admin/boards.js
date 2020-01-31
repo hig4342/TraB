@@ -52,15 +52,17 @@ boards.put('/:id', async ctx => {
 })
 
 boards.post('/', async ctx => {
-  const { title, ad_link, banner_image, main_image, content, board_state } = ctx.request.body
+  const { title, ad_link, banner_image, main_image, content, board_state, UserId, ad_deadline } = ctx.request.body
 
   const result = await Models.Board.create({
+    UserId: UserId,
     title: title,
     ad_link: ad_link,
     board_state: board_state,
     banner_image: banner_image,
     main_image: main_image,
     content: content,
+    ad_deadline: ad_deadline,
   })
 
   ctx.body = result

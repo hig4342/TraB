@@ -10,6 +10,8 @@ import moment from 'moment'
 
 import dynamic from 'next/dynamic'
 import { UploadChangeParam, UploadFile } from 'antd/lib/upload/interface';
+import { RadioChangeEvent } from 'antd/lib/radio';
+import useUser from '@hooks/useUser';
 
 const baseUrl = process.env.NODE_ENV === 'production' ? 'https://trab.co.kr' : ''
 
@@ -21,20 +23,23 @@ const EditorWrapper = dynamic(
 const AdminWrite: NextPage = ()=> {
 
   const [form] = Form.useForm()
+  const { user } = useUser()
   const [bannerImage, setBannerImage] = React.useState('')
   const [mainImage, setMainImage] = React.useState('')
   const [content, setContent] = React.useState('')
   const [visible, setVisible] = React.useState(false)
+  const [state, setState] = React.useState(false)
 
   const onFinish: Callbacks['onFinish'] = (values) => {
-    console.log(values);
     const data = {
+      UserId: user.id,
       title: form.getFieldValue('title'),
       board_state: form.getFieldValue('board_state'),
       content: content,
       banner_image: bannerImage,
       main_image: mainImage,
-      ad_link: form.getFieldValue('ad_link')
+      ad_link: form.getFieldValue('ad_link'),
+      ad_deadline: form.getFieldValue('ad_deadline')
     }
     axios.post(baseUrl+'/api/admin/boards', data).then( result => {
       console.log(result)
@@ -48,6 +53,14 @@ const AdminWrite: NextPage = ()=> {
     })
   };
 
+  const handleState = (e: RadioChangeEvent) => {
+    setState(e.target.value === 2)
+    form.setFieldsValue({
+      ad_link: '',
+      ad_deadline: ''
+    })
+  }
+
   const handleMainImage = (info: UploadChangeParam<UploadFile<any>>) => {
     if (info.file.response) {
       setMainImage(info.file.response)
@@ -60,8 +73,8 @@ const AdminWrite: NextPage = ()=> {
     }
   }
 
-  const handleContent = (content: string, _index: number) => {
-    setContent(content)
+  const handleContent = (text: string) => {
+    setContent(text)
   }
 
   const handleShow = () => {
@@ -100,20 +113,25 @@ const AdminWrite: NextPage = ()=> {
           <Input />
         </Form.Item>
         <Form.Item name='board_state' label='공지사항/광고'>
-          <Radio.Group buttonStyle="solid">
+          <Radio.Group onChange={handleState} buttonStyle="solid">
             <Radio.Button value={1}>공지사항</Radio.Button>
             <Radio.Button value={2}>광고</Radio.Button>
           </Radio.Group>
         </Form.Item>
-        <Form.Item name='ad_link' label='광고URL'>
-          <Input />
-        </Form.Item>
-        <Form.Item name='ad_deadline' label='광고기한'>
-          <DatePicker
-            placeholder='광고기한'
-            disabledDate={disabledDate}
-          />
-        </Form.Item>
+        { state ?
+          <>
+          <Form.Item name='ad_link' label='광고URL'>
+            <Input />
+          </Form.Item>
+          <Form.Item name='ad_deadline' label='광고기한'>
+            <DatePicker
+              placeholder='광고기한'
+              disabledDate={disabledDate}
+            />
+          </Form.Item>
+          </>
+          : null
+        }
         <Form.Item labelCol={{span: 24}} wrapperCol={{span: 24}} label='배너이미지'>
           <Upload.Dragger
             name='image'
@@ -135,10 +153,10 @@ const AdminWrite: NextPage = ()=> {
           </Upload.Dragger>
         </Form.Item>
         <Form.Item
-          name='content'
+          name='contents'
           rules={[{ required: true, message: '내용을 입력하세요!' },]}
         >
-          <EditorWrapper index={0} handleContent={handleContent}/>
+          <EditorWrapper handleContents={handleContent}/>
         </Form.Item>
         <Form.Item>
           <Button onClick={handleShow}>작성하기</Button>
@@ -151,7 +169,7 @@ const AdminWrite: NextPage = ()=> {
             onOk={onFinish}
             onCancel={handleHide}
           >
-            <img style={{width: '100%'}} src={mainImage}/>
+            <img style={{width: '100%', marginBottom: '3rem'}} src={mainImage}/>
             <div style={{width: '100%'}}>{ReactHtmlParser(content)}</div>
           </Modal>
         </Form.Item>

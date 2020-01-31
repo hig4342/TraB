@@ -1,5 +1,6 @@
 const Router = require('koa-router')
 const Models = require('../../models')
+const sequelize = Models.sequelize
 
 const users = new Router({
   prefix: '/api/users'
