@@ -7,6 +7,7 @@ import UploadWrapper from '@components/UploadWrapper'
 import moment from 'moment'
 import useUser from '@hooks/useUser'
 import '@assets/Designer_Register.less'
+import { UploadFile } from 'antd/lib/upload/interface'
 
 
 const baseUrl = process.env.NODE_ENV === 'production' ? 'https://trab.co.kr' : ''
@@ -86,8 +87,8 @@ const Designer_Register: NextPage = ()=> {
     })
   }
 
-  const handleImage = (e: string) => {
-    setImage(e)
+  const handleThumnail = (fileList: UploadFile<any>[]) => {
+    setImage(fileList[0].url ? fileList[0].url : '')
   }
 
   return (
@@ -114,7 +115,7 @@ const Designer_Register: NextPage = ()=> {
       <div className='register-submmit'>
       <Row justify='center' align='middle' gutter={[16, 16]}>
           <Col md={8}>
-            <div className='upload-image-wrapper'><UploadWrapper index={1} handleImage={handleImage}/></div>
+            <div className='upload-image-wrapper'><UploadWrapper handleThumnail={handleThumnail}/></div>
           </Col>
           <Col md={16}>
             <Form.Item {...itemLayout} name='email' label='이메일'>
