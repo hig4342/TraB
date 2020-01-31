@@ -22,7 +22,7 @@ const MypagePlanner: React.SFC<Props> = ({planners})=> {
                     <div style={{width: '100%', height: 160, overflow: 'hidden'}}>
                       <img
                         alt="planner-image"
-                        src={planner.contents_image[planner.thumbnail-1]}
+                        src={planner.thumbnail}
                         style={{height: '100%', width: '100%'}}
                       />
                     </div>
