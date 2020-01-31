@@ -211,8 +211,6 @@ const Designer_Register: NextPage = ()=> {
                 />
               </Modal>
             </Form.Item>
-          </Col>
-          <Col span={24}>
             <Form.Item
               {...itemLayout}
               label='은행명'
@@ -229,6 +227,8 @@ const Designer_Register: NextPage = ()=> {
             >
               <Input placeholder='계좌번호'/>
             </Form.Item>
+          </Col>
+          <Col span={24}>
             <Form.Item
               {...itemLayout}
               name='profile'
