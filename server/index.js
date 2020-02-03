@@ -35,12 +35,13 @@ passport.use(new LocalStrategy({
     attributes: { exclude: ['salt'] },
     where: { email: email }
   }).then( result => {
-    console.log(result)
     if (!result) {
+      console.log('아이디없음')
       return done(null, false, { message: '존재하지 않는 이메일입니다.' })
     }
     const user = result.dataValues
     if (!bcrypt.compareSync(password,result.dataValues.password)) { 
+      console.log('비번틀림')
       return done(null, false, { message: '비밀번호가 틀렸습니다.' })
     }
     return done(null, user)

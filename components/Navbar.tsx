@@ -1,12 +1,15 @@
 import * as React from 'react'
 import Link from 'next/link'
 import Router from 'next/router'
+import axios from 'axios'
 import useUser from '@hooks/useUser'
 import PopupWrapper from '@components/PopupWrapper'
 import '@assets/Navbar.less'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { Drawer, Menu, Button } from 'antd'
+
+const baseUrl = process.env.NODE_ENV === 'production' ? 'https://trab.co.kr' : ''
 
 const Navbar: React.SFC = () => {
 
@@ -17,7 +20,9 @@ const Navbar: React.SFC = () => {
     onLogout()
     sessionStorage.removeItem('usertoken')
     localStorage.removeItem('usertoken')
-    Router.push('/')
+    axios.get(baseUrl + 'api/auth/signout').then(() => {
+      Router.push('/')
+    })
   }
 
   const showDrawer = () => {

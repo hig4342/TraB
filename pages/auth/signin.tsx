@@ -15,7 +15,6 @@ const SigninPage: NextPage = () => {
   const {onLogin} = useUser()
 
   const onFinish = (values: Store) => {
-    console.log('Success:', values);
     axios.post('/api/auth/signin', values).then( result => {
       const usertoken = result.data
       sessionStorage.setItem('usertoken', usertoken)
@@ -25,6 +24,8 @@ const SigninPage: NextPage = () => {
       const user: User = jwtDecode(usertoken)
       onLogin(user)
       Router.push('/')
+    }).catch( err => {
+      console.log(err)
     })
   };
 
@@ -34,8 +35,9 @@ const SigninPage: NextPage = () => {
 
   return (
     <div className='signin-page'>
-      <Row justify='start' align='middle'>
-        <Col xs={24} sm={12} >
+      <Row justify='end' align='middle'>
+        <Col xs={24} sm={11} >
+          <div className='signin-title'><h1>SIGN IN</h1></div>
           <div className='signin-wrapper'>
             <Form
               onFinish={onFinish}
@@ -74,8 +76,8 @@ const SigninPage: NextPage = () => {
             </Form>
           </div>
         </Col>
-        <Col xs={24} sm={12} className='background-wrapper'>
-          <img src='/background_signin.png'/>
+        <Col xs={0} sm={10}>
+        <div style={{ minHeight: 750 }} />
         </Col>
       </Row>
     </div>

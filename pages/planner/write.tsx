@@ -68,7 +68,7 @@ const PlannerWrite: NextPage = ()=> {
       <Form
         name='planner_write_form'
         form={form}
-        layout='horizontal'
+        layout='vertical'
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
       >
@@ -112,37 +112,33 @@ const PlannerWrite: NextPage = ()=> {
           name='title'
           required={false}
           rules={[{ required: true, message: '제목을 입력하세요!' },]}
-          labelCol={{xs: 2, sm: 1}}
-          wrapperCol={{xs: 22, sm: 23}}
+          wrapperCol={{xs: 24, sm: 12}}
         >
-          <Input />
+          <Input placeholder='제목을 입력하세요'/>
         </Form.Item>
         <Form.Item
           label='나라'
           name='country'
           required={false}
           rules={[{ required: true, message: '나라를 입력하세요!' },]}
-          labelCol={{xs: 2, sm: 1}}
-          wrapperCol={{xs: 22, sm: 23}}
+          wrapperCol={{xs: 24, sm: 12}}
         >
-          <Input />
+          <Input placeholder='나라를 입력하세요'/>
         </Form.Item>
         <Form.Item
           label='도시'
           name='city'
           required={false}
           rules={[{ required: true, message: '도시를 입력하세요!' },]}
-          labelCol={{xs: 2, sm: 1}}
-          wrapperCol={{xs: 22, sm: 23}}
+          wrapperCol={{xs: 24, sm: 12}}
         >
-          <Input />
+          <Input placeholder='도시를 입력하세요'/>
         </Form.Item>
         <Form.Item
           label='대표 사진'
           name='thumbnail'
           required={false}
           rules={[{ required: true, message: '썸네일에 들어갈 사진을 업로드해주세요.' },]}
-          labelCol={{xs: 3, sm: 2}}
           wrapperCol={{xs: 21, sm: 6}}
         >
           <UploadWrapper handleThumnail={handleThumnail}/>  

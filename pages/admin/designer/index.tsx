@@ -3,11 +3,13 @@ import axios from 'axios'
 import { NextPage } from 'next'
 import Link from 'next/link'
 import { Table, Button } from 'antd'
+import { User } from 'type'
+import { ColumnsType } from 'antd/lib/table/interface'
 
-const columns: any = [{
+const columns: ColumnsType<User> = [{
   title: '번호',
-  dataIndex: 'key',
-  key: 'key',
+  dataIndex: 'id',
+  key: 'id',
   align: 'center'
 }, {
   title: '이름',
@@ -18,7 +20,7 @@ const columns: any = [{
   title: '은행 / 계좌번호',
   key: 'account_num',
   align: 'center',
-  render: (_text: any, record: { account_bank: string; account_num: string }) => (
+  render: (_text: any, record) => (
     <div>{record.account_bank} / {record.account_num}</div>
   )
 }, {
@@ -27,18 +29,21 @@ const columns: any = [{
   key: 'state_id',
   align: 'center',
   filters: [{
-    text: '미승인',
-    value: 3,
-  }, {
-    text: '승인거부',
-    value: 4,
+    text: '승인요청',
+    value: '3',
   }, {
     text: '승인완료',
-    value: 5,
+    value: '4',
+  }, {
+    text: 'ITP',
+    value: '5',
+  }, {
+    text: '관리자',
+    value: '9999',
   }],
-  onFilter: (value: number, record: {state_id: number}) => record.state_id === value,
+  onFilter: (value, record) => record.state_id === Number(value),
   render: (state_id: number) => (
-    <span>{state_id === 3 ? '미승인' : state_id === 4 ? '승인거부' : '승인완료'}</span>
+    <span>{state_id === 3 ? '승인요청' : state_id === 4 ? '승인완료' : state_id === 5 ? 'ITP' : '관리자'}</span>
   )
 }, {
   title: '승인하기',
@@ -56,23 +61,25 @@ const columns: any = [{
   }
 }, {
   title: '자세히보기',
-  dataIndex: 'key',
+  dataIndex: 'id',
   key: 'details',
-  render: (key: number) => (
-    <Link href='/admin/designer/[id]' as={`/admin/designer/${key}`}><a>자세히보기</a></Link>
+  render: (id: number) => (
+    <Link href='/admin/designer/[id]' as={`/admin/designer/${id}`}><a>자세히보기</a></Link>
   )
 }]
 
 type Props = {
-  designer_data: any
+  designer: User[]
+  designerCount: number
 }
 
-const Designer: NextPage<Props> = ({ designer_data })=> {
+const AdminDesigners: NextPage<Props> = ({ designer, designerCount })=> {
+
   return (
-    <div className='admin-designer' style={{ width: '100%' }}>
-      <h1>설계자 인원 리스트</h1>
+    <div className='admin-designers' style={{ width: '100%' }}>
+      <h1>설계자 인원 리스트 총 {designerCount}명</h1>
       <Table
-        dataSource={designer_data}
+        dataSource={designer}
         columns={columns}
         pagination={{
           pageSize: 10,
@@ -86,11 +93,13 @@ const Designer: NextPage<Props> = ({ designer_data })=> {
   )
 }
 
-Designer.getInitialProps = async () => {
-  const designer_data = await axios.get('admin/users/designer')
+AdminDesigners.getInitialProps = async () => {
+  const designer = await axios.get('/api/admin/users/designer')
+  const designerCount = await axios.get('/api/admin/users/designer/count')
   return {
-    designer_data: designer_data.data
+    designer: designer.data,
+    designerCount: designerCount.data
   }
 }
 
-export default Designer
+export default AdminDesigners

@@ -75,11 +75,11 @@ const PopupWrapper: React.SFC<Props> = ({signin=false, email=false, enroll=false
           <div className='popup-title'><h2>이메일 인증을 부탁드립니다.</h2></div>
           <div className='popup-contents'>
             <p>아직 이메일 인증을 받지 않으셨군요.</p>
-            <p>이메일 인증이 되어야 활동을 할 수 있습니다.</p>
+            <p>이메일 인증이 되어야 이용 할 수 있습니다.</p>
             <p>이메일 인증을 완료해주세요!</p>
           </div>
           <Row justify="center" className='popup-action'>
-            <Col span={8}><Link href='/'><Button className='ok-button'>확인</Button></Link></Col>
+            <Col span={8}><Link href='/'><Button className='ok-button' onClick={handleCancel}>확인</Button></Link></Col>
             <Col span={8}><Button className='cancel-button' onClick={handleCancel}>취소</Button></Col>
           </Row>
           <p>* 확인 버튼을 누르면 메인 화면으로 이동합니다.</p>

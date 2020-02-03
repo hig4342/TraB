@@ -2,19 +2,17 @@ import * as React from 'react'
 import axios from 'axios'
 import Router from 'next/router'
 import { NextPage } from 'next'
+import usePopup from '@hooks/usePopup'
 import moment from 'moment'
 import { Form, Input, Button, DatePicker, Checkbox, Modal, Row, Col, Radio, message } from 'antd'
 import { MailOutlined, LockOutlined } from '@ant-design/icons'
 import AddressFinder from '@components/AddressFinder'
 import '@assets/Signup.less'
 
-const CenterItemLayout: React.CSSProperties = {
-  textAlign: 'center'
-}
-
 const Signup: NextPage = ()=> {
   const [form] = Form.useForm();
   const [visible, setVisible] = React.useState(false);
+  const { onVisible } = usePopup()
 
   const onFinish = (values: any) => {
     const data = {
@@ -31,6 +29,7 @@ const Signup: NextPage = ()=> {
     }
     axios.post('/api/auth/signup', data).then( result => {
       if(result.status == 200) {
+        onVisible()
         Router.push('/')
       }
     }).catch( err => {
@@ -66,8 +65,9 @@ const Signup: NextPage = ()=> {
 
   return (
     <div className='signup-page'>
-      <Row justify='start' align="middle">
-        <Col xs={24} sm={12}>
+      <Row justify='end' align="middle">
+        <Col xs={24} sm={12} >
+          <div className='signin-title'><h1>SIGN UP</h1></div>
           <div className='signup-wrapper'>
             <Form
               form={form}
@@ -76,9 +76,6 @@ const Signup: NextPage = ()=> {
               onFinish={onFinish}
               onFinishFailed={onFinishFailed}
             >
-              <Form.Item style={CenterItemLayout}>
-                <h1>회원가입</h1>
-              </Form.Item>
               <Form.Item
                 label='이메일'
                 name='email'
@@ -211,8 +208,8 @@ const Signup: NextPage = ()=> {
             </Form>
           </div>
         </Col>
-        <Col xs={24} sm={12} className='background-wrapper'>
-          <img src='/background_signin.png'/>
+        <Col xs={0} sm={10}>
+          <div style={{ minHeight: 750 }} />
         </Col>
       </Row>
     </div>

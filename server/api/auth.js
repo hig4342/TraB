@@ -21,7 +21,6 @@ auth.get('/signout', async ctx => {
 })
 
 auth.get('/signin/success', async ctx => {
-  console.log("성공 테스트", ctx.session.passport.user)
   const { user } = ctx.session.passport
   const userdata = {
     id: user.id,
@@ -112,7 +111,6 @@ auth.post('/signup', async ctx => {
 auth.get('/certify', async ctx => {
   const { email, token } = ctx.query
   const decoded = jwt.verify(token, 'TraBSecret')
-  
   if(decoded) {
     const result = await Models.User.findOne({
       where: {email: email}
@@ -180,6 +178,40 @@ auth.post('/edit', async ctx => {
   })
 
   ctx.body = token
+})
+
+auth.get('/update', async ctx => {
+  const { user } = ctx.state
+  if ( user ) {
+    const userdb = await Models.User.findOne({
+      where: {id: user.id}
+    })
+    const userdata = {
+      id: userdb.dataValues.id,
+      email: userdb.dataValues.email,
+      name: userdb.dataValues.name,
+      nickname: userdb.dataValues.nickname,
+      phone: userdb.dataValues.phone,
+      birth: userdb.dataValues.birth,
+      sex: userdb.dataValues.sex,
+      address_zonecode: userdb.dataValues.address_zonecode,
+      address_fulladdress: userdb.dataValues.address_fulladdress,
+      address_detailaddress: userdb.dataValues.address_detailaddress,
+      profile_image: userdb.dataValues.profile_image,
+      profile: userdb.dataValues.profile,
+      account_bank: userdb.dataValues.account_bank,
+      account_num: userdb.dataValues.account_num,
+      state_id: userdb.dataValues.state_id,
+    }
+  
+    const token = jwt.sign(userdata, 'TraBSecret', {
+      expiresIn: '1d'
+    })
+    ctx.body = token
+  } else {
+    ctx.status = 401
+    ctx.body = 'failure'
+  }
 })
 
 module.exports = auth

@@ -1,12 +1,16 @@
 import * as React from 'react'
 import axios from 'axios'
 import { NextPage } from 'next'
+import jwtDecode from 'jwt-decode'
 import dynamic from 'next/dynamic'
-//import NoticeSwiper from '@components/NoticeSwiper'
+import Router from 'next/router'
 import ShowandPlan from '@components/ShowandPlan'
 import CurrentSituation from '@components/CurrentSituation'  
 import NewPlannerList from '@components/NewPlannerList'
 import { Board, Planner } from 'type'
+import useUser from '@hooks/useUser'
+import usePopup from '@hooks/usePopup'
+import { User } from '@reducers/userReducer'
 
 const NoticeSwiper = dynamic(
   () => import('@components/NoticeSwiper'),
@@ -29,6 +33,22 @@ type Props = {
 }
 
 const IndexPage: NextPage<Props> = ({notices, planners, users, newPlanners}) => {
+
+  const {onLogin} = useUser();
+  const {onVisible} = usePopup();
+
+  React.useEffect(() => {
+    const { auth } = Router.query;
+    if ( auth === 'success' ) {
+      onVisible()
+    }
+    axios.get(baseUrl + '/api/auth/update').then( result => {
+      const usertoken = result.data
+      sessionStorage.setItem('usertoken', usertoken)
+      const user: User = jwtDecode(usertoken)
+      onLogin(user)
+    })
+  }, [])
 
   return (
     <div className='index-page'>

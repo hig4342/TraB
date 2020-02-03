@@ -1,15 +1,16 @@
 import * as React from 'react'
 import { Layout, Divider } from 'antd'
+import Link from 'next/link'
 import Router from 'next/router'
-//import NProgress from 'nprogress'
 import Navbar from '@components/Navbar'
 import jwtDecode from 'jwt-decode'
 import useUser from '@hooks/useUser'
 import { User } from '@reducers/userReducer'
 import { LoadingOutlined } from '@ant-design/icons';
+import Popup from '@components/Popup'
+import Foot from './Foot'
 import 'antd/dist/antd.css'
 import '@assets/Layout.less'
-import Foot from './Foot'
 
 const { Header, Footer, Content } = Layout;
 
@@ -44,13 +45,14 @@ const AppLayout: React.SFC = ({children}) => {
       <Header>
         <Navbar />
       </Header>
+      <Popup />
       <div className='toolbar-wrapper'>
         <div className='toolbar'>
-          <div><img src="/domestic.png" width='60' height='60'/>한국</div>
+          <Link href='/planner/domestic'><div><img src="/domestic.png" width='60' height='60'/>한국</div></Link>
           <Divider/>
-          <div><img src="/foreign.png" width='60' height='60'/>외쿡</div>
+          <Link href='/planner/foreign'><div><img src="/foreign.png" width='60' height='60'/>외쿡</div></Link>
           <Divider/>
-          <div><img style={{padding: 10}}src="/selling.png" width='60' height='60'/>판매</div>
+          <Link href='/planner/write'><div><img style={{padding: 10}}src="/selling.png" width='60' height='60'/>판매</div></Link>
         </div>
       </div>
       {

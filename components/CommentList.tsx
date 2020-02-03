@@ -3,6 +3,7 @@ import { Comment, List, Avatar, Rate, Button } from 'antd'
 import { Reply } from 'type'
 import Link from 'next/link'
 //import axios from 'axios'
+import { Callbacks } from 'rc-field-form/lib/interface';
 import TextArea from 'antd/lib/input/TextArea'
 import '@assets/CommentList.less'
 import { Form } from 'antd'
@@ -15,18 +16,29 @@ type Props = {
 
 const CommentList: React.SFC<Props> = ({comments})=> {
 
-  // const writeComment = (baseUrl + '/api/planners/reply') => {
-  //   axios.post('')
-  // }
+  const writeComment: Callbacks['onFinish'] = (values) => {
+    console.log(values)
+    //axios.post(baseUrl + '/api/planners/reply')
+  }
 
   return (
     <div className='comment-list-wrapper'>
       <div className='comment-write'>
-        <Form>
-          <Form.Item>
+        <Form
+          onFinish={writeComment}
+        >
+          <Form.Item
+            label='평점'
+            name='rate'
+            required={false}
+            rules={[{ required: true, message: '평점을 선택해주세요.' },]}
+          >
             <Rate allowHalf/>
           </Form.Item>
-          <Form.Item>
+          <Form.Item
+            name='content'
+            rules={[{ required: true, message: '내용을 입력하세요!' },]}
+          >
             <TextArea rows={4} placeholder='댓글'/>
           </Form.Item>
           <Form.Item>
