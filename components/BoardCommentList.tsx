@@ -1,12 +1,14 @@
 import * as React from 'react'
 import axios from 'axios'
-import Router from 'next/router'
 import { Comment, List, Avatar, Button, Form, message } from 'antd'
 import { BoardReply } from 'type'
 import Link from 'next/link'
 import TextArea from 'antd/lib/input/TextArea'
 import useUser from '@hooks/useUser'
+import { Callbacks } from 'rc-field-form/lib/interface';
 import '@assets/CommentList.less'
+
+const baseUrl = process.env.NODE_ENV === 'production' ? 'https://trab.co.kr' : ''
 
 type Props = {
   comments: BoardReply[];
@@ -15,19 +17,24 @@ type Props = {
 
 const BoardCommentList: React.SFC<Props> = ({comments, board_id})=> {
   const {user, isLogin} = useUser()
-
-  const onFinish = (e: any) => {
+  const [reply, setReply] = React.useState(comments)
+  const [form] = Form.useForm()
+  const onFinish: Callbacks['onFinish'] = (values) => {
     if(user.state_id === 1) {
       message.error('이메일 인증을 받은 회원만 댓글을 작성할 수 있습니다.')
       return
     } else {
-      axios.post('api/board/reply', {
+      axios.post(baseUrl + '/api/boards/reply', {
         BoardId: board_id,
         UserId: user.id,
-        content: e.content
-      }).then( result => {
-        console.log(result)
-        Router.push(`/board/${board_id}`)
+        ...values
+      }).then( () => {
+        axios.get(baseUrl + `/api/boards/${board_id}`).then( result => {
+          setReply(result.data.BoardReplies)
+          form.setFieldsValue({
+            content: ''
+          })
+        })
       })
     }
   }
@@ -37,6 +44,7 @@ const BoardCommentList: React.SFC<Props> = ({comments, board_id})=> {
       { isLogin ?
       <div className='comment-write'>
           <Form
+            form={form}
             onFinish={onFinish}
           >
             <Form.Item
@@ -54,8 +62,8 @@ const BoardCommentList: React.SFC<Props> = ({comments, board_id})=> {
       <List
         itemLayout="horizontal"
         className='comment-list'
-        header={`${comments.length}개의 답글`}
-        dataSource={comments}
+        header={`${reply.length}개의 답글`}
+        dataSource={reply}
         renderItem={item => (
           <List.Item>
             <Comment

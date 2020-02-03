@@ -260,7 +260,7 @@ planners.post('/', async ctx => {
 planners.post('/reply', async ctx => {
   const { PlannerId, UserId, content, rate } = ctx.request.body
 
-  const result = await Models.BoardReply.create({
+  const result = await Models.Reply.create({
     PlannerId: PlannerId,
     UserId: UserId,
     content: content,
