@@ -59,6 +59,15 @@ const AdminPlannerContent: React.SFC<Props> = ({planner, themes}) => {
     console.log(value)
   }
 
+  const deletePlanner = () => {
+    axios.delete(baseUrl + `/api/admin/planners/${planner.id}`).then( result => {
+      console.log(result)
+      Router.push('/admin/planner')
+    }).catch( err => {
+      console.log(err)
+    })
+  }
+
   const rejectPlanner = () => {
     axios.patch(baseUrl + `/api/admin/planners/${planner.id}/state`, {upload_state: 2}).then( result => {
       console.log(result)
@@ -170,12 +179,19 @@ const AdminPlannerContent: React.SFC<Props> = ({planner, themes}) => {
           <EditorWrapper handleContents={handleContents}/>
         </Form.Item>
         <Form.Item>
-          <Button onClick={rejectPlanner}>계획표 거부</Button>
-          <Button onClick={allowPlanner}>계획표 승인</Button>
-          <Button onClick={changePremium}>편한계획표 변경</Button>
-          <Button onClick={changeItp}>ITP 변경</Button>
-          <Button htmlType='submit'>수정하기</Button>
-          <Button>취소</Button>
+          <div className='button-wrapper'>
+            <Button type='primary' onClick={allowPlanner}>계획표 승인</Button>
+            <Button type='danger' onClick={deletePlanner}>계획표 삭제</Button>
+          </div>
+          <div className='button-wrapper'>
+            <Button type='danger' shape='round' onClick={rejectPlanner}>계획표 거부</Button>
+            <Button className='premium' shape='round' onClick={changePremium}>편한계획표 변경</Button>
+            <Button className='itp' shape='round' onClick={changeItp}>ITP 변경</Button>
+          </div>
+          <div className='button-wrapper'>
+            <Button type='primary' htmlType='submit'>수정하기</Button>
+            <Button>취소</Button>
+          </div>
         </Form.Item>
       </Form>
     </div>

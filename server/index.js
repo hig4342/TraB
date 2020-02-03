@@ -80,15 +80,62 @@ app.prepare().then(() => {
   router.get('/auth/signin', async (ctx, next) => {
     if(ctx.isAuthenticated()) {
       ctx.redirect('back')
+    } else {
+      await app.render(ctx.req, ctx.res, '/auth/signin', ctx.query)
+      ctx.respond = false
     }
-    await app.render(ctx.req, ctx.res, '/auth/signin', ctx.query)
-    ctx.respond = false
+  })
+
+  router.get('/auth/signup', async (ctx, next) => {
+    if(ctx.isAuthenticated()) {
+      ctx.redirect('back')
+    } else {
+      await app.render(ctx.req, ctx.res, '/auth/signup', ctx.query)
+      ctx.respond = false
+    }
+  })
+
+  router.get('/auth/mypage', async (ctx, next) => {
+    if(ctx.isAuthenticated()) {
+      await app.render(ctx.req, ctx.res, '/auth/mypage', ctx.query)
+      ctx.respond = false
+    } else {
+      ctx.redirect('back')
+    }
+  })
+
+  router.get('/planner/write', async ctx => {
+    const { user } = ctx.state
+    if(user && user.state_id >= 4) {
+      await app.render(ctx.req, ctx.res, '/planner/write', ctx.query)
+    } else {
+      ctx.redirect('back')
+    }
+  })
+
+  router.get('/board/write', async ctx => {
+    const { user } = ctx.state
+    if(user && user.state_id >= 2) {
+      await app.render(ctx.req, ctx.res, '/board/write', ctx.query)
+    } else {
+      ctx.redirect('back')
+    }
   })
 
   router.get('/admin', async ctx => {
     const { user } = ctx.state
     if(user && user.state_id === 9999) {
       await app.render(ctx.req, ctx.res, '/admin', ctx.query)
+    } else {
+      ctx.redirect('back')
+    }
+  })
+
+  router.get('/admin/*', async ctx => {
+    console.log(ctx.request.url)
+    const { user } = ctx.state
+    if(user && user.state_id === 9999) {
+      await app.render(ctx.req, ctx.res, ctx.request.url, ctx.query)
     } else {
       ctx.redirect('back')
     }

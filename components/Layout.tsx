@@ -8,6 +8,7 @@ import useUser from '@hooks/useUser'
 import { User } from '@reducers/userReducer'
 import { LoadingOutlined } from '@ant-design/icons';
 import Popup from '@components/Popup'
+import PopupWrapper from './PopupWrapper'
 import Foot from './Foot'
 import 'antd/dist/antd.css'
 import '@assets/Layout.less'
@@ -52,7 +53,7 @@ const AppLayout: React.SFC = ({children}) => {
           <Divider/>
           <Link href='/planner/foreign'><div><img src="/foreign.png" width='60' height='60'/>외쿡</div></Link>
           <Divider/>
-          <Link href='/planner/write'><div><img style={{padding: 10}}src="/selling.png" width='60' height='60'/>판매</div></Link>
+          <PopupWrapper signin email enroll pending callback='/planner/write'><div><img style={{padding: 10}}src="/selling.png" width='60' height='60'/>판매</div></PopupWrapper>
         </div>
       </div>
       {

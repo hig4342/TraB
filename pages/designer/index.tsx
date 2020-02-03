@@ -1,10 +1,10 @@
 import * as React from 'react'
 import axios from 'axios'
 import { NextPage } from 'next'
-import { Board, User } from 'type'
-// import { RadioChangeEvent } from 'antd/lib/radio/interface'
+import { Board, User, Country } from 'type'
+import { RadioChangeEvent } from 'antd/lib/radio/interface'
 // import { CheckboxValueType } from 'antd/lib/checkbox/Group'
-// import CountrySelector from '@components/CountrySelector'
+import CountrySelector from '@components/CountrySelector'
 import DesignerList from '@components/DesignerList'
 // import FilterBox from '@components/FilterBox'
 import NoticeSwiper from '@components/NoticeSwiper'
@@ -14,21 +14,23 @@ const baseUrl = process.env.NODE_ENV === 'production' ? 'https://trab.co.kr' : '
 
 type Props = {
   advertisements: Board[]
+  countries: Country[]
   designers: User[]
 }
 
-const Designer: NextPage<Props> = ({ advertisements, designers })=> {
+const Designer: NextPage<Props> = ({ advertisements, designers, countries })=> {
 
-  // const [nation, setNation] = React.useState('')
+  const [nation, setNation] = React.useState('all')
   // const [country, setCountry] = React.useState('')
   // const [city, setCity] = React.useState<Array<CheckboxValueType>>([])
   // const [theme, setTheme] = React.useState<Array<CheckboxValueType>>([])
 
-  // const onChange = (e: RadioChangeEvent) => {
-  //   console.log('radio checked', e.target.value);
-  //   setNation(e.target.value)
-  // }
+  const onChange = (e: RadioChangeEvent) => {
+    console.log('radio checked', e.target.value);
+    setNation(e.target.value)
+  }
 
+  console.log(countries)
   // const handleCountry = (e: RadioChangeEvent) => {
   //   console.log('radio checked', e.target.value);
   //   setCountry(e.target.value)
@@ -49,7 +51,7 @@ const Designer: NextPage<Props> = ({ advertisements, designers })=> {
       <NoticeSwiper items={advertisements} inline/>
       <div className='new-designer'>
         <h1 className='big-title'>트래비(TraB) 여행 설계자</h1>
-        {/* <CountrySelector value={nation} onChange={onChange}/> */}
+        <CountrySelector value={nation} onChange={onChange}/>
         {/* <FilterBox
           foreign={nation === 'foreign'}
           country={country}
@@ -68,20 +70,22 @@ const Designer: NextPage<Props> = ({ advertisements, designers })=> {
         <h1 className='small-title'>편한계획표 설계자 명단</h1>
         <DesignerList premium designers={designers}/>
       </div>
-      <div className='hot-designer'>
+      {/* <div className='hot-designer'>
         <h1 className='small-title'>이번주 명예의 설계자</h1>
         <h4 className='sub-title'>금주에 가장 많은 활동을 한 여행 설계자들 입니다!</h4>
         <DesignerList designers={designers}/>
-      </div>
+      </div> */}
     </div>
   )
 }
 
 Designer.getInitialProps = async () => {
   const advertisements = await axios.get(baseUrl + '/api/boards/advertisements')
+  const countries = await axios.get(baseUrl + '/api/countries')
   const designer = await axios.get( baseUrl + '/api/users/designer')
   return {
     advertisements: advertisements.data,
+    countries: countries.data,
     designers: designer.data
   }
 }
