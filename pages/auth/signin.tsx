@@ -34,43 +34,48 @@ const SigninPage: NextPage = () => {
 
   return (
     <div className='signin-page'>
-      <Row justify='center' align='middle'>
-        <Col xs={22} sm={16} md={10} lg={9} xl={8} className='signin-wrapper'>
-          <Form
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            name='signin_form'
-            layout='vertical'
-          >
-            <Form.Item
-              label='이메일'
-              name='email'
-              required={false}
-              rules={[{ required: true, message: '이메일을 입력해주세요' }]}
+      <Row justify='start' align='middle'>
+        <Col xs={24} sm={12} >
+          <div className='signin-wrapper'>
+            <Form
+              onFinish={onFinish}
+              onFinishFailed={onFinishFailed}
+              name='signin_form'
+              layout='vertical'
             >
-              <Input placeholder='이메일을 입력해주세요'/>
-            </Form.Item>
-            <Form.Item
-              label='비밀번호'
-              name='password'
-              required={false}
-              rules={[{ required: true, message: '비밀번호를 입력해주세요' }]}
-            >
-              <Input.Password placeholder='비밀번호를 입력해주세요'/>
-            </Form.Item>
-            <Form.Item
-              name='remember'
-              valuePropName="checked"
-            >
-              <Checkbox>로그인 상태 유지</Checkbox>
-            </Form.Item>
-            <Form.Item> 
-              <Button type='primary' htmlType='submit' block>로그인</Button>
-            </Form.Item>
-            <Form.Item>
-              <div style={{textAlign: 'center'}}><span>아직 트래비(TraB) 회원이 아니신가요? <Link href='auth/signup'><a>회원가입</a></Link></span></div>
-            </Form.Item>
-          </Form>
+              <Form.Item
+                label='이메일'
+                name='email'
+                required={false}
+                rules={[{ required: true, message: '이메일을 입력해주세요' }]}
+              >
+                <Input placeholder='이메일을 입력해주세요'/>
+              </Form.Item>
+              <Form.Item
+                label='비밀번호'
+                name='password'
+                required={false}
+                rules={[{ required: true, message: '비밀번호를 입력해주세요' }]}
+              >
+                <Input.Password placeholder='비밀번호를 입력해주세요'/>
+              </Form.Item>
+              <Form.Item
+                name='remember'
+                valuePropName="checked"
+              >
+                <Checkbox>로그인 상태 유지</Checkbox>
+              </Form.Item>
+              <Form.Item> 
+                <Button type='primary' htmlType='submit' block>로그인</Button>
+              </Form.Item>
+              <Form.Item>
+                <div style={{textAlign: 'center'}}><span>아직 트래비(TraB) 회원이 아니신가요? <Link href='auth/signup'><a>회원가입</a></Link></span></div>
+              </Form.Item>
+            </Form>
+          </div>
+        </Col>
+        <Col xs={24} sm={12} className='background-wrapper'>
+          <img src='/background_signin.png'/>
         </Col>
       </Row>
     </div>
