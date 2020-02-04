@@ -101,7 +101,7 @@ const PopupWrapper: React.SFC<Props> = ({signin=false, email=false, enroll=false
           <div className='popup-title'><h2>계획표 설계자 등록하기</h2></div>
           <div className='popup-contents'>
             <p>아직 계획표 설계자로 등록하지 않으셨군요.</p>
-            <p>설계자 등록이 되어야 계획표를 판매 하실 수 있습니다.</p>
+            <p >설계자 등록이 되어야 계획표를 판매 하실 수 있습니다.</p>
             <p>설계자 등록을 완료해주세요!</p>
           </div>
           <Row justify="center" className='popup-action'>
@@ -119,6 +119,7 @@ const PopupWrapper: React.SFC<Props> = ({signin=false, email=false, enroll=false
         <Modal
           className='popup'
           visible={visible}
+          width={550}
           onCancel={handleCancel}
           closable={false}
           centered
@@ -127,7 +128,7 @@ const PopupWrapper: React.SFC<Props> = ({signin=false, email=false, enroll=false
           <div className='popup-title'><h2>설계자 등록 대기중</h2></div>
           <div className='popup-contents'>
             <p>설계자 신청이 완료되었습니다.</p>
-            <p>관리자가 설계자 등록을 수락해야 게획표를 쓰실 수 있습니다.</p>
+            <p>관리자가 설계자 등록을 수락해야 계획표를 쓰실 수 있습니다.</p>
             <p>설계자 등록을 기다려 주세요.</p>
           </div>
           <Row justify="center" className='popup-action'>

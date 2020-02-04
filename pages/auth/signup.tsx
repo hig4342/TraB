@@ -2,7 +2,6 @@ import * as React from 'react'
 import axios from 'axios'
 import Router from 'next/router'
 import { NextPage } from 'next'
-import usePopup from '@hooks/usePopup'
 import moment from 'moment'
 import { Form, Input, Button, DatePicker, Checkbox, Modal, Row, Col, Radio, message } from 'antd'
 import { MailOutlined, LockOutlined } from '@ant-design/icons'
@@ -12,7 +11,6 @@ import '@assets/Signup.less'
 const Signup: NextPage = ()=> {
   const [form] = Form.useForm();
   const [visible, setVisible] = React.useState(false);
-  const { onVisible } = usePopup()
 
   const onFinish = (values: any) => {
     const data = {
@@ -29,8 +27,10 @@ const Signup: NextPage = ()=> {
     }
     axios.post('/api/auth/signup', data).then( result => {
       if(result.status == 200) {
-        onVisible()
-        Router.push('/')
+        Router.push({
+          pathname: '/',
+          query: { auth: 'signup' }
+        })
       }
     }).catch( err => {
       console.log(err)

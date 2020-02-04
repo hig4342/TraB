@@ -1,13 +1,15 @@
 import * as React from 'react'
 import { NextPage } from 'next'
+import Router from 'next/router'
 import { Row, Col, Form, Input, Radio, DatePicker, Button, Modal, Checkbox } from 'antd'
 import axios from 'axios'
 import AddressFinder from '@components/AddressFinder'
 import UploadWrapper from '@components/UploadWrapper'
 import moment from 'moment'
 import useUser from '@hooks/useUser'
-import '@assets/Designer_Register.less'
 import { UploadFile } from 'antd/lib/upload/interface'
+import { Callbacks } from 'rc-field-form/lib/interface';
+import '@assets/Designer_Register.less'
 
 
 const baseUrl = process.env.NODE_ENV === 'production' ? 'https://trab.co.kr' : ''
@@ -40,7 +42,7 @@ const Designer_Register: NextPage = ()=> {
     }
   }, [user])
 
-  const onFinish = (values: any) => {
+  const onFinish: Callbacks['onFinish'] = (values) => {
     const data = {
       id: user.id,
       name: values.name,
@@ -56,8 +58,11 @@ const Designer_Register: NextPage = ()=> {
       profile_image: image,
       profile: values.profile,
     }
-    axios.post(baseUrl+'/api/users/designer/register', data).then( result => {
-      console.log(result)
+    axios.post(baseUrl+'/api/users/designer/register', data).then( () => {
+      Router.push({
+        pathname: '/',
+        query: { auth: 'register' }
+      })
     })
   }
 
@@ -109,7 +114,7 @@ const Designer_Register: NextPage = ()=> {
             zonecode: user.address_zonecode,
             fulladdress: user.address_fulladdress,
             detailaddress: user.address_detailaddress
-          } 
+          }
         }}
       >
       <div className='register-submmit'>
@@ -157,7 +162,7 @@ const Designer_Register: NextPage = ()=> {
             >
               <Radio.Group buttonStyle='solid'>
                 <Radio.Button className='man' value='1'>남</Radio.Button>
-                <Radio.Button className='woman' value='2'>녀</Radio.Button>
+                <Radio.Button className='woman' value='2'>여</Radio.Button>
               </Radio.Group>
             </Form.Item>
             <Form.Item

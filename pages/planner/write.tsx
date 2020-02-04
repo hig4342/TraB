@@ -8,8 +8,8 @@ import { Callbacks } from 'rc-field-form/lib/interface';
 import { Form, Input, Button, Checkbox, message } from 'antd'
 import UploadWrapper from '@components/UploadWrapper'
 import useUser from '@hooks/useUser'
-import '@assets/PlannerWrite.less'
 import { UploadFile } from 'antd/lib/upload/interface'
+import '@assets/PlannerWrite.less'
 
 const baseUrl = process.env.NODE_ENV === 'production' ? 'https://trab.co.kr' : ''
 

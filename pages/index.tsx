@@ -35,11 +35,20 @@ type Props = {
 const IndexPage: NextPage<Props> = ({notices, planners, users, newPlanners}) => {
 
   const {onLogin} = useUser();
-  const {onVisible} = usePopup();
+  const { onVisible, handleContents } = usePopup();
 
   React.useEffect(() => {
     const { auth } = Router.query;
     if ( auth === 'success' ) {
+      handleContents('success')
+      onVisible()
+    }
+    if ( auth === 'signup' ) {
+      handleContents('signup')
+      onVisible()
+    }
+    if ( auth === 'register' ) {
+      handleContents('register')
       onVisible()
     }
     axios.get(baseUrl + '/api/auth/update').then( result => {

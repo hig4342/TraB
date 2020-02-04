@@ -21,7 +21,7 @@ users.get('/designer', async ctx => {
 })
 
 users.post('/designer/register', async ctx => {
-  const { id, name, nickname, phone, sex, address_zonecode, address_fulladdress, address_detailaddress, profile_image, account_bank, account_num} = ctx.request.body
+  const { id, name, nickname, phone, sex, address_zonecode, address_fulladdress, address_detailaddress, profile, profile_image, account_bank, account_num} = ctx.request.body
   
   const result = await Models.User.update({
     name: name,
