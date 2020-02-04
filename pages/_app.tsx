@@ -31,12 +31,10 @@ class MyApp extends App {
           <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
           <meta name='og:title' content='트래비(TraB)' />
           <meta name='og:description'
-            content='
-              여행의 A to Z, 자유 여행 플랫폼 트래비 입니다.
-              Not Afraid, Not Nervous, For Stable'
-          />
+            content='여행의 A to Z, 자유 여행 플랫폼 트래비 입니다. Not Afraid, Not Nervous, For Stable'/>
+          <meta name='og:image' content='/logo.png'/>
           <meta name='twitter:title' content='트래비(TraB)' />
-          <meta name='twitter:image' content='' />
+          <meta name='twitter:image' content='/logo.png' />
         </Head>
         <Layout>
           <Component {...pageProps} />
