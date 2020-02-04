@@ -17,6 +17,10 @@
 }
 @import (css) url(https://fonts.googleapis.com/css?family=Courgette);
 
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
 .ant-layout,
 .ant-layout-header,
 .ant-layout-content,
@@ -145,7 +149,7 @@ h4 {
 
 @media (max-width: 575.98px) {
   .container {
-    width: 100vw;
+    width: 100%;
   }
   h1 {
     &.big-title {
