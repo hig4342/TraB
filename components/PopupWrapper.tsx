@@ -53,7 +53,7 @@ const PopupWrapper: React.SFC<Props> = ({signin=false, email=false, enroll=false
             <p>먼저 진행해 주세요.</p>
           </div>
           <Row justify="center" className='popup-action'>
-            <Col span={8}><Link href='/auth/signin'><Button className='ok-button'>확인</Button></Link></Col>
+            <Col span={8}><Link href='/auth/signin'><Button className='ok-button' onClick={handleCancel}>확인</Button></Link></Col>
             <Col span={8}><Button className='cancel-button' onClick={handleCancel}>취소</Button></Col>
           </Row>
           <p>* 확인 버튼을 누르면 로그인 화면으로 이동합니다.</p>
@@ -105,7 +105,7 @@ const PopupWrapper: React.SFC<Props> = ({signin=false, email=false, enroll=false
             <p>설계자 등록을 완료해주세요!</p>
           </div>
           <Row justify="center" className='popup-action'>
-            <Col span={8}><Link href='/designer/register'><Button className='ok-button'>확인</Button></Link></Col>
+            <Col span={8}><Link href='/designer/register'><Button className='ok-button' onClick={handleCancel}>확인</Button></Link></Col>
             <Col span={8}><Button className='cancel-button' onClick={handleCancel}>취소</Button></Col>
           </Row>
           <p>* 확인 버튼을 누르면 설계자 등록 화면으로 이동합니다.</p>
@@ -131,7 +131,7 @@ const PopupWrapper: React.SFC<Props> = ({signin=false, email=false, enroll=false
             <p>설계자 등록을 기다려 주세요.</p>
           </div>
           <Row justify="center" className='popup-action'>
-            <Col span={8}><Link href='/'><Button className='ok-button'>확인</Button></Link></Col>
+            <Col span={8}><Link href='/'><Button className='ok-button' onClick={handleCancel}>확인</Button></Link></Col>
             <Col span={8}><Button className='cancel-button' onClick={handleCancel}>취소</Button></Col>
           </Row>
           <p>* 확인 버튼을 누르면 메인 화면으로 이동합니다.</p>

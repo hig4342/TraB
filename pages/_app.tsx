@@ -28,7 +28,7 @@ class MyApp extends App {
       <Provider store={store}>
         <Head>
           <title>트래비(TraB)</title>
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0" />
           <meta name='og:title' content='트래비(TraB)' />
           <meta name='og:description' content='여러분의 여행계획표를 맡겨보세요' />
           <meta name='twitter:title' content='트래비(TraB)' />
