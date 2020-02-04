@@ -54,7 +54,7 @@ input[type=password] {
   }
   &::before {
     content: "";
-    //margin: 10px;
+    cursor: pointer;
     position: absolute;
     text-align: center;
     z-index: 1;
@@ -70,13 +70,15 @@ input[type=password] {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
   }
-  &:hover {
-    width: 100px;
-    &::before {
-      margin-left: 100px;
-    }
-    .toolbar {
+  &:not(.clicked) {
+    &:hover {
       width: 100px;
+      &::before {
+        margin-left: 100px;
+      }
+      .toolbar {
+        width: 100px;
+      }
     }
   }
   .toolbar {

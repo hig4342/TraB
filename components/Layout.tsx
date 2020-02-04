@@ -19,6 +19,7 @@ const AppLayout: React.SFC = ({children}) => {
   
   const { onLogin } = useUser()
   const [loading, setLoading] = React.useState(false)
+  const [toolbarClass, setToolbarClass] = React.useState('toolbar-wrapper')
 
   Router.events.on('routeChangeStart', _url => {
     setLoading(true)
@@ -41,13 +42,29 @@ const AppLayout: React.SFC = ({children}) => {
     }
   }, [])
 
+  const onSlide: React.MouseEventHandler = (event) => {
+    console.log(event.target)
+    if(toolbarClass === 'toolbar-wrapper') {
+      setToolbarClass('toolbar-wrapper clicked')
+    } else {
+      setToolbarClass('toolbar-wrapper')
+    }
+  }
+
+  const onHover: React.MouseEventHandler = (event) => {
+    console.log(event.target)
+    if(toolbarClass === 'toolbar-wrapper clicked') {
+      setToolbarClass('toolbar-wrapper')
+    }
+  }
+
   return (
     <Layout>
       <Header>
         <Navbar />
       </Header>
       <Popup />
-      <div className='toolbar-wrapper'>
+      <div className={toolbarClass} onClick={onSlide} onMouseEnter={onHover}>
         <div className='toolbar'>
           <Link href='/planner/domestic'><div><img src="/domestic.png" width='60' height='60'/>한국</div></Link>
           <Divider/>
