@@ -32,10 +32,10 @@ class MyApp extends App {
           <meta name="description" content='여행의 A to Z, 자유 여행 플랫폼 트래비 입니다. Not Afraid, Not Nervous, For Stable' />
           <meta name='og:title' content='트래비(TraB)' />
           <meta name='og:description' content='여행의 A to Z, 자유 여행 플랫폼 트래비 입니다. Not Afraid, Not Nervous, For Stable' />
-          <meta name='og:image' content='/logo.png'/>
+          <meta name='og:image' content='https://trab.co.kr/logo.png'/>
           <meta property="og:url" content="http://trab.co.kr" />
           <meta name='twitter:title' content='트래비(TraB)' />
-          <meta name='twitter:image' content='/logo.png' />
+          <meta name='twitter:image' content='https://trab.co.kr/logo.png' />
         </Head>
         <Layout>
           <Component {...pageProps} />

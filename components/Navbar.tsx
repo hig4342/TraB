@@ -1,7 +1,6 @@
 import * as React from 'react'
 import Link from 'next/link'
 import Router from 'next/router'
-import axios from 'axios'
 import useUser from '@hooks/useUser'
 import PopupWrapper from '@components/PopupWrapper'
 import '@assets/Navbar.less'
@@ -20,9 +19,7 @@ const Navbar: React.SFC = () => {
     onLogout()
     sessionStorage.removeItem('usertoken')
     localStorage.removeItem('usertoken')
-    axios.get(baseUrl + 'api/auth/signout').then(() => {
-      Router.push('/')
-    })
+    Router.push(baseUrl +'/api/auth/signout')
   }
 
   const showDrawer = () => {
@@ -87,12 +84,12 @@ const Navbar: React.SFC = () => {
             title={
               !isLogin ?
                 <div>
-                  <Button>로그인</Button>
-                  <Button>회원가입</Button>
+                  <Link href='/auth/signin'><Button onClick={onClose}>로그인</Button></Link>
+                  <Link href='/auth/signup'><Button onClick={onClose}>회원가입</Button></Link>
                 </div>
               : 
                 <div>
-                  <p></p>
+                  <p>{user.nickname}</p>
                 </div>
             }
             onClose={onClose}
@@ -104,12 +101,12 @@ const Navbar: React.SFC = () => {
               className='menu-list'
             >
               <Menu.SubMenu title='여행계획표 열람하기'>
-                <Menu.Item key='domestic'><Link href='/planner/domestic'><a>국내 여행계획</a></Link></Menu.Item>
-                <Menu.Item key='foreign'><Link href='/planner/foreign'><a>해외 여행계획</a></Link></Menu.Item>
+                <Menu.Item key='domestic'><Link href='/planner/domestic'><a onClick={onClose}>국내 여행계획</a></Link></Menu.Item>
+                <Menu.Item key='foreign'><Link href='/planner/foreign'><a onClick={onClose}>해외 여행계획</a></Link></Menu.Item>
               </Menu.SubMenu>
-              <Menu.Item key='designer'><Link href='/designer'><a>TraB 설계자</a></Link></Menu.Item>
+              <Menu.Item key='designer'><Link href='/designer'><a onClick={onClose}>TraB 설계자</a></Link></Menu.Item>
               { user.state_id !== 4 ? <Menu.Item key='designer_register'><PopupWrapper signin email pending callback='/designer/register'>설계자 등록하기</PopupWrapper></Menu.Item> : null}
-              <Menu.Item key='board'><Link href='/board'><a>TraB 게시판</a></Link></Menu.Item>
+              <Menu.Item key='board'><Link href='/board'><a onClick={onClose}>TraB 게시판</a></Link></Menu.Item>
               <Menu.Item key='planner'><PopupWrapper signin email enroll pending callback='/planner/write'>여행계획 판매하기</PopupWrapper></Menu.Item>
             </Menu>
           </Drawer>

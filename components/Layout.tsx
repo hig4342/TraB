@@ -42,8 +42,7 @@ const AppLayout: React.SFC = ({children}) => {
     }
   }, [])
 
-  const onSlide: React.MouseEventHandler = (event) => {
-    console.log(event.target)
+  const onSlide: React.MouseEventHandler = () => {
     if(toolbarClass === 'toolbar-wrapper') {
       setToolbarClass('toolbar-wrapper clicked')
     } else {
@@ -51,8 +50,13 @@ const AppLayout: React.SFC = ({children}) => {
     }
   }
 
-  const onHover: React.MouseEventHandler = (event) => {
-    console.log(event.target)
+  const onHover: React.MouseEventHandler = () => {
+    if(toolbarClass === 'toolbar-wrapper clicked') {
+      setToolbarClass('toolbar-wrapper')
+    }
+  }
+
+  const onMouseOut: React.MouseEventHandler = () => {
     if(toolbarClass === 'toolbar-wrapper clicked') {
       setToolbarClass('toolbar-wrapper')
     }
@@ -64,7 +68,7 @@ const AppLayout: React.SFC = ({children}) => {
         <Navbar />
       </Header>
       <Popup />
-      <div className={toolbarClass} onClick={onSlide} onMouseEnter={onHover}>
+      <div className={toolbarClass} onClick={onSlide} onMouseEnter={onHover} onMouseOut={onMouseOut}>
         <div className='toolbar'>
           <Link href='/planner/domestic'><div><img src="/domestic.png" width='60' height='60'/>한국</div></Link>
           <Divider/>

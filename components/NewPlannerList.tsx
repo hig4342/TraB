@@ -1,18 +1,24 @@
 import * as React from 'react'
-import { Planner } from 'type'
+import dynamic from 'next/dynamic'
+import { Planner, Board } from 'type'
 import { Row, Col, Card, Rate } from 'antd'
 import { ColProps } from 'antd/lib/col'
 import ITP from '@components/ITP'
-//import NoticeSwiper from '@components/NoticeSwiper'
 import Link from 'next/link'
 import '../assets/NewPlannerList.less'
+
+const NoticeSwiper = dynamic(
+  () => import('@components/NoticeSwiper'),
+  { ssr: false }
+)
 
 type Props = {
   domestic: Planner[];
   foreign: Planner[];
+  advertisements: Board[];
 }
 
-const NewPlannerList: React.SFC<Props> = ({ domestic, foreign })=> {
+const NewPlannerList: React.SFC<Props> = ({ domestic, foreign, advertisements })=> {
 
   const options: ColProps = {
     className: "planner-col",
@@ -75,6 +81,7 @@ const NewPlannerList: React.SFC<Props> = ({ domestic, foreign })=> {
           <div className='more-card'><Link href='/planner/domestic'><a>MORE</a></Link></div>
         </Col>
       </Row>
+      <NoticeSwiper items={advertisements} inline/>
       <div className='description-card'>
         <div className='region-text'>외쿡,</div>
         <div>

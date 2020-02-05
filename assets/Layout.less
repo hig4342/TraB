@@ -3,11 +3,11 @@
 @font-face {
   font-family: 'mh';
   src: url('/font/mh.eot');
-  src: url('/font/mh.woff2') format('woff2'),
+  src: url('/font/mh.eot?#iefix') format('embedded-opentype'),
+       url('/font/mh.woff2') format('woff2'),
        url('/font/mh.woff') format('woff'),
-       url('/font/mh.svg#mh') format('svg'),
        url('/font/mh.ttf') format('truetype'),
-       url('/font/mh.eot?#iefix') format('embedded-opentype');
+       url('/font/mh.svg#mh') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -16,6 +16,42 @@
   src: url('/font/DancingScript-Regular.ttf') format('truetype');
 }
 @import (css) url(https://fonts.googleapis.com/css?family=Courgette);
+@font-face {
+  font-family: 'Font Awesome 5 Brands';
+  font-style: normal;
+  font-weight: normal;
+  font-display: auto;
+  src: url("/font/fa-brands-400.eot");
+  src: url("/font/fa-brands-400.eot?#iefix") format("embedded-opentype"),
+       url("/font/fa-brands-400.woff2") format("woff2"),
+       url("/font/fa-brands-400.woff") format("woff"),
+       url("/font/fa-brands-400.ttf") format("truetype"),
+       url("/font/fa-brands-400.svg#fontawesome") format("svg");
+}
+@font-face {
+  font-family: 'Font Awesome 5 Free';
+  font-style: normal;
+  font-weight: 400;
+  font-display: auto;
+  src: url("/font/fa-regular-400.eot");
+  src: url("/font/fa-regular-400.eot?#iefix") format("embedded-opentype"),
+       url("/font/fa-regular-400.woff2") format("woff2"),
+       url("/font/fa-regular-400.woff") format("woff"),
+       url("/font/fa-regular-400.ttf") format("truetype"),
+       url("/font/fa-regular-400.svg#fontawesome") format("svg");
+}
+@font-face {
+  font-family: 'Font Awesome 5 Free';
+  font-style: normal;
+  font-weight: 900;
+  font-display: auto;
+  src: url("/font/fa-solid-900.eot");
+  src: url("/font/fa-solid-900.eot?#iefix") format("embedded-opentype"),
+       url("/font/fa-solid-900.woff2") format("woff2"),
+       url("/font/fa-solid-900.woff") format("woff"),
+       url("/font/fa-solid-900.ttf") format("truetype"),
+       url("/font/fa-solid-900.svg#fontawesome") format("svg");
+}
 
 body {
   overflow-x: hidden;
@@ -152,6 +188,7 @@ h4 {
 @media (max-width: 575.98px) {
   .container {
     width: 100%;
+    padding: 10px;
   }
   h1 {
     &.big-title {

@@ -32,7 +32,7 @@ boards.get('/advertisements', async ctx => {
     where: {
       board_state: 2,
       visible: true,
-      ad_region: region || region !== 1 ? [1, region] : [1, 2, 3],
+      ad_region: region && region !== 1 ? [1, region] : [1, 2, 3],
       ad_deadline: {
         [Op.gte]: new Date()
       }
