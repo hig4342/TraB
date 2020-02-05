@@ -7,6 +7,8 @@ export type Board = {
   main_image: string;
   ad_deadline: Date;
   ad_link: string;
+  ad_region: number;
+  visible: boolean;
   hit: number;
   BoardReplies: BoardReply[];
   User: User;

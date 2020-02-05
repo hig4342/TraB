@@ -1,7 +1,7 @@
 import * as React from 'react'
 import axios from 'axios'
 import { NextPage } from 'next'
-import { Table, Button } from 'antd'
+import { Table, Button, Checkbox } from 'antd'
 import { Board } from 'type'
 import { ColumnsType } from 'antd/lib/table/interface'
 import Link from 'next/link'
@@ -37,6 +37,13 @@ const Notice: NextPage<Props> = ({notices})=> {
     width: 120,
     align: 'center',
     render: (date: Date) => (moment(date).format('YYYY-MM-DD'))
+  }, {
+    title: '공개 여부',
+    dataIndex: 'visible',
+    key: 'visible',
+    width: 100,
+    align: 'center',
+    render: (visible: boolean) => (<Checkbox defaultChecked={visible} disabled/>)
   }, {
     title: '조회수',
     dataIndex: 'hit',

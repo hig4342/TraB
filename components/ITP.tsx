@@ -1,6 +1,6 @@
 import * as React from 'react'
 import axios from 'axios'
-import { Row, Col, Divider } from 'antd'
+import { Row, Col } from 'antd'
 
 type Props = {
   url: string
@@ -24,13 +24,9 @@ const ITP: React.SFC<Props> = ({url}) => {
   
   return (
     <div className='itp-content' onClick={handleBubbling}>
-      <Divider className='itp-divider'/>
       <Row>
-        <Col span={6}>
-          <div className='itp-image-wrapper'><img src={image}/></div>
-        </Col>
-        <Col span={18}>
-          <div><span>{title}</span></div>
+        <Col span={24}>
+          <div><img src={image}/><span>{title}</span></div>
           <div><a href={url}>{url}</a></div>
         </Col>
       </Row>

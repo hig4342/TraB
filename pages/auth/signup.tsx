@@ -54,7 +54,6 @@ const Signup: NextPage = ()=> {
   }
 
   const handleAddress = (zonecode: string, fulladdress: string) => {
-    console.log(zonecode, fulladdress)
     form.setFieldsValue({
       address: {
         zonecode: zonecode,

@@ -68,7 +68,7 @@ const Domestic_Planner: NextPage<Props> = ({ advertisements, planners, countries
 }
 
 Domestic_Planner.getInitialProps = async () => {
-  const advertisements = await axios.get(baseUrl + '/api/boards/advertisements')
+  const advertisements = await axios.get(baseUrl + '/api/boards/advertisements?region=2')
   const planner = await axios.get(baseUrl + '/api/planners/domestic')
   const country = await axios.get(baseUrl + '/api/countries')
   const city = await axios.get(baseUrl + '/api/cities')

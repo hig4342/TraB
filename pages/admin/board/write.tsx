@@ -4,7 +4,7 @@ import { NextPage } from 'next'
 import Link from 'next/link'
 import Router from 'next/router';
 import { Callbacks } from 'rc-field-form/lib/interface';
-import { Form, Input, Button, message, Upload, DatePicker, Radio, Modal } from 'antd'
+import { Form, Input, Button, message, Upload, DatePicker, Radio, Modal, Checkbox } from 'antd'
 import ReactHtmlParser from 'react-html-parser'
 import moment from 'moment'
 
@@ -39,7 +39,9 @@ const AdminWrite: NextPage = ()=> {
       banner_image: bannerImage,
       main_image: mainImage,
       ad_link: form.getFieldValue('ad_link'),
-      ad_deadline: form.getFieldValue('ad_deadline')
+      ad_deadline: form.getFieldValue('ad_deadline'),
+      ad_region: form.getFieldValue('ad_region'),
+      visible: form.getFieldValue('visible')
     }
     axios.post(baseUrl+'/api/admin/boards', data).then( result => {
       console.log(result)
@@ -99,7 +101,9 @@ const AdminWrite: NextPage = ()=> {
         layout='horizontal'
         onFinishFailed={onFinishFailed}
         initialValues={{
-          board_state: 1
+          board_state: 1,
+          ad_region: 1,
+          visible: true
         }}
       >
         <Form.Item
@@ -112,6 +116,9 @@ const AdminWrite: NextPage = ()=> {
         >
           <Input />
         </Form.Item>
+        <Form.Item name='visible' label='공개여부' valuePropName='checked'>
+          <Checkbox />
+        </Form.Item>
         <Form.Item name='board_state' label='공지사항/광고'>
           <Radio.Group onChange={handleState} buttonStyle="solid">
             <Radio.Button value={1}>공지사항</Radio.Button>
@@ -120,15 +127,22 @@ const AdminWrite: NextPage = ()=> {
         </Form.Item>
         { state ?
           <>
-          <Form.Item name='ad_link' label='광고URL'>
-            <Input />
-          </Form.Item>
-          <Form.Item name='ad_deadline' label='광고기한'>
-            <DatePicker
-              placeholder='광고기한'
-              disabledDate={disabledDate}
-            />
-          </Form.Item>
+            <Form.Item name='ad_link' label='광고URL'>
+              <Input />
+            </Form.Item>
+            <Form.Item name='ad_deadline' label='광고기한'>
+              <DatePicker
+                placeholder='광고기한'
+                disabledDate={disabledDate}
+              />
+            </Form.Item>
+            <Form.Item name='ad_region' label='지역선택'>
+              <Radio.Group>
+                <Radio.Button value={1}>전체</Radio.Button>
+                <Radio.Button value={2}>한국</Radio.Button>
+                <Radio.Button value={3}>외국</Radio.Button>
+              </Radio.Group>
+            </Form.Item>
           </>
           : null
         }

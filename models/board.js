@@ -33,6 +33,14 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
       type: DataTypes.DATE
     },
+    ad_region: {
+      allowNull: true,
+      type: DataTypes.INTEGER
+    },
+    visible: {
+      allowNull: false,
+      type: DataTypes.BOOLEAN
+    },
     hit: {
       allowNull: false,
       defaultValue: 0,

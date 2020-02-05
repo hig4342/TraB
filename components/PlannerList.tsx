@@ -17,10 +17,6 @@ type Props = {
   themes: CheckboxValueType[];
 }
 
-// const errorHandle = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-//   e.currentTarget.src = 'placeholder-image.jpg'
-// }
-
 const PlannerList: React.SFC<Props> = ({items, country, city, themes})=> {
 
   const [length, setLength] = React.useState(12)
@@ -64,19 +60,18 @@ const PlannerList: React.SFC<Props> = ({items, country, city, themes})=> {
                 hoverable
                 className={"planner-card" + (item.upload_state === 4 ? ' premium' : item.upload_state === 5 ? ' itp' : '')}
                 cover={
-                  <div style={{width: '100%', height: 160, overflow: 'hidden'}}><img
+                  <div className='planner-card-cover'><img
                     alt="planner-image"
                     src={item.thumbnail}
-                    //onError={errorHandle}
                     style={{height: '100%', width: '100%'}}
                   /></div>
                 }
               >
                 <Meta title={`[${item.City.city_name}] ` + item.title} description={item.Country.country_name} />
-                <span>{item.User.nickname}</span>
-                <div><Rate allowHalf disabled defaultValue={item.Replies.length !== 0 ? item.Replies.map(({rate}) => (rate)).reduce((a, b) => a+b)/item.Replies.length : 0}/><span>&nbsp;&nbsp;{item.Replies.length !== 0 ? item.Replies.map(({rate}) => (rate)).reduce((a, b) => a+b)/item.Replies.length : 0}</span></div>
-                <div style={{ fontSize: 13 }}><span>조회수: {item.hit}&nbsp;&nbsp;|&nbsp;&nbsp;댓글수: {item.Replies.length}</span></div>
+                <span className='planner-title'>{item.User.nickname}</span>
                 <ITP url={item.blog_link}/>
+                <div className='rate-wrapper'><Rate allowHalf disabled defaultValue={item.Replies.length !== 0 ? Math.floor(item.Replies.map(({rate}) => (rate)).reduce((a, b) => a+b)/item.Replies.length*2)/2 : 0}/><span className='rate-number'>&nbsp;&nbsp;{item.Replies.length !== 0 ? (item.Replies.map(({rate}) => (rate)).reduce((a, b) => a+b)/item.Replies.length).toFixed(2) : 0}</span></div>
+                <div className='count-wrapper' style={{ fontSize: 13 }}><span>조회수: {item.hit}&nbsp;&nbsp;|&nbsp;&nbsp;댓글수: {item.Replies.length}</span></div>
               </Card>
             </Link>
           </Col>

@@ -3,6 +3,7 @@ import { Planner } from 'type'
 import { Row, Col, Card, Rate } from 'antd'
 import { ColProps } from 'antd/lib/col'
 import ITP from '@components/ITP'
+//import NoticeSwiper from '@components/NoticeSwiper'
 import Link from 'next/link'
 import '../assets/NewPlannerList.less'
 
@@ -11,15 +12,11 @@ type Props = {
   foreign: Planner[];
 }
 
-// const errorHandle = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-//   e.currentTarget.src = 'placeholder-image.jpg'
-// }
-
 const NewPlannerList: React.SFC<Props> = ({ domestic, foreign })=> {
 
   const options: ColProps = {
     className: "planner-col",
-    xs: { span: 24 },
+    xs: { span: 10 },
     sm: { span: 12 },
     md: { span: 8 },
     lg: { span: 7 },
@@ -28,8 +25,15 @@ const NewPlannerList: React.SFC<Props> = ({ domestic, foreign })=> {
   
   return (
     <div className="new-planner-list">
-      <Row justify="start" align='top' gutter={[16, 16]}>
-        <Col {...options} key='domestic'>
+      <div className='description-card'>
+        <div className='region-text'><span>한</span><span>국</span>,</div>
+        <div>
+          <div>어디까지</div>
+          <div>가봤~니?</div>
+        </div>
+      </div>
+      <Row justify="start" align='middle' gutter={[16, 16]} className='description-list'>
+        <Col {...options} xs={24} key='domestic' className='description-card-wrapper'>
           <div className='description-card'>
             <div><img src='new_plan.png' /></div>
             <div className='region-text'><span>한</span><span>국</span>,</div>
@@ -49,7 +53,7 @@ const NewPlannerList: React.SFC<Props> = ({ domestic, foreign })=> {
                     hoverable
                     className={"planner-card" + (planner.upload_state === 4 ? ' premium' : planner.upload_state === 5 ? ' itp' : '')}
                     cover={
-                      <div style={{width: '100%', height: 160, overflow: 'hidden'}}><img
+                      <div className='planner-card-cover'><img
                         alt="planner-image"
                         src={planner.thumbnail}
                         style={{height: '100%', width: '100%'}}
@@ -57,19 +61,29 @@ const NewPlannerList: React.SFC<Props> = ({ domestic, foreign })=> {
                     }
                   >
                     <Card.Meta title={`[${planner.City.city_name}] ` + planner.title} description={planner.Country.country_name} />
-                    <span>{planner.User.nickname}</span>
-                    <div><Rate allowHalf disabled defaultValue={planner.Replies.length !== 0 ? planner.Replies.map(({rate}) => (rate)).reduce((a, b) => a+b)/planner.Replies.length : 0}/><span>&nbsp;&nbsp;{planner.Replies.length !== 0 ? planner.Replies.map(({rate}) => (rate)).reduce((a, b) => a+b)/planner.Replies.length : 0}</span></div>
-                    <div style={{ fontSize: 13 }}><span>조회수: {planner.hit}&nbsp;&nbsp;|&nbsp;&nbsp;댓글수: {planner.Replies.length}</span></div>
+                    <span className='planner-title'>{planner.User.nickname}</span>
                     <ITP url={planner.blog_link}/>
+                    <div><Rate allowHalf disabled defaultValue={planner.Replies.length !== 0 ? planner.Replies.map(({rate}) => (rate)).reduce((a, b) => a+b)/planner.Replies.length : 0}/><span className='rate-number'>&nbsp;&nbsp;{planner.Replies.length !== 0 ? planner.Replies.map(({rate}) => (rate)).reduce((a, b) => a+b)/planner.Replies.length : 0}</span></div>
+                    <div style={{ fontSize: 13 }}><span>조회수: {planner.hit}&nbsp;&nbsp;|&nbsp;&nbsp;댓글수: {planner.Replies.length}</span></div>
                   </Card>
                 </Link>
               </Col>
             )
           })
         }
+        <Col {...options} key='more' className='more-card-wrapper'>
+          <div className='more-card'><Link href='/planner/domestic'><a>MORE</a></Link></div>
+        </Col>
       </Row>
-      <Row justify="start" align="middle" gutter={[16, 64]}>
-        <Col {...options} key='foreign'>
+      <div className='description-card'>
+        <div className='region-text'>외쿡,</div>
+        <div>
+          <div>가봤~니?</div>
+          <div>어디까지</div>
+        </div>
+      </div>
+      <Row justify="start" align="middle" gutter={[16, 16]} className='description-list'>
+        <Col {...options} key='foreign' className='description-card-wrapper'>
           <div className='description-card'>
             <div><img src='new_plan.png' /></div>
             <div className='region-text'>외쿡,</div>
@@ -88,7 +102,7 @@ const NewPlannerList: React.SFC<Props> = ({ domestic, foreign })=> {
                   hoverable
                   className={"planner-card" + (planner.upload_state === 4 ? ' premium' : planner.upload_state === 5 ? ' itp' : '')}
                   cover={
-                    <div style={{width: '100%', height: 160, overflow: 'hidden'}}><img
+                    <div className='planner-card-cover'><img
                       alt="planner-image"
                       src={planner.thumbnail}
                       style={{height: '100%', width: '100%'}}
@@ -96,15 +110,18 @@ const NewPlannerList: React.SFC<Props> = ({ domestic, foreign })=> {
                   }
                 >
                   <Card.Meta title={`[${planner.City.city_name}] ` + planner.title} description={planner.Country.country_name} />
-                  <span>{planner.User.nickname}</span>
-                  <div><Rate allowHalf disabled defaultValue={planner.Replies.length !== 0 ? planner.Replies.map(({rate}) => (rate)).reduce((a, b) => a+b)/planner.Replies.length : 0}/><span>&nbsp;&nbsp;{planner.Replies.length !== 0 ? planner.Replies.map(({rate}) => (rate)).reduce((a, b) => a+b)/planner.Replies.length : 0}</span></div>
-                  <div style={{ fontSize: 13 }}><span>조회수: {planner.hit}&nbsp;&nbsp;|&nbsp;&nbsp;댓글수: {planner.Replies.length}</span></div>
+                  <span className='planner-title'>{planner.User.nickname}</span>
                   <ITP url={planner.blog_link}/>
+                  <div><Rate allowHalf disabled defaultValue={planner.Replies.length !== 0 ? Math.floor(planner.Replies.map(({rate}) => (rate)).reduce((a, b) => a+b)/planner.Replies.length*2)/2 : 0}/><span className='rate-number'>&nbsp;&nbsp;{planner.Replies.length !== 0 ? (planner.Replies.map(({rate}) => (rate)).reduce((a, b) => a+b)/planner.Replies.length).toFixed(2) : 0}</span></div>
+                  <div style={{ fontSize: 13 }}><span>조회수: {planner.hit}&nbsp;&nbsp;|&nbsp;&nbsp;댓글수: {planner.Replies.length}</span></div>
                 </Card>
               </Link>
             </Col>
           ))
         }
+        <Col {...options} key='more' className='more-card-wrapper'>
+          <div className='more-card'><Link href='/planner/foreign'><a>MORE</a></Link></div>
+        </Col>
       </Row>
     </div>
   )

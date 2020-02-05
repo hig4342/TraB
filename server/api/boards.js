@@ -1,5 +1,6 @@
 const Router = require('koa-router')
 const Models = require('../../models')
+const Op = Models.Sequelize.Op
 
 const boards = new Router({
   prefix: '/api/boards'
@@ -19,15 +20,23 @@ boards.post('/', async ctx => {
 
 boards.get('/notices', async ctx => {
   const result = await Models.Board.findAll({
-    where: { board_state: 1 }
+    where: { board_state: 1, visible: true }
   })
 
   ctx.body = result
 })
 
 boards.get('/advertisements', async ctx => {
+  const { region } = ctx.query
   const result = await Models.Board.findAll({
-    where: { board_state: 2 }
+    where: {
+      board_state: 2,
+      visible: true,
+      ad_region: region || region !== 1 ? [1, region] : [1, 2, 3],
+      ad_deadline: {
+        [Op.gte]: new Date()
+      }
+    }
   })
 
   ctx.body = result
@@ -78,7 +87,7 @@ boards.post('/reply', async ctx => {
   const result = await Models.BoardReply.create({
     BoardId: BoardId,
     UserId: UserId,
-    content: content
+    content: content,
   })
 
   ctx.body = result

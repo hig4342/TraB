@@ -45,7 +45,8 @@ const AdminPlannerContent: React.SFC<Props> = ({planner, themes}) => {
       city_name: value.city,
       contents_image: value.thumbnail,
       contents_text: value.contents,
-      themes_id: value.themes_id
+      themes_id: value.themes_id,
+      blog_link: value.blog_link
     }
     axios.put(baseUrl + `/api/admin/planners/${planner.id}`, form).then( result => {
       console.log(result)
@@ -115,8 +116,9 @@ const AdminPlannerContent: React.SFC<Props> = ({planner, themes}) => {
           country: planner.Country.country_name,
           city: planner.City.city_name,
           themes_id: planner.themes_id,
-          images: planner.thumbnail,
-          contents: planner.contents
+          thumbnail: planner.thumbnail,
+          contents: planner.contents,
+          blog_link: planner.blog_link
         }}
       >
         <Form.Item
@@ -160,6 +162,20 @@ const AdminPlannerContent: React.SFC<Props> = ({planner, themes}) => {
             options={themes.map(theme => ({ label: theme.name, value: theme.id }))}
           />
         </Form.Item>
+        {
+          planner.upload_state === 5 ? 
+          <Form.Item>
+            <Form.Item
+              label='블로그주소'
+              name='blog_link'
+              labelCol={{xs: 2, sm: 2}}
+              wrapperCol={{xs: 22, sm: 22}}
+            >
+              <Input placeholder='블로그주소'/>
+            </Form.Item>
+          </Form.Item>
+          : null
+        }
         <Form.Item
           label='대표 사진'
           name='thumbnail'
@@ -168,7 +184,7 @@ const AdminPlannerContent: React.SFC<Props> = ({planner, themes}) => {
           labelCol={{xs: 3, sm: 2}}
           wrapperCol={{xs: 21, sm: 6}}
         >
-          <UploadWrapper handleThumnail={handleThumnail}/>  
+          <UploadWrapper handleThumnail={handleThumnail} defaultUrl={planner.thumbnail}/>  
         </Form.Item>
         <Form.Item
           name='contents'
@@ -176,7 +192,7 @@ const AdminPlannerContent: React.SFC<Props> = ({planner, themes}) => {
           rules={[{ required: true, message: '계획표를 써주세요' },]}
           wrapperCol={{span: 24}}
         >
-          <EditorWrapper handleContents={handleContents}/>
+          <EditorWrapper handleContents={handleContents} defaultContent={planner.contents}/>
         </Form.Item>
         <Form.Item>
           <div className='button-wrapper'>

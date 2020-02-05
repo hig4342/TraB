@@ -36,14 +36,16 @@ boards.get('/:id', async ctx => {
 
 boards.put('/:id', async ctx => {
   const { id } = ctx.params
-  const { title, ad_link, banner_image, main_image, content } = ctx.request.body
+  const { title, ad_link, banner_image, main_image, content, ad_region, visible } = ctx.request.body
 
   const result = await Models.Board.update({
     title: title,
     ad_link: ad_link,
     banner_image: banner_image,
     main_image: main_image,
-    content: content
+    content: content,
+    ad_region: ad_region,
+    visible: visible,
   }, {
     where: { id: id }
   })
@@ -52,7 +54,7 @@ boards.put('/:id', async ctx => {
 })
 
 boards.post('/', async ctx => {
-  const { title, ad_link, banner_image, main_image, content, board_state, UserId, ad_deadline } = ctx.request.body
+  const { title, ad_link, banner_image, main_image, content, board_state, UserId, ad_deadline, ad_region, visible } = ctx.request.body
 
   const result = await Models.Board.create({
     UserId: UserId,
@@ -62,7 +64,9 @@ boards.post('/', async ctx => {
     banner_image: banner_image,
     main_image: main_image,
     content: content,
+    visible: visible,
     ad_deadline: ad_deadline,
+    ad_region: ad_region,
   })
 
   ctx.body = result

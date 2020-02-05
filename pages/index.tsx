@@ -62,15 +62,16 @@ const IndexPage: NextPage<Props> = ({notices, planners, users, newPlanners}) => 
   return (
     <div className='index-page'>
       <NoticeSwiper items={notices}/>
-      <CurrentSituation planners={planners} designers={users}/>
       <ShowandPlan />
-      <NewPlannerList domestic={newPlanners.domestic} foreign={newPlanners.foreign}/>
+      <CurrentSituation planners={planners} designers={users}/>
+      <NewPlannerList domestic={newPlanners.domestic} foreign={newPlanners.foreign} />
     </div>
   )
 }
 
 IndexPage.getInitialProps = async () => {
   const notices = await axios.get(baseUrl + '/api/boards/notices')
+  //const advertisements = await axios.get(baseUrl + '/api/boards/advertisements')
   const planners = await axios.get(baseUrl + '/api/planners/count')
   const users = await axios.get(baseUrl + '/api/users/designer/count')
   const newPlanners = await axios.get(baseUrl + '/api/planners/new')

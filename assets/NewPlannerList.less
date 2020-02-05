@@ -1,4 +1,22 @@
 .new-planner-list {
+  margin-top: 4rem;
+  &>.description-card {
+    display: none;
+  }
+  .more-card-wrapper {
+    display: none;
+    width: 100%;
+    text-align: center;
+    .more-card {
+      margin: auto;
+      width: fit-content;
+      font-size: 20px;
+      border-bottom: 3px solid rgb(160, 160, 160);
+      a {
+        color: rgb(160, 160, 160);
+      }
+    }
+  }
   .description-card {
     font-family: 'BMDOHYEON';
     margin: 0 auto;
@@ -40,11 +58,30 @@
   .planner-card {
     padding: 5px;
     border-radius: 5px;
+    .planner-card-cover {
+      width: 100%;
+      height: 160px;
+      overflow: hidden;
+    }
     .ant-card-body {
       .ant-card-meta-title {
-        margin-bottom: 0;
+        margin-bottom: 2px;
       }
       padding: 5px;
+    }
+    @media (max-width: 575.98px) {
+      .planner-card-cover {
+        height: 80px;
+      }
+      .ant-card-body {
+        font-size: 12px;
+        .ant-card-meta-title {
+          font-size: 14px;
+        }
+        .ant-card-meta-description {
+          font-size: 12px;
+        }
+      }
     }
   }
   .ant-card-hoverable:hover {
@@ -69,8 +106,9 @@
     z-index: 10;
     display: none;
     img {
-      width: 100%;
-      height: 100%;
+      height: 20px;
+      width: 20px;
+      margin-right: 5px;
     }
     div {
       overflow:hidden;
@@ -79,11 +117,7 @@
     }
     .itp-image-wrapper {
       margin: auto;
-      width: 40px;
-      height: 40px;
-    }
-    .itp-divider {
-      margin: 10px 0;
+      padding: 5px;
     }
   }
   .itp {
@@ -99,8 +133,53 @@
       border-radius: 0 0 25px 25px;
       right: 10%;
     }
+    .planner-title {
+      display: none;
+    }
+    .ant-card-meta-description {
+      display: none;
+    }
     .itp-content {
       display: block;
+    }
+  }
+  @media (max-width: 575.98px) {
+    &>.description-card {
+      display: block;
+    }
+    .more-card-wrapper {
+      display: block;
+    }
+    .description-list {
+      display: -webkit-box;
+      overflow-x: scroll;
+    }
+    .description-card-wrapper {
+      display: none;
+    }
+    .description-card {
+      width: fit-content;
+      div {
+        img {
+          display: none;
+        }
+        display: inline-block;
+        width: fit-content;
+        font-size: 30px;
+        div {
+          margin-right: 10px;
+        }
+      }
+      .region-text {
+        font-size: 44px;
+        margin-right: 10px;
+      }
+      .more-text {
+        display: none;
+      }
+    }
+    .rate-number {
+      display: none;
     }
   }
 }

@@ -2,7 +2,7 @@ import * as React from 'react'
 import axios from 'axios'
 import { NextPage } from 'next'
 import { Board } from 'type'
-import { Upload, Form, Input, message, Button, Modal, DatePicker } from 'antd'
+import { Upload, Form, Input, message, Button, Modal, DatePicker, Radio, Checkbox } from 'antd'
 import { UploadChangeParam } from 'antd/lib/upload'
 import { UploadFile } from 'antd/lib/upload/interface'
 import EditorWrapper from '@components/EditorWrapper'
@@ -56,7 +56,9 @@ const AdminPost: NextPage<Props> = ({post})=> {
       ad_link: form.getFieldValue('ad_link'),
       banner_image: bannerImage,
       main_image: mainImage,
-      content: content
+      content: content,
+      ad_region: form.getFieldValue('ad_region'),
+      visible: form.getFieldValue('visible'),
     }
     axios.put(baseUrl + `/api/admin/boards/${post.id}`, data).then( result => {
       console.log(result)
@@ -81,11 +83,16 @@ const AdminPost: NextPage<Props> = ({post})=> {
           ad_deadline: moment(post.ad_deadline),
           banner_image: bannerImage,
           main_image: mainImage,
-          content: content
+          content: content,
+          ad_region: post.ad_region,
+          visible: post.visible,
         }}
       >
         <Form.Item name='title' label='제목'>
           <Input />
+        </Form.Item>
+        <Form.Item name='visible' label='공개여부' valuePropName='checked'>
+          <Checkbox />
         </Form.Item>
         <Form.Item label='종류'>
           <span>{post.board_state === 1 ? '공지사항' : '광고'}</span>
@@ -99,6 +106,13 @@ const AdminPost: NextPage<Props> = ({post})=> {
             <DatePicker
               placeholder='광고기한'
             />
+            </Form.Item>
+            <Form.Item name='ad_region' label='지역선택'>
+              <Radio.Group>
+                <Radio.Button value={1}>전체</Radio.Button>
+                <Radio.Button value={2}>한국</Radio.Button>
+                <Radio.Button value={3}>외국</Radio.Button>
+              </Radio.Group>
             </Form.Item>
           </>
           : null
