@@ -37,7 +37,10 @@ const PlannerWrite: NextPage = ()=> {
     }
     axios.post(baseUrl + '/api/planners', formdata).then( () => {
       setLoading(false)
-      Router.push('/')
+      Router.push({
+        pathname: '/',
+        query: { process: 'complete' }
+      })
     }).catch( err => {
       console.log(err)
     })

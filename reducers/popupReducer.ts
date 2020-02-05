@@ -11,7 +11,7 @@ type PopupAction =
   | ReturnType<typeof hidden>
   | ReturnType<typeof setcontents>
 
-export type ContentsType = 'register' | 'signup' | 'success'
+export type ContentsType = 'register' | 'signup' | 'success' | 'complete'
 
 type PopupState = {
   isVisible: boolean

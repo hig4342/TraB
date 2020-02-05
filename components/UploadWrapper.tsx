@@ -49,6 +49,7 @@ const UploadImage: React.SFC<Props> = ({ defaultUrl, handleThumnail }) => {
   return (
       <Upload.Dragger
         name='image'
+        accept='image/*'
         fileList={fileList}
         multiple={false}
         className='upload-wrapper'

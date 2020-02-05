@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Layout, Divider } from 'antd'
+import { Layout, Divider, BackTop } from 'antd'
 import Link from 'next/link'
 import Router from 'next/router'
 import Navbar from '@components/Navbar'
@@ -77,6 +77,7 @@ const AppLayout: React.SFC = ({children}) => {
           <PopupWrapper signin email enroll pending callback='/planner/write'><div><img style={{padding: 10}}src="/selling.png" width='60' height='60'/>판매</div></PopupWrapper>
         </div>
       </div>
+      <BackTop />
       {
         loading ?
           <div className='loading-page'><div className='loading-wrapper'><LoadingOutlined /></div></div>
