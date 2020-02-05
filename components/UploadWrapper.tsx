@@ -75,7 +75,7 @@ const UploadImage: React.SFC<Props> = ({ defaultUrl, handleThumnail }) => {
             </div>
             :
             <div>
-              <img src={fileList[0].url || '/placeholder-image.jpg'} alt='image' style={{ width: '100%' }} />
+              <img src={fileList[0].url || '/placeholder-image.jpg'} alt='image' style={{ width: '100%', maxHeight: 150 }} />
             </div>
         }
       </Upload.Dragger>

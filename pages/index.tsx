@@ -39,7 +39,6 @@ const IndexPage: NextPage<Props> = ({notices, advertisements, planners, users, n
   const { onVisible, handleContents } = usePopup();
 
   React.useEffect(() => {
-    console.log(advertisements)
     const { auth } = Router.query;
     if ( auth === 'success' ) {
       handleContents('success')

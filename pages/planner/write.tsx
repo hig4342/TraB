@@ -21,8 +21,10 @@ const EditorWrapper = dynamic(
 const PlannerWrite: NextPage = ()=> {
   const [form] = Form.useForm()
   const {user} = useUser()
+  const [loading, setLoading] = React.useState(false)
 
   const onFinish: Callbacks['onFinish'] = (values) => {
+    setLoading(true)
     const country_name = values.country === '대한민국' ? '한국' : values.country
     const formdata = {
       title: values.title,
@@ -33,12 +35,10 @@ const PlannerWrite: NextPage = ()=> {
       contents: values.contents,
       themes_id: []
     }
-    console.log(formdata)
-    axios.post(baseUrl + '/api/planners', formdata).then( result => {
-      console.log(result)
+    axios.post(baseUrl + '/api/planners', formdata).then( () => {
+      setLoading(false)
       Router.push('/')
     }).catch( err => {
-      console.log('????')
       console.log(err)
     })
   };
@@ -137,6 +137,7 @@ const PlannerWrite: NextPage = ()=> {
         <Form.Item
           label='대표 사진'
           name='thumbnail'
+          className='thumbnail-wrapper'
           required={false}
           rules={[{ required: true, message: '썸네일에 들어갈 사진을 업로드해주세요.' },]}
           wrapperCol={{xs: 21, sm: 6}}
@@ -153,7 +154,7 @@ const PlannerWrite: NextPage = ()=> {
         </Form.Item>
         <Form.Item>
           <div className='button-wrapper'>
-            <Button className='ok-button' htmlType='submit'>작성하기</Button>
+            <Button loading={loading} className='ok-button' htmlType='submit'>작성하기</Button>
             <Link href='/'><Button className='cancel-button'>작성취소</Button></Link>
           </div>
         </Form.Item>

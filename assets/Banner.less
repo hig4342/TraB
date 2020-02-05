@@ -5,10 +5,10 @@
   position: relative;
   margin-bottom: 3rem;
   &.domestic {
-    font-family: 'mh', cursive;
+    font-family: 'mh', sans-serif;
   }
   &.foreign {
-    font-family: 'Courgette', cursive;
+    font-family: 'Courgette', sans-serif;
   }
   .banner-image {
     position: absolute;
@@ -35,21 +35,30 @@
       font-size: 48px;
       color: white;
     }
-    @media (max-width: 575.98px) {
-      &>span {
-        margin: calc((150px - 92px) / 2) auto;
-        font-size: 32px;
-        padding: 6px 32px;
-      }
-    }
   }
 }
 @media (max-width: 575.98px) {
   .banner-wrapper {
     height: 150px;
+    &.domestic {
+      font-family: 'Nanum Gothic', sans-serif;
+    }
+    &.foreign {
+      font-family: 'Nanum Gothic', sans-serif;
+    }
     .banner-image {
       img {
         height: 150px;
+      }
+    }
+    .banner-text {
+      height: 150px;
+      &>span {
+        margin: calc((150px - 66px) / 2) auto;
+        font-size: 32px;
+        line-height: 60px;
+        padding: 3px 28px;
+        border-radius: 18px;
       }
     }
   }

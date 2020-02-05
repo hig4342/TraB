@@ -105,9 +105,9 @@ const Navbar: React.SFC = () => {
                 <Menu.Item key='foreign'><Link href='/planner/foreign'><a onClick={onClose}>해외 여행계획</a></Link></Menu.Item>
               </Menu.SubMenu>
               <Menu.Item key='designer'><Link href='/designer'><a onClick={onClose}>TraB 설계자</a></Link></Menu.Item>
-              { user.state_id !== 4 ? <Menu.Item key='designer_register'><PopupWrapper signin email pending callback='/designer/register'>설계자 등록하기</PopupWrapper></Menu.Item> : null}
+              { user.state_id !== 4 ? <Menu.Item onClick={onClose} key='designer_register'><PopupWrapper signin email pending callback='/designer/register'>설계자 등록하기</PopupWrapper></Menu.Item> : null}
               <Menu.Item key='board'><Link href='/board'><a onClick={onClose}>TraB 게시판</a></Link></Menu.Item>
-              <Menu.Item key='planner'><PopupWrapper signin email enroll pending callback='/planner/write'>여행계획 판매하기</PopupWrapper></Menu.Item>
+              <Menu.Item onClick={onClose} key='planner'><PopupWrapper signin email enroll pending callback='/planner/write'>여행계획 판매하기</PopupWrapper></Menu.Item>
             </Menu>
           </Drawer>
         </div>
