@@ -71,7 +71,7 @@ const SigninPage: NextPage = () => {
                 <Button type='primary' htmlType='submit' block>로그인</Button>
               </Form.Item>
               <Form.Item>
-                <div style={{textAlign: 'center'}}><span>아직 트래비(TraB) 회원이 아니신가요? <Link href='auth/signup'><a>회원가입</a></Link></span></div>
+                <div style={{textAlign: 'center'}}><span>아직 트래비(TraB) 회원이 아니신가요? <Link href='/auth/signup'><a>회원가입</a></Link></span></div>
               </Form.Item>
             </Form>
           </div>

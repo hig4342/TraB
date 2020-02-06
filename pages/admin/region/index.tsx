@@ -114,8 +114,8 @@ const Region: NextPage<Props> = ({ countryData, cityData })=> {
   const handleCountryRemove = () => {
     setLoading(true)
     const id = Number(selectedCountryRowKeys[0])
-    axios.delete(`/api/admin/countries/${id}`).then( _result => {
-      axios.get('/api/admin/countries').then( result => {
+    axios.delete(baseUrl + `/api/admin/countries/${id}`).then( _result => {
+      axios.get(baseUrl + '/api/admin/countries').then( result => {
         setCountries(result.data)
         setLoading(false)
       })
@@ -127,8 +127,8 @@ const Region: NextPage<Props> = ({ countryData, cityData })=> {
   const handleCityRemove = () => {
     setLoading(true)
     const id = Number(selectedCityRowKeys[0])
-    axios.delete(`/api/admin/cities/${id}`).then( _result => {
-      axios.get('/api/admin/cities').then( result => {
+    axios.delete(baseUrl + `/api/admin/cities/${id}`).then( _result => {
+      axios.get(baseUrl + '/api/admin/cities').then( result => {
         setCities(result.data)
         setLoading(false)
       })

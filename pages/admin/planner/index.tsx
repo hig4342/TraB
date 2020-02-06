@@ -16,14 +16,14 @@ type Props = {
 const AdminPlannerList: NextPage<Props> = ({planner_data})=> {
   
   const refusePayment = (id: number) => {
-    axios.patch(`/api/admin/planners/payment`, {id: id, payment_state: 2}).then( result => {
+    axios.patch(baseUrl + `/api/admin/planners/payment`, {id: id, payment_state: 2}).then( result => {
       console.log(result)
       Router.reload()
     })
   }
   
   const approvePayment = (id: number) => {
-    axios.patch(`/api/admin/planners/payment`, {id: id, payment_state: 3}).then( result => {
+    axios.patch(baseUrl + `/api/admin/planners/payment`, {id: id, payment_state: 3}).then( result => {
       console.log(result)
       Router.reload()
     })

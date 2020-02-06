@@ -2,6 +2,7 @@ import * as React from 'react'
 import axios from 'axios'
 import { NextPage } from 'next'
 import { User } from 'type'
+import { Descriptions } from 'antd'
 
 const baseUrl = process.env.NODE_ENV === 'production' ? 'https://trab.co.kr' : ''
 
@@ -14,7 +15,9 @@ const AdminDesigner: NextPage<Props> = ({ designer })=> {
 
   return (
     <div className='admin-designer' style={{ width: '100%' }}>
-      {designer.email}
+      <Descriptions title='설계자 정보'>
+        <Descriptions.Item label='이메일'>{designer.email}</Descriptions.Item>
+      </Descriptions>
     </div>
   )
 }

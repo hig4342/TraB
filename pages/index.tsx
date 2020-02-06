@@ -35,7 +35,7 @@ type Props = {
 
 const IndexPage: NextPage<Props> = ({notices, advertisements, planners, users, newPlanners}) => {
 
-  const {onLogin} = useUser();
+  const {onLogin, onLogout} = useUser();
   const { onVisible, handleContents } = usePopup();
 
   React.useEffect(() => {
@@ -65,6 +65,10 @@ const IndexPage: NextPage<Props> = ({notices, advertisements, planners, users, n
       sessionStorage.setItem('usertoken', usertoken)
       const user: User = jwtDecode(usertoken)
       onLogin(user)
+    }).catch(() => {
+      sessionStorage.removeItem('usertoken')
+      localStorage.removeItem('usertoken')
+      onLogout()
     })
   }, [])
 

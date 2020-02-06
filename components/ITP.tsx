@@ -17,10 +17,12 @@ const ITP: React.SFC<Props> = ({url}) => {
     event.stopPropagation()
   }
 
-  axios.get(baseUrl + '/api/planners/metadata?url=' + url).then( result => {
-    setTitle(result.data.title)
-    setImage(result.data.image)
-  })
+  React.useEffect(() => {
+    axios.get(baseUrl + '/api/planners/metadata?url=' + url).then( result => {
+      setTitle(result.data.title)
+      setImage(result.data.image)
+    })
+  }, [])
   
   return (
     <div className='itp-content' onClick={handleBubbling}>

@@ -25,8 +25,13 @@
   }
   .preview-image {
     width: 100%;
-    max-height: 150px;
     display: block;
+    &.horizontal {
+      max-height: 150px;
+    }
+    &.vertical {
+      max-height: 300px;
+    }
     &.rotate-90 {
       -webkit-transform: rotate(90deg);
 	    -moz-transform: rotate(90deg);

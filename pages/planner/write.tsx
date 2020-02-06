@@ -143,7 +143,7 @@ const PlannerWrite: NextPage = ()=> {
           rules={[{ required: true, message: '썸네일에 들어갈 사진을 업로드해주세요.' },]}
           wrapperCol={{xs: 21, sm: 6}}
         >
-          <UploadWrapper handleThumnail={handleThumnail}/>  
+          <UploadWrapper handleThumnail={handleThumnail}/>
         </Form.Item>
         <Form.Item
           name='contents'

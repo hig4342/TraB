@@ -43,4 +43,17 @@ users.get('/:id', async ctx => {
   ctx.body = result
 })
 
+users.patch('/:id/state', async ctx => {
+  const { id } = ctx.params
+  const { state_id } = ctx.request.body
+
+  const result = await Models.User.update({
+    state_id: state_id
+  }, {
+    where: {id: id}
+  })
+  
+  ctx.body = result
+})
+
 module.exports = users
