@@ -20,10 +20,14 @@ const ITP: React.SFC<Props> = ({url}) => {
   React.useEffect(() => {
     axios.get(baseUrl + '/api/planners/metadata?url=' + url).then( result => {
       setTitle(result.data.title)
-      setImage(result.data.image)
+      if(result.data.image) {
+        setImage(result.data.image)
+      } else {
+        setImage('/bloger.png')
+      }
     })
   }, [])
-  
+
   return (
     <div className='itp-content' onClick={handleBubbling}>
       <Row>

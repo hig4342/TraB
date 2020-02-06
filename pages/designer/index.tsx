@@ -4,10 +4,8 @@ import { NextPage } from 'next'
 import dynamic from 'next/dynamic'
 import { Board, User, Country } from 'type'
 import { RadioChangeEvent } from 'antd/lib/radio/interface'
-// import { CheckboxValueType } from 'antd/lib/checkbox/Group'
 import CountrySelector from '@components/CountrySelector'
 import DesignerList from '@components/DesignerList'
-// import FilterBox from '@components/FilterBox'
 import '@assets/Designer.less'
 import { Input } from 'antd'
 
@@ -26,19 +24,17 @@ type Props = {
 
 const Designer: NextPage<Props> = ({ advertisements, designers, countries })=> {
 
-  const [nation, setNation] = React.useState('all')
+  const [region, setRegion] = React.useState<'all' | 'domestic' | 'foreign'>('all')
   const [searchName, setSearchName] = React.useState('')
-  // const [country, setCountry] = React.useState('')
+  // const [country, setCountry] = React.useState(0)
   // const [city, setCity] = React.useState<Array<CheckboxValueType>>([])
-  // const [theme, setTheme] = React.useState<Array<CheckboxValueType>>([])
 
   const onChange = (e: RadioChangeEvent) => {
-    setNation(e.target.value)
+    setRegion(e.target.value)
   }
 
-  React.useEffect(() => {
-    console.log(countries)
-  }, [])
+  console.log(countries)
+
   // const handleCountry = (e: RadioChangeEvent) => {
   //   console.log('radio checked', e.target.value);
   //   setCountry(e.target.value)
@@ -47,11 +43,6 @@ const Designer: NextPage<Props> = ({ advertisements, designers, countries })=> {
   // const handleCity = (checkedValues: Array<CheckboxValueType>) => {
   //   console.log('checkbox checked', checkedValues);
   //   setCity(checkedValues)
-  // }
-
-  // const handleTheme = (checkedValues: Array<CheckboxValueType>) => {
-  //   console.log('checkbox checked', checkedValues);
-  //   setTheme(checkedValues)
   // }
   
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,30 +57,13 @@ const Designer: NextPage<Props> = ({ advertisements, designers, countries })=> {
         <div>
           <Input.Search value={searchName} onChange={handleSearch} />
         </div>
-        <CountrySelector value={nation} onChange={onChange}/>
-        {/* <FilterBox
-          foreign={nation === 'foreign'}
-          country={country}
-          handleCountry={handleCountry}
-          city={city}
-          handleCity={handleCity}
-          theme={theme}
-          handleTheme={handleTheme}
-          countrylist={countrylist}
-          citylist={citylist}
-          themelist={themelist}
-          mode='designer'/> */}
-        <DesignerList designers={designers}/>
+        <CountrySelector value={region} onChange={onChange}/>
+        <DesignerList designers={designers} searchName={searchName} region={region}/>
       </div>
       <div className='professional-designer'>
         <h1 className='small-title'>편한계획표 설계자 명단</h1>
         <DesignerList premium designers={designers}/>
       </div>
-      {/* <div className='hot-designer'>
-        <h1 className='small-title'>이번주 명예의 설계자</h1>
-        <h4 className='sub-title'>금주에 가장 많은 활동을 한 여행 설계자들 입니다!</h4>
-        <DesignerList designers={designers}/>
-      </div> */}
     </div>
   )
 }

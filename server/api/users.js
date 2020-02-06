@@ -8,10 +8,14 @@ const users = new Router({
 
 users.get('/designer', async ctx => {
   const result = await Models.User.findAll({
-    where: { state_id: [4] },
+    where: { state_id: [4, 5, 9999] },
     include: [{
       model: Models.Planner,
       include: [{
+        model: Models.City
+      }, {
+        model: Models.Country
+      }, {
         model: Models.Reply
       }]
     }]
