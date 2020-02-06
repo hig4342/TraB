@@ -87,6 +87,9 @@ users.get('/:id/planners', async ctx => {
         model: Models.Country
       }, {
         model: Models.Reply
+      }, { 
+        model: Models.User,
+        attributes: ['email', 'nickname']
       }]
     }]
   })

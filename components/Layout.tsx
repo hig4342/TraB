@@ -42,7 +42,7 @@ const AppLayout: React.SFC = ({children}) => {
     }
   }, [])
 
-  const onSlide: React.MouseEventHandler = () => {
+  const onSlide = () => {
     if(toolbarClass === 'toolbar-wrapper') {
       setToolbarClass('toolbar-wrapper clicked')
     } else {
@@ -50,17 +50,12 @@ const AppLayout: React.SFC = ({children}) => {
     }
   }
 
-  const onHover: React.MouseEventHandler = () => {
+  const closePopup = () => {
     if(toolbarClass === 'toolbar-wrapper clicked') {
       setToolbarClass('toolbar-wrapper')
     }
   }
 
-  const onMouseOut: React.MouseEventHandler = () => {
-    if(toolbarClass === 'toolbar-wrapper clicked') {
-      setToolbarClass('toolbar-wrapper')
-    }
-  }
 
   return (
     <Layout>
@@ -68,7 +63,7 @@ const AppLayout: React.SFC = ({children}) => {
         <Navbar />
       </Header>
       <Popup />
-      <div className={toolbarClass} onClick={onSlide} onMouseEnter={onHover} onMouseOut={onMouseOut}>
+      <div className={toolbarClass} onClick={onSlide} onMouseEnter={closePopup} onMouseOut={closePopup} onMouseLeave={closePopup}>
         <div className='toolbar'>
           <Link href='/planner/domestic'><div><img src="/domestic.png" width='60' height='60'/>한국</div></Link>
           <Divider/>
@@ -82,7 +77,7 @@ const AppLayout: React.SFC = ({children}) => {
         loading ?
           <div className='loading-page'><div className='loading-wrapper'><LoadingOutlined /></div></div>
         :
-          <Content className="container">
+          <Content className="container" onWheel={closePopup}>
             {children}
           </Content>
       }

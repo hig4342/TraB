@@ -12,9 +12,10 @@ type Props = {
   defaultUrl?: string;
   handleThumnail: (fileList: UploadFile<any>[]) => void;
   direction?: 'vertical' | 'horizontal'
+  disabled?: boolean
 }
 
-const UploadImage: React.SFC<Props> = ({ defaultUrl, handleThumnail, direction='horizontal' }) => {
+const UploadImage: React.SFC<Props> = ({ defaultUrl, handleThumnail, direction='horizontal', disabled=false }) => {
  
   const [loading, setLoading] = React.useState(false)
   const [fileList, setFileList] = React.useState<UploadFile<any>[]>([{
@@ -71,6 +72,7 @@ const UploadImage: React.SFC<Props> = ({ defaultUrl, handleThumnail, direction='
         accept='image/*'
         fileList={fileList}
         multiple={false}
+        disabled={disabled}
         className='upload-wrapper'
         action={baseUrl+'/api/file/upload'}
         onChange={handleChange}

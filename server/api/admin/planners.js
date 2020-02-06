@@ -60,7 +60,7 @@ planners.get('/:id', async ctx => {
 
 planners.put('/:id', async ctx => {
   const { id } = ctx.params
-  const { title, country_name, city_name, contents_image, contents_text, themes_id, blog_link } = ctx.request.body
+  const { title, country_name, city_name, thumbnail, contents, themes_id, blog_link } = ctx.request.body
 
   const checked_country_name = country_name === '대한민국' ? '한국' : country_name
   let result1 = await Models.Country.findOne({
@@ -88,8 +88,8 @@ planners.put('/:id', async ctx => {
     title: title,
     CountryId: CountryId,
     CityId: CityId,
-    contents_image: contents_image,
-    contents_text: contents_text,
+    thumbnail: thumbnail,
+    contents: contents,
     themes_id: themes_id,
     blog_link: blog_link
   }, {

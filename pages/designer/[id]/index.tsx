@@ -13,10 +13,6 @@ type Props = {
 
 const DesignerPage: NextPage<Props> = ({designer})=> {
 
-  React.useEffect(() => {
-    console.log(designer)
-  }, [])
-
   return (
     <div className='designer-page'>
       <DesignerDescription designer={designer} />

@@ -2,7 +2,6 @@ import * as React from 'react'
 import axios from 'axios'
 import { NextPage } from 'next'
 import Link from 'next/link'
-import Router from 'next/router'
 import { Table, Button } from 'antd'
 import { Planner } from 'type'
 import { ColumnsType } from 'antd/lib/table/interface'
@@ -15,17 +14,25 @@ type Props = {
 
 const AdminPlannerList: NextPage<Props> = ({planner_data})=> {
   
+  const [plannerData, setPlannerData] = React.useState(planner_data)
+  const [loading, setLoading] = React.useState(false)
+
   const refusePayment = (id: number) => {
-    axios.patch(baseUrl + `/api/admin/planners/payment`, {id: id, payment_state: 2}).then( result => {
-      console.log(result)
-      Router.reload()
+    setLoading(true)
+    axios.patch(baseUrl + `/api/admin/planners/${id}/payment`, {payment_state: 2}).then( () => {
+      axios.get(baseUrl + '/api/admin/planners').then( result => {
+        setPlannerData(result.data)
+        setLoading(false)
+      })
     })
   }
   
   const approvePayment = (id: number) => {
-    axios.patch(baseUrl + `/api/admin/planners/payment`, {id: id, payment_state: 3}).then( result => {
-      console.log(result)
-      Router.reload()
+    axios.patch(baseUrl + `/api/admin/planners/${id}/payment`, {payment_state: 3}).then( () => {
+      axios.get(baseUrl + '/api/admin/planners').then( result => {
+        setPlannerData(result.data)
+        setLoading(false)
+      })
     })
   }
 
@@ -100,10 +107,19 @@ const AdminPlannerList: NextPage<Props> = ({planner_data})=> {
     )
   }, {
     title: '정산하기',
-    dataIndex: 'id',
+    dataIndex: 'payment_state',
     key: 'payment',
     align: 'center',
-    render: (_id: number, record) => (record.upload_state > 2 ? <span><Button onClick={() => approvePayment(record.id)} type='primary'>지불</Button><Button onClick={() => refusePayment(record.id)} type='primary' danger>거부</Button></span> : null)
+    render: (_payment_state, record) => (
+      record.upload_state > 2 ? 
+        record.payment_state === 1 ?
+        <span>
+          <Button onClick={() => approvePayment(record.id)} type='primary'>지불</Button>
+          <Button onClick={() => refusePayment(record.id)} type='primary' danger>거부</Button>
+        </span>
+        : <span>{record.payment_state === 2 ? '지불거부' : '지불완료'}</span>
+      : null
+      )
   }, {
     title: '자세히보기',
     dataIndex: 'id',
@@ -117,7 +133,8 @@ const AdminPlannerList: NextPage<Props> = ({planner_data})=> {
   return (
     <div className='admin-planner' style={{ width: '100%'}}>
       <Table
-        dataSource={planner_data}
+        loading={loading}
+        dataSource={plannerData}
         rowKey={record => record.id}
         columns={columns}
         pagination={{

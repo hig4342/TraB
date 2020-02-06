@@ -18,13 +18,11 @@ const MyPage: NextPage = ()=> {
   const {user, isLogin, onLogin} = useUser()
   const [changeable, setChangeable] = React.useState(true)
   const [visible, setVisible] = React.useState(false);
-  const [image, setImage] = React.useState('')
   const [form] = Form.useForm();
   const [planners, setPlanners] = React.useState<Planner[]>([])
   
   React.useEffect(() => {
     if(isLogin) {
-      console.log(user)
       form.setFieldsValue({
         name: user.name,
         nickname: user.nickname,
@@ -41,8 +39,6 @@ const MyPage: NextPage = ()=> {
         profile_image: user.profile_image,
         profile: user.profile
       })
-      const { profile_image } = user
-      if( profile_image ) setImage(profile_image)
       axios.get(`/api/users/${user.id}/planners`).then( result => {
         const planner_data: Planner[] = result.data.Planners
         setPlanners(planner_data)
@@ -70,7 +66,7 @@ const MyPage: NextPage = ()=> {
         },
         account_bank: user.account_bank,
         account_num: user.account_num,
-        profile_image: image,
+        profile_image: user.profile_image,
         profile: user.profile
       })
     }
@@ -89,7 +85,7 @@ const MyPage: NextPage = ()=> {
       address_detailaddress: values.address.detailaddress,
       account_bank: values.account_bank,
       account_num: values.account_num,
-      profile_image: image,
+      profile_image: values.profile_image,
       profile: values.profile
     }
     axios.post('/api/auth/edit', data).then( result => {
@@ -114,7 +110,6 @@ const MyPage: NextPage = ()=> {
         profile_image: user.profile_image,
         profile: user.profile
       })
-      if(user.profile) setImage(user.profile)
     })
   }
 
@@ -149,12 +144,14 @@ const MyPage: NextPage = ()=> {
   }
 
   const handleThumnail = (fileList: UploadFile<any>[]) => {
-    setImage(fileList[0].url ? fileList[0].url : '')
+    form.setFieldsValue({
+      profile_image: fileList[0].url ? fileList[0].url : ''
+    })
   }
 
   return (
     <div className='mypage-wrapper' style={{width: '100%'}}>
-    { user ?
+    { isLogin ?
       <div className='mypage' style={{width: '100%'}}>
         <Row justify='center' align='middle' gutter={[16, 16]}>
           <Form
@@ -164,13 +161,29 @@ const MyPage: NextPage = ()=> {
             onFinishFailed={onFinishFailed}
             layout='inline'
             style={{width: '100%'}}
+            initialValues={{
+              name: user.name,
+              nickname: user.nickname,
+              phone: user.phone,
+              sex: String(user.sex),
+              birth: moment(user.birth),
+              address: {
+                zonecode: user.address_zonecode,
+                fulladdress: user.address_fulladdress,
+                detailaddress: user.address_detailaddress
+              },
+              account_bank: user.account_bank,
+              account_num: user.account_num,
+              profile_image: user.profile_image,
+              profile: user.profile
+            }}
           >
             <Col md={8}>
               <Form.Item
                 name='profile_image'
               >
-                <div className='profile-image-wrapper' style={{minHeight: 400}}>
-                  <UploadWrapper handleThumnail={handleThumnail} defaultUrl={user.profile_image}/>
+                <div className='profile-image-wrapper'> 
+                  <UploadWrapper handleThumnail={handleThumnail} defaultUrl={user.profile_image} direction='vertical' disabled={changeable}/>
                 </div>
               </Form.Item>
             </Col>
@@ -310,7 +323,7 @@ const MyPage: NextPage = ()=> {
             </Col>
           </Form>
         </Row>
-        { user.state_id === 4 ? <MypagePlanner planners={planners}/> : 
+        { user.state_id >= 4 ? <MypagePlanner planners={planners}/> : 
           <div className='experience'>
             <h1 className='small-title'>설계자로 등록하고 본인만의 계획표를 판매해보세요</h1>
             <Row justify="center">

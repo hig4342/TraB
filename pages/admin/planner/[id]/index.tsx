@@ -17,7 +17,7 @@ const AdminPlanner: NextPage<Props> = ({planner, themes})=> {
   return (
     <div className='planner' style={{width: '100%'}}>
       <DesignerDescription designer={planner.User} plannerId={planner.id}/>
-      <AdminPlannerContent planner={planner} themes={themes}/>
+      <AdminPlannerContent planner={planner} themes={themes} />
     </div>
   )
 }

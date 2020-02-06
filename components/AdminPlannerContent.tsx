@@ -10,6 +10,7 @@ const baseUrl = process.env.NODE_ENV === 'production' ? 'https://trab.co.kr' : '
 
 import dynamic from 'next/dynamic'
 import { UploadFile } from 'antd/lib/upload/interface'
+import Link from 'next/link'
 const EditorWrapper = dynamic(
   () => import('@components/EditorWrapper'),//import EditorWrapper from '@components/EditorWrapper'
   { ssr: false }
@@ -38,13 +39,12 @@ const AdminPlannerContent: React.SFC<Props> = ({planner, themes}) => {
   }
   
   const onFinish = (value: any) => {
-    console.log(value)
     const form = {
       title: value.title,
       country_name: value.country,
       city_name: value.city,
-      contents_image: value.thumbnail,
-      contents_text: value.contents,
+      thumbnail: value.thumbnail,
+      contents: value.contents,
       themes_id: value.themes_id,
       blog_link: value.blog_link
     }
@@ -192,7 +192,10 @@ const AdminPlannerContent: React.SFC<Props> = ({planner, themes}) => {
           rules={[{ required: true, message: '계획표를 써주세요' },]}
           wrapperCol={{span: 24}}
         >
-          <EditorWrapper handleContents={handleContents} defaultContent={planner.contents}/>
+          { planner.upload_state === 4 || planner.upload_state === 5 ? 
+            <EditorWrapper handleContents={handleContents} defaultContent={planner.contents} hyperlink/>
+            : <EditorWrapper handleContents={handleContents} defaultContent={planner.contents} />
+          }
         </Form.Item>
         <Form.Item>
           <div className='button-wrapper'>
@@ -206,7 +209,7 @@ const AdminPlannerContent: React.SFC<Props> = ({planner, themes}) => {
           </div>
           <div className='button-wrapper'>
             <Button type='primary' htmlType='submit'>수정하기</Button>
-            <Button>취소</Button>
+            <Link href='/admin/planner'><Button>취소</Button></Link>
           </div>
         </Form.Item>
       </Form>

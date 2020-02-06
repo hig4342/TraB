@@ -6,7 +6,6 @@ import { ColProps } from 'antd/lib/grid'
 import { Planner } from 'type'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
-const { Meta } = Card
 import '../assets/PlannerList.less'
 import ITP from '@components/ITP'
 
@@ -67,7 +66,7 @@ const PlannerList: React.SFC<Props> = ({items, country, city, themes})=> {
                   /></div>
                 }
               >
-                <Meta title={`[${item.City.city_name}] ` + item.title} description={item.Country.country_name} />
+                <Card.Meta title={`[${item.City.city_name}] ` + item.title} description={item.Country.country_name} />
                 <span className='planner-title'>{item.User.nickname}</span>
                 <ITP url={item.blog_link}/>
                 <div className='rate-wrapper'><Rate allowHalf disabled defaultValue={item.Replies.length !== 0 ? Math.floor(item.Replies.map(({rate}) => (rate)).reduce((a, b) => a+b)/item.Replies.length*2)/2 : 0}/><span className='rate-number'>&nbsp;&nbsp;{item.Replies.length !== 0 ? (item.Replies.map(({rate}) => (rate)).reduce((a, b) => a+b)/item.Replies.length).toFixed(2) : 0}</span></div>

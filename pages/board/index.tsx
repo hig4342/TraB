@@ -46,11 +46,6 @@ const BoardPage: NextPage<Props> = ({ advertisements, posts })=> {
     key: 'createdAt',
     align: 'center',
     render: (value: Date) => (moment(value).format('YYYY-MM-DD'))
-  }, {
-    title: '조회수',
-    dataIndex: 'hit',
-    key: 'hit',
-    align: 'center',
   }]
 
   return (
