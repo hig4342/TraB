@@ -47,7 +47,6 @@ const PlannerWrite: NextPage = ()=> {
   };
 
   const handleThumnail = (fileList: UploadFile<any>[]) => {
-    console.log(fileList)
     form.setFieldsValue({
       thumbnail: fileList[0].url
     })
@@ -63,7 +62,6 @@ const PlannerWrite: NextPage = ()=> {
     errorInfo.errorFields.forEach(error => {
       message.error(error.errors)
     })
-    console.log('Failed:', errorInfo);
   };
 
   return (

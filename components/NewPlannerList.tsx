@@ -6,6 +6,7 @@ import { ColProps } from 'antd/lib/col'
 import ITP from '@components/ITP'
 import Link from 'next/link'
 import '../assets/NewPlannerList.less'
+import loadImage from 'blueimp-load-image'
 
 const NoticeSwiper = dynamic(
   () => import('@components/NoticeSwiper'),
@@ -52,6 +53,11 @@ const NewPlannerList: React.SFC<Props> = ({ domestic, foreign, advertisements })
         </Col>
         {
           domestic.map((planner) => {
+            loadImage(planner.thumbnail, (_image, data) => {
+              console.log(data)
+            }, {
+              orientation: true
+            })
             return (
               <Col {...options} key={planner.id}>
                 <Link href={`/planner/${planner.id}`}>

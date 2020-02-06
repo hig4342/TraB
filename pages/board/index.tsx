@@ -28,7 +28,6 @@ const BoardPage: NextPage<Props> = ({ advertisements, posts })=> {
     dataIndex: 'id',
     key: 'id',
     align: 'center',
-    width: 100,
     render: (id, record) => (record.board_state === 3 ? id : '공지사항')
   }, {
     title: '제목',
@@ -40,20 +39,17 @@ const BoardPage: NextPage<Props> = ({ advertisements, posts })=> {
     dataIndex: 'User',
     key: 'UserId',
     align: 'center',
-    width: 150,
     render: (User: User, record) => (record.board_state === 3 ? User.nickname : '관리자')
   }, {
     title: '등록일',
     dataIndex: 'createdAt',
     key: 'createdAt',
-    width: 120,
     align: 'center',
     render: (value: Date) => (moment(value).format('YYYY-MM-DD'))
   }, {
     title: '조회수',
     dataIndex: 'hit',
     key: 'hit',
-    width: 100,
     align: 'center',
   }]
 
