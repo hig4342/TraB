@@ -13,8 +13,12 @@ type Props = {
 
 const DesignerPage: NextPage<Props> = ({designer})=> {
 
+  React.useEffect(() => {
+    console.log(designer)
+  }, [])
+
   return (
-    <div className='example'>
+    <div className='designer-page'>
       <DesignerDescription designer={designer} />
     </div>
   )
@@ -23,7 +27,7 @@ const DesignerPage: NextPage<Props> = ({designer})=> {
 DesignerPage.getInitialProps = async (req) => {
   const id = req.query.id
 
-  const designer = await axios.get(baseUrl+`/api/users/${id}`)
+  const designer = await axios.get(baseUrl + `/api/users/${id}`)
   return {
     designer: designer.data
   }

@@ -2,8 +2,9 @@ import * as React from 'react'
 import { User } from 'type'
 import Link from 'next/link'
 import { Row, Col, Descriptions, Card, Rate } from 'antd'
-const { Meta } = Card
 import '@assets/DesignerDescription.less'
+import { ColProps } from 'antd/lib/col'
+import ITP from './ITP'
 
 type Props = {
   designer: User
@@ -12,15 +13,24 @@ type Props = {
 
 const DesignerDescription: React.SFC<Props> = ({designer, plannerId})=> {
 
+  const options: ColProps = {
+    className: "planner-col",
+    xs: { span: 10 },
+    sm: { span: 12 },
+    md: { span: 8 },
+    lg: { span: 7 },
+    xl: { span: 6 },
+  }
+
   return (
     <div className='designer-description'>
       <Row justify="center" align="middle">
-        <Col xs={24} md={4}>
+        <Col xs={12} md={4}>
           <div className='image-wrapper'>
             <img src={designer.profile_image || '/placeholder-image.jpg'}/>
           </div>
         </Col>
-        <Col xs={24} md={6}>
+        <Col xs={12} md={6}>
           <Descriptions colon={false} column={1} className='designer-information'>
             <Descriptions.Item label='닉네임'>{designer.nickname}</Descriptions.Item>
             <Descriptions.Item label='이메일'><div>{designer.email}</div></Descriptions.Item>
@@ -32,23 +42,25 @@ const DesignerDescription: React.SFC<Props> = ({designer, plannerId})=> {
             <h1>설계한 계획표 목록</h1>
             <Row justify='start' align="middle" className='planner-list' gutter={[16, 16]}>
               {designer.Planners.filter(planner => planner.id !== plannerId).map(planner => (
-                <Col key={planner.id} xs={8} md={6}>
+                <Col  {...options} key={planner.id}>
                   <Link href={`/planner/${planner.id}`}>
                     <Card
                       hoverable
-                      className={"planner-card" + (planner.upload_state == 4 ? ' premium' : '')}
+                      className={"planner-card" + (planner.upload_state === 4 ? ' premium' : planner.upload_state === 5 ? ' itp' : '')}
                       cover={
-                        <div style={{width: '100%', height: 160, overflow: 'hidden'}}><img
+                        <div className='planner-card-cover'><img
                           alt="planner-image"
                           src={planner.thumbnail}
-                          style={{height: '100%'}}
+                          style={{height: '100%', width: '100%'}}
                         /></div>
                       }
                     >
-                      <Meta title={`[${planner.City.city_name}] ` + planner.title} description={planner.Country.country_name} />
-                      <div><Rate allowHalf disabled defaultValue={planner.Replies.length !== 0 ? planner.Replies.map(({rate}) => (rate)).reduce((a, b) => a+b)/planner.Replies.length : 0}/><span>&nbsp;&nbsp;{planner.Replies.length !== 0 ? planner.Replies.map(({rate}) => (rate)).reduce((a, b) => a+b)/planner.Replies.length : 0}</span></div>
+                      <Card.Meta title={`[${planner.City.city_name}] ` + planner.title} description={planner.Country.country_name} />
+                      <span className='planner-title'>{designer.nickname}</span>
+                      <ITP url={planner.blog_link}/>
+                      <div><Rate allowHalf disabled defaultValue={planner.Replies.length !== 0 ? planner.Replies.map(({rate}) => (rate)).reduce((a, b) => a+b)/planner.Replies.length : 0}/></div>
                       <div style={{ fontSize: 13 }}><span>조회수: {planner.hit}&nbsp;&nbsp;|&nbsp;&nbsp;댓글수: {planner.Replies.length}</span></div>
-                    </Card>
+                  </Card>
                   </Link>
                 </Col>
               ))}

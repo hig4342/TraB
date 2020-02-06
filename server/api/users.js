@@ -56,7 +56,7 @@ users.get('/designer/count', async ctx => {
 users.get('/:id', async ctx => {
   const { id } = ctx.params
   const result = await Models.User.findOne({
-    where: [{id: id}, {state_id: [3, 4, 5]}],
+    where: {id: id},
     attributes: { exclude: ['password', 'salt'] },
     include: [{
       model: Models.Planner,

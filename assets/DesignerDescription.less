@@ -1,5 +1,5 @@
 .designer-description {
-  margin-bottom: 10rem;
+  margin-bottom: 2rem;
   .image-wrapper {
     img {
       padding: 10px;
@@ -19,17 +19,25 @@
   }
   .designer-profile {
     min-height: 5rem;
+    border: 1px solid rgba(0, 0, 0, 0.2);
   }
   .self-introduction{
     margin-top: 1.5rem;
     .planner-list {
       margin: 2rem auto;
+      display: -webkit-box;
+      overflow-x: scroll;
       .ant-card-hoverable:hover {
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
       }
       .planner-card {
         padding: 5px;
         border-radius: 5px;
+        .planner-card-cover {
+          width: 100%;
+          height: 80px;
+          overflow: hidden;
+        }
         .ant-card-body {
           padding: 5px;
         }
@@ -47,6 +55,51 @@
           border-radius: 0 0 25px 25px;
           right: 10%;
         }
+      }
+      .itp-content {
+        cursor: auto;
+        z-index: 10;
+        display: none;
+        img {
+          height: 20px;
+          width: 20px;
+          margin-right: 5px;
+        }
+        div {
+          overflow:hidden;
+          text-overflow:ellipsis;
+          white-space:nowrap;
+        }
+        .itp-image-wrapper {
+          margin: auto;
+          padding: 5px;
+        }
+      }
+      .itp {
+        &::before {
+          content: 'ITP';
+          position: absolute;
+          background: linear-gradient( 150deg, rgb(142, 175, 236), rgb(117, 219, 185));
+          color: white;
+          font-weight: bold;
+          text-align: center;
+          width: 50px;
+          height: 25px;
+          border-radius: 0 0 25px 25px;
+          right: 10%;
+        }
+        .planner-title {
+          display: none;
+        }
+        .ant-card-meta-description {
+          display: none;
+        }
+        .itp-content {
+          display: block;
+        }
+      }
+      .ant-rate {
+        font-size: 18px;
       }
     }
   }

@@ -205,6 +205,7 @@ planners.get('/:id', async ctx => {
       attributes: ['email', 'nickname', 'sex', 'profile_image', 'profile'],
       include: [{
         model: Models.Planner,
+        where: { upload_state: [3, 4, 5] },
         include: [{
           model: Models.City
         }, {
