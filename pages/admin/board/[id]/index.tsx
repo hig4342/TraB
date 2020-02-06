@@ -50,6 +50,10 @@ const AdminPost: NextPage<Props> = ({post})=> {
     setVisible(false)
   }
 
+  const disabledDate = (current: moment.Moment) => {
+    return current <= moment();
+  }
+
   const onFinish  = () => {
     const data = {
       title: form.getFieldValue('title'),
@@ -57,6 +61,7 @@ const AdminPost: NextPage<Props> = ({post})=> {
       banner_image: bannerImage,
       main_image: mainImage,
       content: content,
+      ad_deadline: form.getFieldValue('ad_deadline'),
       ad_region: form.getFieldValue('ad_region'),
       visible: form.getFieldValue('visible'),
     }
@@ -104,6 +109,7 @@ const AdminPost: NextPage<Props> = ({post})=> {
             </Form.Item>
             <Form.Item name='ad_deadline' label='광고기한'>
             <DatePicker
+              disabledDate={disabledDate}
               placeholder='광고기한'
             />
             </Form.Item>

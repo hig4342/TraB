@@ -1,16 +1,22 @@
 import * as React from 'react'
 import axios from 'axios'
 import { NextPage } from 'next'
+import dynamic from 'next/dynamic'
 import { Board, User, Country } from 'type'
 import { RadioChangeEvent } from 'antd/lib/radio/interface'
 // import { CheckboxValueType } from 'antd/lib/checkbox/Group'
 import CountrySelector from '@components/CountrySelector'
 import DesignerList from '@components/DesignerList'
 // import FilterBox from '@components/FilterBox'
-import NoticeSwiper from '@components/NoticeSwiper'
 import '@assets/Designer.less'
+import { Input } from 'antd'
 
 const baseUrl = process.env.NODE_ENV === 'production' ? 'https://trab.co.kr' : ''
+
+const NoticeSwiper = dynamic(
+  () => import('@components/NoticeSwiper'),
+  { ssr: false }
+)
 
 type Props = {
   advertisements: Board[]
@@ -21,16 +27,18 @@ type Props = {
 const Designer: NextPage<Props> = ({ advertisements, designers, countries })=> {
 
   const [nation, setNation] = React.useState('all')
+  const [searchName, setSearchName] = React.useState('')
   // const [country, setCountry] = React.useState('')
   // const [city, setCity] = React.useState<Array<CheckboxValueType>>([])
   // const [theme, setTheme] = React.useState<Array<CheckboxValueType>>([])
 
   const onChange = (e: RadioChangeEvent) => {
-    console.log('radio checked', e.target.value);
     setNation(e.target.value)
   }
 
-  console.log(countries)
+  React.useEffect(() => {
+    console.log(countries)
+  }, [])
   // const handleCountry = (e: RadioChangeEvent) => {
   //   console.log('radio checked', e.target.value);
   //   setCountry(e.target.value)
@@ -45,12 +53,19 @@ const Designer: NextPage<Props> = ({ advertisements, designers, countries })=> {
   //   console.log('checkbox checked', checkedValues);
   //   setTheme(checkedValues)
   // }
+  
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchName(e.target.value)
+  }
 
   return (
     <div className='designer-list' style={{width: '100%'}}>
       <NoticeSwiper items={advertisements} inline/>
       <div className='new-designer'>
         <h1 className='big-title'>트래비(TraB) 여행 설계자</h1>
+        <div>
+          <Input.Search value={searchName} onChange={handleSearch} />
+        </div>
         <CountrySelector value={nation} onChange={onChange}/>
         {/* <FilterBox
           foreign={nation === 'foreign'}

@@ -31,18 +31,15 @@ const Domestic_Planner: NextPage<Props> = ({ advertisements, planners, countries
   const [theme, setTheme] = React.useState<Array<CheckboxValueType>>([])
 
   const handleCountry = (e: RadioChangeEvent) => {
-    console.log('radio checked', e.target.value);
     setCountry(e.target.value)
     setCity([])
   }
 
   const handleCity = (checkedValues: CheckboxValueType[]) => {
-    console.log('checkbox checked', checkedValues);
     setCity(checkedValues)
   }
 
   const handleTheme = (checkedValues: CheckboxValueType[]) => {
-    console.log('checkbox checked', checkedValues);
     setTheme(checkedValues)
   }
 

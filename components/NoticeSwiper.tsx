@@ -2,7 +2,6 @@ import * as React from 'react'
 import Swiper from 'react-id-swiper';
 import { SwiperOptions } from 'swiper'
 import Link from 'next/link';
-import { Modal } from 'antd';
 import { Board } from 'type';
 
 import 'swiper/css/swiper.css'
@@ -15,10 +14,6 @@ type Props = {
 
 const NoticeSwiper: React.SFC<Props> = ({items, inline=false})=> {
 
-  const [visible, setVisible] = React.useState(false)
-  const [title, setTitle] = React.useState('')
-  const [image, setImage] = React.useState('')
-  const [autoplay, setAutoplay] = React.useState(true)
 
   const options: SwiperOptions = { 
     pagination: {
@@ -35,25 +30,12 @@ const NoticeSwiper: React.SFC<Props> = ({items, inline=false})=> {
       prevEl: '.swiper-button-prev',
     },
     spaceBetween: 30,
-  }
-
-  const handleShow = (item: Board) => {
-    setVisible(true)
-    setAutoplay(false)
-    setTitle(item.title)
-    setImage(item.main_image)
-  }
-
-  const handleHide = () => {
-    setVisible(false)
-    setAutoplay(true)
+    autoplay: true,
   }
 
   return (
-    <>
     <Swiper
       {...options}
-      autoplay={autoplay}
       containerClass={"notice-swiper swiper-container" + (inline ? ' inline' : '')}
     >
       {
@@ -67,24 +49,13 @@ const NoticeSwiper: React.SFC<Props> = ({items, inline=false})=> {
           } else {
             return (
               <div className='item-wrapper' key={index}>
-                <img onClick={() => handleShow(item)} src={item.banner_image} />
+                <a target='_blank' href={item.ad_link}><img src={item.banner_image} /></a>
               </div>
             )
           }
         })
       }
     </Swiper>
-    <Modal
-      title={title}
-      centered
-      visible={visible}
-      width='1080'
-      //onOk={onFinish}
-      onCancel={handleHide}
-    >
-      <img style={{width: '100%'}} src={image}/>
-    </Modal>
-    </>
   )
 }
 

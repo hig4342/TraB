@@ -6,7 +6,7 @@ import PopupWrapper from '@components/PopupWrapper'
 import '@assets/Navbar.less'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
-import { Drawer, Menu, Button } from 'antd'
+import { Drawer, Menu, Button, Row, Col } from 'antd'
 
 const baseUrl = process.env.NODE_ENV === 'production' ? 'https://trab.co.kr' : ''
 
@@ -90,8 +90,10 @@ const Navbar: React.SFC = () => {
               : 
                 <div>
                   <div><span>{user.nickname}</span></div>
-                  <div><Link href='/auth/mypage'><a className='sub-item'>마이페이지</a></Link></div>
-                  <div><a onClick={handleLogout} className='sub-item'>로그아웃</a></div>
+                  <Row style={{marginTop: 5}}>
+                    <Col><Link href='/auth/mypage'><Button>마이페이지</Button></Link></Col>
+                    <Col offset={1}><Button onClick={handleLogout}>로그아웃</Button></Col>
+                  </Row>
                 </div>
             }
             onClose={onClose}

@@ -2,13 +2,18 @@ import * as React from 'react'
 import axios from 'axios'
 import { NextPage } from 'next'
 import Router from 'next/router'
+import dynamic from 'next/dynamic'
 import { Table, Button } from 'antd'
 import { Board, User } from 'type'
-import NoticeSwiper from '@components/NoticeSwiper'
 import moment from 'moment'
 import '@assets/Board.less'
 import PopupWrapper from '@components/PopupWrapper'
 import { ColumnsType } from 'antd/lib/table'
+
+const NoticeSwiper = dynamic(
+  () => import('@components/NoticeSwiper'),
+  { ssr: false }
+)
 
 const baseUrl = process.env.NODE_ENV === 'production' ? 'https://trab.co.kr' : ''
 

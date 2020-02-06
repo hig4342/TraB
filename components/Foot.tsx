@@ -2,7 +2,8 @@ import * as React from 'react'
 import { Row, Col } from 'antd'
 import '@assets/Foot.less'
 
-const Foot: React.SFC = ()=> {
+const Foot: React.SFC = () => {
+  
   return (
     <div className='information'>
       <Row>
@@ -37,6 +38,11 @@ const Foot: React.SFC = ()=> {
           <div className='document-wrapper'>
             <a target='_blank' href='/Trab_personal_information.html'>개인정보 이용동의서</a>
             <a style={{marginLeft: 20}} target='_blank' href=''>회사 소개</a>
+          </div>
+        </Col>
+        <Col xs={24} md={8}>
+          <div className='mark-wrapper'>
+            <a target='_blank' href='http://escrow1.kbstar.com/quics?page=B009111&cc=b010807:b008491&mHValue=9e4575ec73bc8c4223698f3491a9c29f20190703145685'><img src="http://img1.kbstar.com/img/escrow/escrowcmark.gif" /></a>
           </div>
         </Col>
       </Row>
