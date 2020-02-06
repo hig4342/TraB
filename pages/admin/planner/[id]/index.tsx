@@ -14,8 +14,6 @@ type Props = {
 
 const AdminPlanner: NextPage<Props> = ({planner, themes})=> {
 
-  console.log(planner.id)
-
   return (
     <div className='planner' style={{width: '100%'}}>
       <DesignerDescription designer={planner.User} plannerId={planner.id}/>
