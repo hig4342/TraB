@@ -95,7 +95,7 @@ const columns: ColumnsType<User> = [{
   key: 'details',
   align: 'center',
   render: (id: number) => (
-    <Link href='/admin/designer/[id]' as={`/admin/designer/${id}`}><a>자세히보기</a></Link>
+    <Link href='/admin/user/[id]' as={`/admin/user/${id}`}><a>자세히보기</a></Link>
   )
 }]
 
