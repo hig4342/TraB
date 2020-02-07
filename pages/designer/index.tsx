@@ -53,9 +53,9 @@ const Designer: NextPage<Props> = ({ advertisements, designers, countries })=> {
     <div className='designer-list' style={{width: '100%'}}>
       <NoticeSwiper items={advertisements} inline/>
       <div className='new-designer'>
-        <h1 className='big-title'>트래비(TraB) 여행 설계자</h1>
-        <div>
-          <Input.Search value={searchName} onChange={handleSearch} />
+        <h1 className='big-title' style={{ marginBottom: '2rem'}}>트래비(TraB) 여행 설계자</h1>
+        <div className='search-bar'>
+          <Input.Search value={searchName} onChange={handleSearch} placeholder='닉네임을 검색하세요!'/>
         </div>
         <CountrySelector value={region} onChange={onChange}/>
         <DesignerList designers={designers} searchName={searchName} region={region}/>
