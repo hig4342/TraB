@@ -49,6 +49,7 @@
       }
     }
     .more-text {
+      cursor: pointer;
       margin: 5px auto;
       width: fit-content;
       font-size: 20px;
@@ -155,8 +156,11 @@
       display: block;
     }
     .description-list {
+      height: fit-content;
       display: -webkit-box;
+      box-sizing: content-box;
       overflow-x: scroll;
+      overflow-y: hidden;
     }
     .description-card-wrapper {
       display: none;
