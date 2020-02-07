@@ -38,7 +38,7 @@ const NewPlannerList: React.SFC<Props> = ({ domestic, foreign, advertisements })
           <div>가봤~니?</div>
         </div>
       </div>
-      <Row justify="start" align='middle' gutter={[16, 16]} className='description-list'>
+      <Row justify="start" align='middle' className='description-list'>
         <Col {...options} xs={24} key='domestic' className='description-card-wrapper'>
           <div className='description-card'>
             <div><img src='new_plan.png' /></div>
@@ -89,7 +89,7 @@ const NewPlannerList: React.SFC<Props> = ({ domestic, foreign, advertisements })
           <div>어디까지</div>
         </div>
       </div>
-      <Row justify="start" align="middle" gutter={[16, 16]} className='description-list'>
+      <Row justify="start" align="middle" className='description-list'>
         <Col {...options} key='foreign' className='description-card-wrapper'>
           <div className='description-card'>
             <div><img src='new_plan.png' /></div>
