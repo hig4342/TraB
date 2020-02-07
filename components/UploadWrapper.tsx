@@ -88,7 +88,7 @@ const UploadImage: React.SFC<Props> = ({ defaultUrl, handleThumnail, direction='
             </div>
           : !fileList[0].url ?
             <div>
-              <p className="ant-upload-drag-icon">
+              <p className="upload-icon">
                 <InboxOutlined />
               </p>
               <p className="ant-upload-text">사진을 업로드 해주세요.</p>

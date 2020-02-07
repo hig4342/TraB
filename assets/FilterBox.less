@@ -1,11 +1,9 @@
 .filter-box-wrapper {
   padding: 0 15px;
   z-index: 1;
-  height: 210px;
   .filter-box {
     width: 100%;
     margin: 0 auto;
-    //color: white;
     .filter-item {
       margin: 1rem auto;
     }
@@ -13,5 +11,52 @@
   .filter-name {
     font-size: 18px;
     margin: 0.5rem auto;
+  }
+  .mobile-search-box {
+    display: none;
+    text-align: center;
+  }
+  
+  @media (max-width: 575.98px) {
+    .mobile-search-box {
+      display: block;
+    }
+    .filter-box {
+      display: none;
+    }
+    .filter-item {
+      display: none;
+    }
+  }
+}
+
+.mobile-search-wrapper {
+  text-align: center;
+  max-height: 200px;
+  overflow-y: scroll;
+  .ant-radio-group {
+    width: 100%;
+    .ant-radio-button-wrapper {
+      margin: 5px auto;
+      width: 100%;
+      height: 40px;
+      line-height: 40px;
+      padding: 0 15px;
+      font-size: 16px;
+      border-radius: 2px;
+    }
+  }
+  .ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+    background: #18bbff;
+    border-color: #18bbff;
+  }
+  .mobile-search {
+    margin: 5px auto;
+    .ant-btn.filter-button {
+      &.selected {
+        background-color: #18bbff;
+        color: white;
+      }
+    }
   }
 }

@@ -156,14 +156,17 @@
       display: block;
     }
     .description-list {
-      height: fit-content;
-      display: -webkit-box;
-      box-sizing: content-box;
-      overflow-x: scroll;
-      overflow-y: hidden;
-      -webkit-overflow-scrolling: touch;
-      .planner-col {
-        float:left;
+      width: 100%;
+      height: 220px;
+      position: relative;
+      overflow: hidden;
+      list-style: none;
+      padding: 0;
+      z-index: 1;
+      .planner-card-wrapper {
+        display: inline-block;
+        .planner-card {
+        }
       }
     }
     .description-card-wrapper {

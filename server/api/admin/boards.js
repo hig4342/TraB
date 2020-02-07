@@ -36,7 +36,7 @@ boards.get('/:id', async ctx => {
 
 boards.put('/:id', async ctx => {
   const { id } = ctx.params
-  const { title, ad_link, banner_image, main_image, content, ad_region, visible, ad_deadline } = ctx.request.body
+  const { title, ad_link, banner_image, main_image, content, ad_region, visible, ad_deadline, themes_id } = ctx.request.body
 
   const result = await Models.Board.update({
     title: title,
@@ -47,6 +47,7 @@ boards.put('/:id', async ctx => {
     content: content,
     ad_region: ad_region,
     visible: visible,
+    themes_id: themes_id,
   }, {
     where: { id: id }
   })

@@ -40,7 +40,7 @@ const DesignerDescription: React.SFC<Props> = ({designer, plannerId})=> {
         <Col xs={24} md={14}>
           <div className='self-introduction'>
             <h1>설계한 계획표 목록</h1>
-            <Row justify='start' align="middle" className='planner-list' gutter={[16, 16]}>
+            <Row justify='start' align="middle" className='my-planner-list' gutter={[16, 16]}>
               {designer.Planners.filter(planner => planner.id !== plannerId).map(planner => (
                 <Col  {...options} key={planner.id}>
                   <Link href={`/planner/${planner.id}`}>

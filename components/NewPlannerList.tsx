@@ -53,7 +53,7 @@ const NewPlannerList: React.SFC<Props> = ({ domestic, foreign, advertisements })
         {
           domestic.map((planner) => {
             return (
-              <Col {...options} key={planner.id}>
+              <Col {...options} key={planner.id} className='planner-card-wrapper'>
                 <Link href={`/planner/${planner.id}`}>
                   <Card
                     hoverable

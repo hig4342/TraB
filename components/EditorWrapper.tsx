@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Editor } from '@tinymce/tinymce-react';
 import { EventHandler } from '@tinymce/tinymce-react/lib/cjs/main/ts/Events';
+import '@assets/EditorWrapper.less'
 
 //const baseUrl = process.env.NODE_ENV === 'production' ? 'https://trab.co.kr' : ''
 
@@ -29,6 +30,7 @@ const EditorWrapper: React.SFC<Props> = ({ hyperlink=false, handleContents, defa
       onEditorChange={handleEditorChange}
       init={{
         menubar: false,
+        min_height: 500,
         plugins: [
           'advlist lists autoresize', 
           'charmap emoticons',
@@ -43,15 +45,23 @@ const EditorWrapper: React.SFC<Props> = ({ hyperlink=false, handleContents, defa
           alignleft aligncenter alignright alignjustify bullist numlist outdent indent|\
           undo redo |\
           preview',
+        toolbar3: 'explain',
+        setup: function (editor) {
+          console.log(editor.ui.registry)
+          editor.ui.registry.addButton('explain', {
+            text: '<div class="explain-wrapper">사진을 업로드 하려면 <img src="/image.svg"/> 버튼을 누르신 후 업로드 클릭 > 이미지 삽입 후 넓이를 600 이하로 맞춰주세요.</div>',
+            onAction: function (_) {}
+          });
+        },
         mobile: {
-          toolbar: 'styleselect|\
+          toolbar1: 'styleselect|\
           bold italic underline strikethrough superscript subscript forecolor backcolor removeformat|\
-          table insertfile image media template anchor charmap emoticons|\
+          table insertfile template anchor charmap emoticons|\
           alignleft aligncenter alignright alignjustify bullist numlist outdent indent|\
           undo redo |\
           preview',
-          toolbar1: false,
-          toolbar2: false,
+          toolbar2: 'image media',
+          min_height: 300,
         },
         statusbar: false,
         toolbar_drawer: false,
