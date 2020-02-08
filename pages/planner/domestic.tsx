@@ -53,6 +53,16 @@ const Domestic_Planner: NextPage<Props> = ({ advertisements, planners, countries
     setCity(checkedCity)
   }
 
+  const addTheme = (value: number) => {
+    let checkedTheme = theme.concat(value);
+    setTheme(checkedTheme)
+  }
+
+  const deleteTheme = (value: number) => {
+    let checkedTheme = theme.filter(item => item !== value);
+    setTheme(checkedTheme)
+  }
+
   return (
     <div className='planner_list' style={{width: '100%'}}>
       <Banner region='domestic'/>
@@ -69,6 +79,8 @@ const Domestic_Planner: NextPage<Props> = ({ advertisements, planners, countries
           handleTheme={handleTheme}
           addCity={addCity}
           deleteCity={deleteCity}
+          addTheme={addTheme}
+          deleteTheme={deleteTheme}
         />
         <PlannerList items={planners} country={country} city={city} themes={theme}/>
       </div>
