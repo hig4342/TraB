@@ -78,7 +78,14 @@ const NewPlannerList: React.SFC<Props> = ({ domestic, foreign, advertisements })
           })
         }
         <Col {...options} key='more' className='more-card-wrapper'>
-          <div className='more-card'><Link href='/planner/domestic'><a>MORE</a></Link></div>
+          <Link href='/planner/domestic'>
+            <Card
+              bordered={false}
+              className='more-card'
+            >
+              <div className='more-button'><span>MORE</span></div>
+            </Card>
+          </Link>
         </Col>
       </Row>
       <NoticeSwiper items={advertisements} inline/>
@@ -103,7 +110,7 @@ const NewPlannerList: React.SFC<Props> = ({ domestic, foreign, advertisements })
         </Col>
         {
           foreign.map((planner) => (
-            <Col {...options} key={planner.id}>
+            <Col {...options} key={planner.id} className='planner-card-wrapper'>
               <Link href={`/planner/${planner.id}`}>
                 <Card
                   hoverable
@@ -127,7 +134,7 @@ const NewPlannerList: React.SFC<Props> = ({ domestic, foreign, advertisements })
           ))
         }
         <Col {...options} key='more' className='more-card-wrapper'>
-          <div className='more-card'><Link href='/planner/foreign'><a>MORE</a></Link></div>
+          <Link href='/planner/foreign'><div className='more-card'><span>MORE</span></div></Link>
         </Col>
       </Row>
     </div>
