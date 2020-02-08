@@ -159,8 +159,10 @@
       display: flex;
       display: -webkit-box;
       overflow-x: auto;
-      overflow-y: hidden;
       white-space: nowrap;
+      -ms-flex-flow: row wrap;
+      flex-flow: row wrap;
+      -webkit-box-orient: horizontal;
       -ms-scroll-snap-type: x mandatory;
       scroll-snap-type: x mandatory;
       scroll-behavior: smooth;
@@ -191,7 +193,11 @@
         justify-content: center;
         -webkit-box-align: center;
         align-items: center;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
         flex-direction: column;
+        -ms-flex-flow: row wrap;
+        flex-flow: row wrap;
         .planner-card {
           flex-direction: column;
           position: relative;
