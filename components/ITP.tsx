@@ -33,7 +33,7 @@ const ITP: React.SFC<Props> = ({url}) => {
       <Row>
         <Col span={24}>
           <div><img src={image}/><span>{title}</span></div>
-          <div><a href={url}>{url}</a></div>
+          <div><a target='_blank' href={url}>{url}</a></div>
         </Col>
       </Row>
     </div>

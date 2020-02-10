@@ -47,9 +47,8 @@ const EditorWrapper: React.SFC<Props> = ({ hyperlink=false, handleContents, defa
           preview',
         toolbar3: 'explain',
         setup: function (editor) {
-          console.log(editor.ui.registry)
           editor.ui.registry.addButton('explain', {
-            text: '<div class="explain-wrapper">사진을 업로드 하려면 <img src="/image.svg"/> 버튼을 누르신 후 업로드 클릭 > 이미지 삽입 후 넓이를 600 이하로 맞춰주세요.</div>',
+            text: '<div class="explain-wrapper"><span>사진을 업로드 하려면 <img src="/image.svg"/> 버튼을 누르신 후 <strong>"업로드"</strong> 클릭 > 이미지 삽입 후 <strong>"넓이를 600"</strong> 이하로 맞춰주세요.</span></div>',
             onAction: function (_) {}
           });
         },

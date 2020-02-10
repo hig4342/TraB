@@ -88,10 +88,10 @@ auth.post('/signup', async ctx => {
   })
 
   const mailHTML = 
-      '<p>안녕하세요! TraB 입니다.</p>' +
-      '<p>이메일 인증을 하기 위해서</p>' +
-      '<p>아래의 링크를 클릭해주세요 !</p>' +
-      "<a href='https://trab.co.kr/api/auth/certify?email=" + email + "&token=" + token +"'>인증하기</a>"
+      '<p>여행계획표의 모든 것, 트래비(TraB) 입니다.</p>' +
+      '<p>요청 하신 이메일 인증이 처리되었습니다.</p>' +
+      '<p>아래 버튼을 클릭해서 다시 로그인 부탁드립니다.</p>' +
+      "<a href='https://trab.co.kr/api/auth/certify?email=" + email + "&token=" + token +"'>☞ 여기를 눌러주세요</a>"
 
   let mailOptions = {
     from: 'trab2019@naver.com',

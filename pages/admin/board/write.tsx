@@ -156,6 +156,8 @@ const AdminWrite: NextPage = ()=> {
            { bannerImage !== '' ? <img style={{width: '100%', height: 270}} src={bannerImage}/> : null }
           </Upload.Dragger>
         </Form.Item>
+        { !state ?
+          <>
         <Form.Item labelCol={{span: 24}} wrapperCol={{span: 24}} label='메인이미지'>
           <Upload.Dragger
             name='image'
@@ -166,6 +168,9 @@ const AdminWrite: NextPage = ()=> {
             { mainImage !== '' ? <img style={{width: '100%'}} src={mainImage}/> : null }
           </Upload.Dragger>
         </Form.Item>
+          </>
+          : null
+        }
         <Form.Item
           name='contents'
           rules={[{ required: true, message: '내용을 입력하세요!' },]}

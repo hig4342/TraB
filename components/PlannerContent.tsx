@@ -1,8 +1,9 @@
 import * as React from 'react'
 import ReactHtmlParser from 'react-html-parser'
-import { Descriptions } from 'antd'
+import { Descriptions, Tag } from 'antd'
 import { Planner, Theme } from 'type'
 import '@assets/PlannerContent.less'
+import Link from 'next/link'
 
 type Props = {
   planner: Planner;
@@ -20,7 +21,7 @@ const PlannerContent: React.SFC<Props> = ({planner, themes}) => {
         <Descriptions.Item label='필터'>
           {
             planner.themes_id.length !== 0 ? 
-            themes.filter(theme => planner.themes_id.includes(theme.id)).map(theme => <span style={{ marginRight: 5 }} key={theme.id}>{theme.name}</span>)
+            themes.filter(theme => planner.themes_id.includes(theme.id)).map(theme => <Tag key={theme.id}><Link href={`/planner/${planner.Country.id === 1 ? "domestic" : "foreign"}?theme_q=${theme.id}`}><a>#{theme.name}</a></Link></Tag>)
             : null
           }
         </Descriptions.Item>

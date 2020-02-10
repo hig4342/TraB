@@ -5,14 +5,28 @@
       border-collapse: separate;
       border-spacing: 25px;
       .ant-descriptions-item {
-        span {
+        .ant-descriptions-item-content {
           color: black;
           font-size: 23px;
+          .ant-tag {
+            font-size: 23px;
+          }
         }
         .ant-descriptions-item-label {
           color: gray;
+          font-size: 25px;
           &::after {
             margin-right: 20px;
+          }
+        }
+      }
+      @media (max-width: 575.98px) {
+        .ant-descriptions-item {
+          .ant-descriptions-item-content {
+            font-size: 16px;
+          }
+          .ant-descriptions-item-label {
+            font-size: 18px;
           }
         }
       }

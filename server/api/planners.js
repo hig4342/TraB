@@ -175,8 +175,6 @@ planners.get('/metadata', async ctx => {
   if( url ) {
     const html = await axios.get(url)
     const $ = cheerio.load(html.data)
-    console.log($("meta[property='og:image']").attr("content"))
-    console.log($("link[type='image/x-icon']").attr("href"))
     metadata = {
       title: $("meta[property='og:title']").attr("content"),
       image: $("meta[property='og:image']").attr("content")

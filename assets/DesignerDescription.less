@@ -24,9 +24,21 @@
   .self-introduction{
     margin-top: 1.5rem;
     .my-planner-list {
-      margin: 2rem auto;
-      display: -webkit-box;
-      overflow-x: scroll;
+      display: block;
+      position: relative;
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+      transform: translate3d(0,0,0);
+      transform: translate3d(0,0,0);
+      .planner-card-wrapper {
+        display: inline-block;
+        vertical-align: middle;
+      }
+      .more-card-wrapper {
+        display: inline-block;
+        vertical-align: middle;
+      }
       .ant-card-hoverable:hover {
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
       }

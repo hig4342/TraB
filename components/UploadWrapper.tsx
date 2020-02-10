@@ -92,10 +92,10 @@ const UploadImage: React.SFC<Props> = ({ defaultUrl, handleThumnail, direction='
                 <InboxOutlined />
               </p>
               <p className="ant-upload-text">사진을 업로드 해주세요.</p>
-              <p className="ant-upload-hint">
+              <div className="ant-upload-hint">
                 <div>클릭이나 드래그로 업로드 할 수 있습니다.</div>
-                 <div>{direction === 'horizontal' ? '가로' : '세로'}로 된 사진을 업로드 해주세요.</div>
-              </p>
+                <div>{direction === 'horizontal' ? '가로' : '세로'}로 된 사진을 업로드 해주세요.</div>
+              </div>
             </div>
             :
             <div className='rotation-wrapper-outer'>

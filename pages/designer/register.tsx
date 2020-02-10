@@ -83,7 +83,6 @@ const Designer_Register: NextPage = ()=> {
   }
 
   const handleAddress = (zonecode: string, fulladdress: string) => {
-    console.log(zonecode, fulladdress)
     form.setFieldsValue({
       address: {
         zonecode: zonecode,
@@ -118,7 +117,7 @@ const Designer_Register: NextPage = ()=> {
         }}
       >
       <div className='register-submmit'>
-      <Row justify='center' align='middle' gutter={[16, 16]}>
+      <Row justify='center' align='top' gutter={[16, 16]}>
           <Col md={8}>
             <div className='upload-image-wrapper'><UploadWrapper handleThumnail={handleThumnail} direction='vertical'/></div>
           </Col>
@@ -240,7 +239,7 @@ const Designer_Register: NextPage = ()=> {
               className='designer-profile'
               rules={[{ required: true, message: '자기소개를 입력하세요!' }]}
             >
-              <Input.TextArea autoSize={{minRows: 5}} placeholder='자기 소개를 최대 100자 이내로 작성 부탁드립니다 ' />
+              <Input.TextArea autoSize={{minRows: 5}} placeholder='자기 소개를 최대 100자 이내로 작성 부탁드립니다.' />
             </Form.Item>
           </Col>
         </Row>

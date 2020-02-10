@@ -22,13 +22,14 @@ type Props = {
   planners: Planner[];
   countries: Country[];
   themes: Theme[];
+  theme_q?: string | string[];
 }
 
-const Domestic_Planner: NextPage<Props> = ({ advertisements, planners, countries, themes })=> {
+const Domestic_Planner: NextPage<Props> = ({ advertisements, planners, countries, themes, theme_q })=> {
 
   const [country, setCountry] = React.useState(0)
   const [city, setCity] = React.useState<Array<CheckboxValueType>>([])
-  const [theme, setTheme] = React.useState<Array<CheckboxValueType>>([])
+  const [theme, setTheme] = React.useState<Array<CheckboxValueType>>(theme_q ? Array.isArray(theme_q) ? theme_q.map(item => Number(item)) : [Number(theme_q)] : [])
 
   const handleCountry = (e: RadioChangeEvent) => {
     setCountry(e.target.value)
@@ -88,18 +89,20 @@ const Domestic_Planner: NextPage<Props> = ({ advertisements, planners, countries
   )
 }
 
-Domestic_Planner.getInitialProps = async () => {
+Domestic_Planner.getInitialProps = async (ctx) => {
   const advertisements = await axios.get(baseUrl + '/api/boards/advertisements?region=2')
   const planner = await axios.get(baseUrl + '/api/planners/domestic')
   const country = await axios.get(baseUrl + '/api/countries')
   const city = await axios.get(baseUrl + '/api/cities')
   const theme = await axios.get(baseUrl + '/api/themes')
+  const { theme_q } = ctx.query
   return {
     advertisements: advertisements.data,
     planners: planner.data,
     countries: country.data,
     cities: city.data,
     themes: theme.data,
+    theme_q: theme_q
   }
 }
 

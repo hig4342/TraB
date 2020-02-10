@@ -22,7 +22,7 @@ const AdminRegion: NextPage<Props> = ({theme})=> {
       name: data.name
     }).then( result => {
       console.log(result)
-      Router.push('/admin/region')
+      Router.push('/admin/theme')
     })
   }
   return (
