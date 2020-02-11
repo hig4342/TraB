@@ -10,6 +10,7 @@ import useUser from '@hooks/useUser'
 import { UploadFile } from 'antd/lib/upload/interface'
 import { Callbacks } from 'rc-field-form/lib/interface';
 import '@assets/Designer_Register.less'
+import { ColProps } from 'antd/lib/col'
 
 
 const baseUrl = process.env.NODE_ENV === 'production' ? 'https://trab.co.kr' : ''
@@ -20,8 +21,15 @@ const Designer_Register: NextPage = ()=> {
   const [form] = Form.useForm();
   const [visible, setVisible] = React.useState(false);
   const [image, setImage] = React.useState('')
-  const itemLayout = {
-    labelCol: { span: 3 }
+  const itemLayout: { labelCol: ColProps; wrapperCol: ColProps } = {
+    labelCol: {
+      xs: 24,
+      sm: 3
+    },
+    wrapperCol: {
+      xs: 24,
+      sm: 19
+    }
   }
 
   React.useEffect(() => {
@@ -176,7 +184,7 @@ const Designer_Register: NextPage = ()=> {
                 disabledDate={disabledDate}
               />
             </Form.Item>
-            <Form.Item {...itemLayout} wrapperCol={{span: 16}} label='주소'>
+            <Form.Item {...itemLayout} label='주소'>
               <Input.Group>
                 <Form.Item
                   name={['address', 'zonecode']}
@@ -231,10 +239,9 @@ const Designer_Register: NextPage = ()=> {
             >
               <Input placeholder='계좌번호'/>
             </Form.Item>
-          </Col>
-          <Col span={24}>
             <Form.Item
               {...itemLayout}
+              label='자기소개'
               name='profile'
               className='designer-profile'
               rules={[{ required: true, message: '자기소개를 입력하세요!' }]}

@@ -39,6 +39,7 @@ const BoardPage: NextPage<Props> = ({ advertisements, posts })=> {
     dataIndex: 'title',
     key: 'title',
     align: 'center',
+    ellipsis: true,
   }, {
     title: '작성자',
     dataIndex: 'User',

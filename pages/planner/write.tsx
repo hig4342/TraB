@@ -136,6 +136,14 @@ const PlannerWrite: NextPage = ()=> {
           <Input placeholder='도시를 입력하세요'/>
         </Form.Item>
         <Form.Item
+          label='테마'
+          name='theme_id'
+          required={false}
+          wrapperCol={{span: 24}}
+        >
+
+        </Form.Item>
+        <Form.Item
           label='대표 사진'
           name='thumbnail'
           className='thumbnail-wrapper'

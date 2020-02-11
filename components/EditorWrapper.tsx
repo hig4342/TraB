@@ -29,6 +29,7 @@ const EditorWrapper: React.SFC<Props> = ({ hyperlink=false, handleContents, defa
       value={content}
       onEditorChange={handleEditorChange}
       init={{
+        selector: 'textarea',
         menubar: false,
         min_height: 500,
         plugins: [
@@ -62,11 +63,14 @@ const EditorWrapper: React.SFC<Props> = ({ hyperlink=false, handleContents, defa
           toolbar2: 'image media',
           min_height: 300,
         },
+        body_class: 'editor-body',
+        content_css: '/tinymce/css/layout.css',
         statusbar: false,
         toolbar_drawer: false,
         language: 'ko_KR',
         language_url: '/tinymce/langs/ko_KR.js',
         //images_upload_url: baseUrl+'/api/file/upload',
+        imagetools_toolbar: "imageoptions",
         images_upload_handler: (blobInfo, success, failure) => {
           var xhr = new XMLHttpRequest();
           xhr.withCredentials = true;

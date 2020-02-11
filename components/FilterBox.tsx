@@ -138,7 +138,7 @@ const FilterBox: React.SFC<Props> = ({ nation='domestic', items, themes, country
         footer={<div className='mobile-filter-footer'><Button type='primary' icon={<SearchOutlined />} block onClick={onThemeHide}>검색</Button></div>}
       >
         <Row align='middle' justify='center' gutter={16}>
-          <Col span={12} className='mobile-search-wrapper'>
+          <Col span={18} className='mobile-search-wrapper'>
           {
             optionsThemes.map(theme => (
               <div key={Number(theme.value)} className='mobile-search'><FilterButton value={Number(theme.value)} add={addTheme} remove={deleteTheme} text={String(theme.label)}/></div>

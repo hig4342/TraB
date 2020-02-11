@@ -11,7 +11,7 @@ type Props = {
 const CountrySelector: React.SFC<Props> = ({ value, onChange })=> {
   return (
     <div className='country-selector'>
-      <Radio.Group buttonStyle='solid' value={value} onChange={onChange} size='large'>
+      <Radio.Group buttonStyle='solid' value={value} onChange={onChange}>
         <Radio.Button value='all'>모든 여행지</Radio.Button>
         <Radio.Button value='domestic'>국내 여행지</Radio.Button>
         <Radio.Button value='foreign'>해외 여행지</Radio.Button>

@@ -17,7 +17,7 @@ const { Header, Footer, Content } = Layout;
 
 const AppLayout: React.SFC = ({children}) => {
   
-  const { onLogin } = useUser()
+  const { isLogin, onLogin } = useUser()
   const [loading, setLoading] = React.useState(false)
   const [toolbarClass, setToolbarClass] = React.useState('toolbar-wrapper')
 
@@ -69,7 +69,16 @@ const AppLayout: React.SFC = ({children}) => {
           <Divider/>
           <Link href='/planner/foreign'><div><img src="/foreign.png" width='60' height='60'/>외쿡</div></Link>
           <Divider/>
-          <PopupWrapper signin email enroll pending callback='/planner/write'><div><img style={{padding: 10}}src="/selling.png" width='60' height='60'/>판매</div></PopupWrapper>
+          <div><PopupWrapper signin email enroll pending callback='/planner/write'><img style={{padding: 10}} src="/selling.png" width='60' height='60'/>판매</PopupWrapper></div>
+          {
+            isLogin ?
+            <>
+            <Divider/>
+            <Link href='/auth/mypage'><div><img style={{padding: 10}} src="/defaultprofile.png" width='60' height='60'/>정보</div></Link>
+            </>
+            :
+            null
+          }
         </div>
       </div>
       <BackTop />
