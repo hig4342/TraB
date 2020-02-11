@@ -25,10 +25,11 @@ type Props = {
 
 const FilterBox: React.SFC<Props> = ({ nation='domestic', items, themes, country, handleCountry, city, handleCity, theme, handleTheme, addCity, deleteCity, addTheme, deleteTheme }) => {
 
-  const [visible, setVisible] = React.useState(false)
+  const [countryVisible, setCountryVisible] = React.useState(false)
+  const [cityVisible, setCityVisible] = React.useState(false)
   const [themeVisible, setThemeVisible] = React.useState(false)
 
-  if (nation == 'domestic') {
+  if (nation === 'domestic') {
     country = 1
   } else {
     items = items.filter(item => item.id !== 1)
@@ -58,12 +59,20 @@ const FilterBox: React.SFC<Props> = ({ nation='domestic', items, themes, country
     value: item.id,
   }))
 
-  const onShow = () => {
-    setVisible(true)
+  const onCountryShow = () => {
+    setCountryVisible(true)
   }
 
-  const onHide = () => {
-    setVisible(false)
+  const onCountryHide = () => {
+    setCountryVisible(false)
+  }
+
+  const onCityShow = () => {
+    setCityVisible(true)
+  }
+
+  const onCityHide = () => {
+    setCityVisible(false)
   }
 
   const onThemeShow = () => {
@@ -76,18 +85,30 @@ const FilterBox: React.SFC<Props> = ({ nation='domestic', items, themes, country
 
   return (
     <div className='filter-box-wrapper'>
-      <div className='mobile-search-box'>
-        <Button onClick={onShow}>어디로 떠나고 싶으세요?</Button>
-      </div>
+      <Row justify='start' className='mobile-filter-box-wrapper'>
+        {
+          nation === 'foreign' ?
+          <Col span={8} className='mobile-search-box ant-col-order-1'>
+            <Button onClick={onCountryShow}>나라</Button>
+          </Col>
+          : null
+        }
+        <Col span={8} order={2} className='mobile-search-box'>
+          <Button onClick={onThemeShow}>계획표 테마</Button>
+        </Col>
+        <Col span={8} style={{ display: country !== 0 ? 'block' : 'none'}} className={ nation === 'domestic' ? 'mobile-search-box ant-col-order-1' : 'mobile-search-box ant-col-order-3'}>
+          <Button onClick={onCityShow}>지역</Button>
+        </Col>
+      </Row>
       <Modal
         title='어디로 떠나고 싶으세요?'
-        visible={visible}
-        onOk={onHide}
-        onCancel={onHide}
-        footer={<div className='mobile-filter-footer'><Button type='primary' icon={<SearchOutlined />} block onClick={onHide}>검색</Button></div>}
+        visible={countryVisible}
+        onOk={onCountryHide}
+        onCancel={onCountryHide}
+        footer={<div className='mobile-filter-footer'><Button type='primary' icon={<SearchOutlined />} block onClick={onCountryHide}>검색</Button></div>}
       >
         <Row align='middle' justify='center' gutter={16}>
-          <Col span={12} className='mobile-search-wrapper' style={{ display: nation === 'foreign' ? 'block' : 'none'}}>
+          <Col span={12} className='mobile-search-wrapper'>
           <Radio.Group value={country} onChange={handleCountry} buttonStyle='solid'>
           {
             optionsCountries.map(country => (
@@ -96,6 +117,16 @@ const FilterBox: React.SFC<Props> = ({ nation='domestic', items, themes, country
           }
           </Radio.Group>
           </Col>
+        </Row>
+      </Modal>
+      <Modal
+        title='어디로 떠나고 싶으세요?'
+        visible={cityVisible}
+        onOk={onCityHide}
+        onCancel={onCityHide}
+        footer={<div className='mobile-filter-footer'><Button type='primary' icon={<SearchOutlined />} block onClick={onCityHide}>검색</Button></div>}
+      >
+        <Row align='middle' justify='center' gutter={16}>
           <Col span={12} className='mobile-search-wrapper'>
           {
             optionsCities.map(city => (
@@ -105,6 +136,23 @@ const FilterBox: React.SFC<Props> = ({ nation='domestic', items, themes, country
           </Col>
         </Row>
       </Modal>
+      <Modal
+        title='어떤 종류의 계획표가 좋으세요?'
+        visible={themeVisible}
+        onOk={onThemeHide}
+        onCancel={onThemeHide}
+        footer={<div className='mobile-filter-footer'><Button type='primary' icon={<SearchOutlined />} block onClick={onThemeHide}>검색</Button></div>}
+      >
+        <Row align='middle' justify='center' gutter={16}>
+          <Col span={18} className='mobile-search-wrapper'>
+          {
+            optionsThemes.map(theme => (
+              <div key={Number(theme.value)} className='mobile-search'><FilterButton value={Number(theme.value)} add={addTheme} remove={deleteTheme} text={String(theme.label)}/></div>
+            ))
+          }
+          </Col>
+        </Row>
+      </Modal>      
       <div className='filter-box'>
         <div className='filter-item' style={{ display: nation === 'foreign' ? 'block' : 'none'}}>
           <Row>
@@ -127,26 +175,6 @@ const FilterBox: React.SFC<Props> = ({ nation='domestic', items, themes, country
           </Row>
         </div>
       </div>
-      <div className='mobile-search-box'>
-        <Button onClick={onThemeShow}>어떤 종류의 계획표가 좋으세요?</Button>
-      </div>
-      <Modal
-        title='어떤 종류의 계획표가 좋으세요?'
-        visible={themeVisible}
-        onOk={onThemeHide}
-        onCancel={onThemeHide}
-        footer={<div className='mobile-filter-footer'><Button type='primary' icon={<SearchOutlined />} block onClick={onThemeHide}>검색</Button></div>}
-      >
-        <Row align='middle' justify='center' gutter={16}>
-          <Col span={18} className='mobile-search-wrapper'>
-          {
-            optionsThemes.map(theme => (
-              <div key={Number(theme.value)} className='mobile-search'><FilterButton value={Number(theme.value)} add={addTheme} remove={deleteTheme} text={String(theme.label)}/></div>
-            ))
-          }
-          </Col>
-        </Row>
-      </Modal>
       <div className='theme-box filter-item'>
         <Row>
           <Col xs={24}>

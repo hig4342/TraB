@@ -10,8 +10,9 @@ import UploadWrapper from '@components/UploadWrapper'
 import MypagePlanner from '@components/MypagePlanner'
 import useUser from '@hooks/useUser'
 import { User } from '@reducers/userReducer'
-import '@assets/Mypage.less'
 import { UploadFile } from 'antd/lib/upload/interface'
+import { ColProps } from 'antd/lib/col'
+import '@assets/Mypage.less'
 
 const MyPage: NextPage = ()=> {
 
@@ -126,7 +127,6 @@ const MyPage: NextPage = ()=> {
   }
 
   const handleAddress = (zonecode: string, fulladdress: string) => {
-    console.log(zonecode, fulladdress)
     form.setFieldsValue({
       address: {
         zonecode: zonecode,
@@ -139,8 +139,15 @@ const MyPage: NextPage = ()=> {
     console.log('Failed:', errorInfo);
   };
 
-  const itemLayout = {
-    labelCol: { span: 2 }
+  const itemLayout: { labelCol: ColProps; wrapperCol: ColProps } = {
+    labelCol: {
+      xs: 24,
+      sm: 3
+    },
+    wrapperCol: {
+      xs: 24,
+      sm: 19
+    }
   }
 
   const handleThumnail = (fileList: UploadFile<any>[]) => {
@@ -153,32 +160,30 @@ const MyPage: NextPage = ()=> {
     <div className='mypage-wrapper' style={{width: '100%'}}>
     { isLogin ?
       <div className='mypage' style={{width: '100%'}}>
-        <Row justify='center' align='middle' gutter={[16, 16]}>
-          <Form
-            form={form}
-            name='user-description'
-            onFinish={changeInformation}
-            onFinishFailed={onFinishFailed}
-            layout='inline'
-            style={{width: '100%'}}
-            initialValues={{
-              name: user.name,
-              nickname: user.nickname,
-              phone: user.phone,
-              sex: String(user.sex),
-              birth: moment(user.birth),
-              address: {
-                zonecode: user.address_zonecode,
-                fulladdress: user.address_fulladdress,
-                detailaddress: user.address_detailaddress
-              },
-              account_bank: user.account_bank,
-              account_num: user.account_num,
-              profile_image: user.profile_image,
-              profile: user.profile
-            }}
-          >
-            <Col md={8}>
+        <Form
+          form={form}
+          name='user-description'
+          onFinish={changeInformation}
+          onFinishFailed={onFinishFailed}
+          initialValues={{
+            name: user.name,
+            nickname: user.nickname,
+            phone: user.phone,
+            sex: String(user.sex),
+            birth: moment(user.birth),
+            address: {
+              zonecode: user.address_zonecode,
+              fulladdress: user.address_fulladdress,
+              detailaddress: user.address_detailaddress
+            },
+            account_bank: user.account_bank,
+            account_num: user.account_num,
+            profile_image: user.profile_image,
+            profile: user.profile
+          }}
+        >
+          <Row justify='center' align='top' gutter={[16, 16]}>
+            <Col xs={24} md={8}>
               <Form.Item
                 name='profile_image'
               >
@@ -187,7 +192,7 @@ const MyPage: NextPage = ()=> {
                 </div>
               </Form.Item>
             </Col>
-            <Col md={16}>
+            <Col xs={24} md={16}>
               <Form.Item {...itemLayout} label='이메일'>
                 <Input disabled value={user.email}/>
               </Form.Item>
@@ -243,7 +248,7 @@ const MyPage: NextPage = ()=> {
                   disabledDate={disabledDate}
                 />
               </Form.Item>
-              <Form.Item {...itemLayout} wrapperCol={{span: 16}} label='주소'>
+              <Form.Item {...itemLayout} label='주소'>
                 <Input.Group>
                   <Form.Item
                     name={['address', 'zonecode']}
@@ -321,8 +326,8 @@ const MyPage: NextPage = ()=> {
                 <Button onClick={cancelChangeable}>취소</Button>
               </Form.Item>
             </Col>
-          </Form>
-        </Row>
+          </Row>
+        </Form>
         { user.state_id >= 4 ? <MypagePlanner planners={planners}/> : 
           <div className='experience'>
             <h1 className='small-title'>설계자로 등록하고 본인만의 계획표를 판매해보세요</h1>

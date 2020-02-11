@@ -15,10 +15,18 @@
   .mobile-search-box {
     display: none;
     text-align: center;
-    margin: 1rem auto;
+  }
+  .invisible-mobile-search-box {
+    display: none;
+  }
+  .mobile-filter-box-wrapper {
+    display: none;
   }
   
   @media (max-width: 575.98px) {
+    .mobile-filter-box-wrapper {
+      display: flex;
+    }
     .mobile-search-box {
       display: block;
     }

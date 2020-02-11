@@ -1,36 +1,80 @@
 .planner {
   .planner-information {
     margin-bottom: 5rem;
-    table {
-      border-collapse: separate;
-      border-spacing: 25px;
-      .ant-descriptions-item {
-        .ant-descriptions-item-content {
-          color: black;
-          font-size: 23px;
-          .ant-tag {
-            font-size: 23px;
-          }
-        }
+    .ant-descriptions-view {
+      border: none;
+    }
+    .ant-descriptions-row {
+      &:first-child {
         .ant-descriptions-item-label {
-          color: gray;
           font-size: 25px;
-          &::after {
-            margin-right: 20px;
+        }
+        .ant-descriptions-item-content {
+          font-size: 23px;
+        }
+      }
+      &:not(:first-child) {
+        .ant-descriptions-item-label {
+          font-size: 21px;
+        }
+        .ant-descriptions-item-content {
+          font-size: 18px;
+          .ant-tag {
+            font-size: 18px;
           }
         }
       }
+    }
+    .ant-descriptions-item-label {
+      background-color: white;
+      border-right: none;
+      color: gray;
+      width: 80px;
+      padding: 0;
+    }
+    .ant-descriptions-item-content {
+      border-right: none;
+      padding: 0;
+      color: black;
+      a {
+        display: inline-block;
+        color: #18bbff;
+        margin-right: 15px;
+      }
+    }
+    table {
+      border-collapse: separate;
       @media (max-width: 575.98px) {
-        .ant-descriptions-item {
-          .ant-descriptions-item-content {
-            font-size: 16px;
-            .ant-tag {
+        .ant-descriptions-row {
+          &:first-child {
+            .ant-descriptions-item-label {
               font-size: 16px;
             }
+            .ant-descriptions-item-content {
+              font-size: 14px;
+            }
           }
-          .ant-descriptions-item-label {
-            font-size: 18px;
+          &:not(:first-child) {
+            .ant-descriptions-item-label {
+              font-size: 14px;
+            }
+            .ant-descriptions-item-content {
+              font-size: 12px;
+              .ant-tag {
+                font-size: 12px;
+              }
+            }
           }
+        }
+      }
+    }
+    @media (max-width: 575.98px) {
+      .ant-descriptions-item-label {
+        width: 60px;
+      }
+      table {
+        .ant-descriptions-row > th, .ant-descriptions-row > td {
+          padding: 4px;
         }
       }
     }

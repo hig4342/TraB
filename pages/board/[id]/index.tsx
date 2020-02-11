@@ -22,6 +22,7 @@ const Post: NextPage<Props> = ({post})=> {
         <Descriptions.Item className='user-wrapper'>
           <Avatar src={post.User.profile_image ? post.User.profile_image : '/defaultprofile.png'} /><span>{post.User.nickname}</span><span>{post.User.email}</span>
         </Descriptions.Item>
+        {post.board_state === 1 ? <Descriptions.Item className='content-wrapper' span={2}><div><img src={post.main_image}/></div></Descriptions.Item> : null }
         <Descriptions.Item className='content-wrapper' span={2}><div className='post-content'>{ ReactHtmlParser(post.content)}</div></Descriptions.Item>
       </Descriptions>
       <BoardCommentList board_id={post.id} comments={post.BoardReplies}/>

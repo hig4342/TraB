@@ -73,7 +73,7 @@ const UploadImage: React.SFC<Props> = ({ defaultUrl, handleThumnail, direction='
         fileList={fileList}
         multiple={false}
         disabled={disabled}
-        className='upload-wrapper'
+        className={'upload-wrapper' + ' upload-wrapper-'+direction }
         action={baseUrl+'/api/file/upload'}
         onChange={handleChange}
         //beforeUpload={beforeUpload}

@@ -2,19 +2,30 @@ import * as React from 'react'
 import { Planner } from 'type'
 import { Row, Col, Card, Rate } from 'antd'
 import Link from 'next/link'
-import '@assets/MypagePlanner.less'
 import ITP from './ITP'
+import { ColProps } from 'antd/lib/col'
+import '@assets/MypagePlanner.less'
 
 type Props = {
   planners: Planner[]
 }
 const MypagePlanner: React.SFC<Props> = ({planners})=> {
+
+  const options: ColProps = {
+    className: "planner-col",
+    xs: { span: 10 },
+    sm: { span: 12 },
+    md: { span: 8 },
+    lg: { span: 7 },
+    xl: { span: 6 },
+  }
+
   return (
     <div className='mypage-planner'>
       <h1 className='small-title'>설계한 계획표 목록</h1>
       <Row justify='start' align="top" className='planner-list' gutter={[16, 16]}>
           {planners.map(planner => (
-            <Col key={planner.id} xs={8} md={6}>
+            <Col key={planner.id} {...options} className='planner-card-wrapper'>
               <Link href={`/planner/${planner.id}`}>
                 <Card
                   hoverable

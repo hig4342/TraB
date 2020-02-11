@@ -126,10 +126,16 @@ const Designer_Register: NextPage = ()=> {
       >
       <div className='register-submmit'>
       <Row justify='center' align='top' gutter={[16, 16]}>
-          <Col md={8}>
-            <div className='upload-image-wrapper'><UploadWrapper handleThumnail={handleThumnail} direction='vertical'/></div>
+          <Col xs={24} md={8}>
+            <Form.Item
+              name='profile_image'
+            >
+              <div className='upload-image-wrapper'>
+                <UploadWrapper handleThumnail={handleThumnail} direction='vertical'/>
+              </div>
+            </Form.Item>
           </Col>
-          <Col md={16}>
+          <Col xs={24} md={16}>
             <Form.Item {...itemLayout} name='email' label='이메일'>
               <Input disabled/>
             </Form.Item>

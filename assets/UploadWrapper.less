@@ -1,6 +1,17 @@
 .upload-wrapper {
   display: block;
   text-align: center;
+  &.upload-wrapper-horizontal {
+    height: 300px;
+  }
+  &.upload-wrapper-vertical {
+    height: 400px;
+  }
+  @media (max-width: 575.98px) {
+    &.upload-wrapper-horizontal {
+      height: 200px;
+    }
+  }
   .upload-icon {
     margin-top: 10px;
     svg {
