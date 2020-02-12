@@ -7,17 +7,18 @@ import { Favorite } from 'type'
 type Props = {
   favorites: Favorite[]
   plannerId: number
+  handlePlanners?: () => void
 }
 
 const baseUrl = process.env.NODE_ENV === 'production' ? 'https://trab.co.kr' : ''
 
-const FavoriteButton: React.SFC<Props> = ({favorites, plannerId}) => {
+const FavoriteButton: React.SFC<Props> = ({favorites, plannerId, handlePlanners}) => {
 
   const { user } = useUser()
   const [filled, setFilled] = React.useState(false)
   const [favorited, setFavorited] = React.useState(favorites.findIndex(favorite => favorite.UserId === user.id && favorite.favorite) !== -1)
   const favoriteCSS: React.CSSProperties = {
-    color: favorited ? 'rgba(256, 0, 0, 0.50)' : 'rgba(0, 0, 0, 0.70)'
+    color: favorited ? 'rgba(256, 0, 0, 0.5)' : 'rgba(0, 0, 0, 0.7)'
   }
   const handleFill = () => {
     setFilled(true)
@@ -33,12 +34,18 @@ const FavoriteButton: React.SFC<Props> = ({favorites, plannerId}) => {
       axios.patch(baseUrl + `/api/planners/favorite/${plannerId}`, {
         UserId: user.id,
         favorite: false
-      }).then(() => setFavorited(false))
+      }).then(() => {
+        setFavorited(false)
+        if( handlePlanners ) handlePlanners()
+      })
     } else {
       axios.patch(baseUrl + `/api/planners/favorite/${plannerId}`, {
         UserId: user.id,
         favorite: true
-      }).then(() => setFavorited(true))
+      }).then(() => {
+        setFavorited(true)
+        if( handlePlanners ) handlePlanners()
+      })
     }
   }
 

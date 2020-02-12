@@ -6,7 +6,7 @@ import Navbar from '@components/Navbar'
 import jwtDecode from 'jwt-decode'
 import useUser from '@hooks/useUser'
 import { User } from '@reducers/userReducer'
-import { LoadingOutlined } from '@ant-design/icons';
+import { LoadingOutlined, HeartTwoTone } from '@ant-design/icons';
 import Popup from '@components/Popup'
 import PopupWrapper from './PopupWrapper'
 import Foot from './Foot'
@@ -17,7 +17,7 @@ const { Header, Footer, Content } = Layout;
 
 const AppLayout: React.SFC = ({children}) => {
   
-  const { isLogin, onLogin } = useUser()
+  const { onLogin } = useUser()
   const [loading, setLoading] = React.useState(false)
   const [toolbarClass, setToolbarClass] = React.useState('toolbar-wrapper')
 
@@ -70,15 +70,8 @@ const AppLayout: React.SFC = ({children}) => {
           <Link href='/planner/foreign'><div><img src="/foreign.png" width='60' height='60'/>외쿡</div></Link>
           <Divider/>
           <div><PopupWrapper signin email enroll pending callback='/planner/write'><img style={{padding: 10}} src="/selling.png" width='60' height='60'/>판매</PopupWrapper></div>
-          {
-            isLogin ?
-            <>
-            <Divider/>
-            <Link href='/auth/mypage'><div><img style={{padding: 10}} src="/defaultprofile.png" width='60' height='60'/>정보</div></Link>
-            </>
-            :
-            null
-          }
+          <Divider/>
+          <div className='favorite-toolbar'><PopupWrapper signin callback='/auth/myfavorite'><HeartTwoTone twoToneColor='rgba(256, 0, 0, 0.5)' />찜목록</PopupWrapper></div>
         </div>
       </div>
       <BackTop />

@@ -100,7 +100,7 @@ export type Favorite = {
   PlannerId: number;
   UserId: number;
   favorite: boolean;
-  Planners: Planner[];
+  Planner: Planner;
 }
 
 export type Count = {

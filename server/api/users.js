@@ -114,22 +114,23 @@ users.get('/:id/planners', async ctx => {
 users.get('/:id/favorite', async ctx => {
   const { id } = ctx.params
   
-  const result = await Models.Favorite.findOne({
+  const result = await Models.Favorite.findAll({
     where: [{ UserId: id, favorite: true }],
     include: [{
-      model: Models.Favorite,
+      model: Models.Planner,
       include: [{
-        model: Models.Planner,
-        include: [{
-          model: Models.City
-        }, {
-          model: Models.Country
-        }, {
-          model: Models.Reply
-        }, { 
-          model: Models.User,
-          attributes: ['email', 'nickname']
-        }]
+        model: Models.City
+      }, {
+        model: Models.Country
+      }, {
+        model: Models.Reply
+      }, { 
+        model: Models.User,
+        attributes: ['email', 'nickname']
+      }, {
+        model: Models.Favorite
+      }, {
+        model: Models.Rate
       }]
     }]
   })
