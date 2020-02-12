@@ -1,5 +1,6 @@
 export type Board = {
   id: number;
+  UserId: number;
   title: string;
   content: string;
   board_state: number;
@@ -11,6 +12,7 @@ export type Board = {
   visible: boolean;
   hit: number;
   BoardReplies: BoardReply[];
+  createdAt: Date;
   User: User;
 }
 

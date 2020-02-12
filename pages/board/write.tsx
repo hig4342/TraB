@@ -20,14 +20,12 @@ const Write: NextPage = ()=> {
   const { user } = useUser()
 
   const onFinish: Callbacks['onFinish'] = (values) => {
-    console.log(values);
-    const form = {
+    const data = {
       title: values.title,
       content: values.content,
       UserId: user.id,
     }
-    axios.post(baseUrl+'/api/boards', form).then( result => {
-      console.log(result)
+    axios.post(baseUrl+'/api/boards', data).then( () => {
       Router.push('/board')
     })
   };
@@ -60,8 +58,8 @@ const Write: NextPage = ()=> {
           name='title'
           required={false}
           rules={[{ required: true, message: '제목을 입력하세요!' },]}
-          labelCol={{xs: 2, sm: 1}}
-          wrapperCol={{xs: 22, sm: 23}}
+          labelCol={{xs: 24, sm: 1}}
+          wrapperCol={{xs: 24, sm: 23}}
         >
           <Input />
         </Form.Item>

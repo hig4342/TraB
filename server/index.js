@@ -122,6 +122,27 @@ app.prepare().then(() => {
     }
   })
 
+  router.get('/board/:id/edit', async ctx => {
+    const { id } = ctx.params
+    const { user } = ctx.state
+    if( !ctx.isAuthenticated() ) {
+      ctx.redirect('back')
+      return
+    }
+
+    const query = await Models.Board.findOne({
+      where: { id: id, UserId: user.id }
+    })
+
+    if( query !== null && user.id === query.id) {
+      await app.render(ctx.req, ctx.res, ctx.request.url, ctx.query)
+    } else {
+      ctx.redirect('back')
+      return
+    }
+    
+  })
+
   router.get('/admin', async ctx => {
     const { user } = ctx.state
     if(user && user.state_id === 9999) {

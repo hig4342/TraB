@@ -82,6 +82,29 @@ boards.get('/:id', async ctx => {
   ctx.body = result
 })
 
+boards.put('/:id', async ctx => {
+  const { id } = ctx.params
+  const { title, content } = ctx.request.body
+  const result = await Models.Board.update({
+    title: title,
+    content: content,
+  }, {
+    where: {id: id}
+  })
+
+  ctx.body = result
+})
+
+boards.delete('/:id', async ctx => {
+  const { id } = ctx.params
+
+  const result = await Models.Board.destroy({
+    where: { id: id }
+  })
+
+  ctx.body = result
+})
+
 boards.post('/reply', async ctx => {
   const { BoardId, UserId, content } = ctx.request.body
 

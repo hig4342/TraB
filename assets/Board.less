@@ -1,20 +1,41 @@
 .board {
-  .ant-table thead > tr > th {
-    background-color: rgb(230, 230, 230);
-  }
-  .board-table-row {
+  .board-item-wrapper {
     cursor: pointer;
-  }
-  .ant-table.ant-table-bordered .ant-table-footer {
-    border: none;
-  }
-  .ant-table-footer {
-    background: white;
-    text-align: right;
-  }
-  @media (max-width: 575.98px) {
-    .ant-table-cell {
-      padding: 12px;
+    padding: 8px 0;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.05);
     }
+    .board-item {
+      width: 100%;
+      .board-item-id {
+        text-align: center;
+      }
+      .board-item-title {
+        font-size: 20px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+      .board-item-description {
+        font-size: 12px;
+        span {
+          margin-right: 5px;
+        }
+      }
+      .board-item-edit {
+        text-align: center;
+        button {
+          margin: 3px;
+        }
+        @media (max-width: 575.98px) {
+          button {
+            margin: 1px;
+          }
+        }
+      }
+    }
+  }
+  .ant-list-footer {
+    text-align: right;
   }
 }

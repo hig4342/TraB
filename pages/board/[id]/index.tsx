@@ -3,9 +3,9 @@ import axios from 'axios'
 import { NextPage } from 'next'
 import { Board } from 'type'
 import ReactHtmlParser from 'react-html-parser'
-import '@assets/BoardItem.less'
 import { Descriptions, Avatar } from 'antd'
 import BoardCommentList from '@components/BoardCommentList'
+import '@assets/BoardItem.less'
 
 const baseUrl = process.env.NODE_ENV === 'production' ? 'https://trab.co.kr' : ''
 
