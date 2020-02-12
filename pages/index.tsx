@@ -43,22 +43,22 @@ const IndexPage: NextPage<Props> = ({notices, advertisements, planners, users, n
     if ( auth === 'success' ) {
       handleContents('success')
       onVisible()
-      Router.push('/')
+      Router.replace('/')
     }
     if ( auth === 'signup' ) {
       handleContents('signup')
       onVisible()
-      Router.push('/')
+      Router.replace('/')
     }
     if ( auth === 'register' ) {
       handleContents('register')
       onVisible()
-      Router.push('/')
+      Router.replace('/')
     }
     if ( process === 'complete' ) {
       handleContents('complete')
       onVisible()
-      Router.push('/')
+      Router.replace('/')
     }
     axios.get(baseUrl + '/api/auth/update').then( result => {
       const usertoken = result.data
