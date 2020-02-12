@@ -16,6 +16,8 @@ planners.get('/', async ctx => {
     }, { 
       model: Models.User,
       attributes: { exclude: ['password', 'salt'] },
+    }, {
+      model: Models.Rate
     }]
   })
 
@@ -50,8 +52,12 @@ planners.get('/:id', async ctx => {
           model: Models.Country
         }, {
           model: Models.Reply
+        }, {
+          model: Models.Rate
         }]
       }]
+    }, {
+      model: Models.Rate
     }]
   })
 

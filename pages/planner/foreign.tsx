@@ -65,7 +65,7 @@ const Foreign_Planner: NextPage<Props> = ({ advertisements, planners, countries,
 
   return (
     <div className='planner_list' style={{width: '100%'}}>
-      <Banner region='foreign' />
+      <Banner type='foreign' />
       <NoticeSwiper items={advertisements} inline rounded/>
       <div className='new-planner'>
         <FilterBox

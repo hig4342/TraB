@@ -1,12 +1,19 @@
 import * as React from 'react'
 import axios from 'axios'
 import { NextPage } from 'next'
-import { Planner, Favorite } from 'type'
+import { Planner, Favorite, Board } from 'type'
 import MyFavoritePlanner from '@components/MyFavoritePlanner'
+import NoticeSwiper from '@components/NoticeSwiper'
+import Banner from '@components/Banner'
 import useUser from '@hooks/useUser'
 import '@assets/Mypage.less'
 
-const MyFavorite: NextPage = ()=> {
+const baseUrl = process.env.NODE_ENV === 'production' ? 'https://trab.co.kr' : ''
+
+type Props = {
+  advertisements: Board[]
+}
+const MyFavorite: NextPage<Props> = ({advertisements})=> {
 
   const { user, isLogin } = useUser()
   const [planners, setPlanners] = React.useState<Planner[]>([])
@@ -26,9 +33,10 @@ const MyFavorite: NextPage = ()=> {
 
   return (
     <div className='mypage-wrapper' style={{width: '100%'}}>
-    <h1 style={{margin: '2rem 0'}} className='small-title'>찜한 계획표 목록</h1>
+      <Banner type='favorite'/>
+      <NoticeSwiper items={advertisements} inline rounded/>
     { isLogin ?
-      <div className='mypage' style={{width: '100%'}}>
+      <div className='mypage' style={{width: '100%', marginTop: '2rem'}}>
         <MyFavoritePlanner planners={planners} handlePlanners={handlePlanners}/>
       </div>
       : null
@@ -38,8 +46,10 @@ const MyFavorite: NextPage = ()=> {
 }
 
 MyFavorite.getInitialProps = async () => {
+  const advertisements = await axios.get(baseUrl + '/api/boards/advertisements')
+
   return {
-    
+    advertisements: advertisements.data,
   }
 }
 

@@ -11,9 +11,10 @@ import '@assets/DesignerDescription.less'
 type Props = {
   designer: User
   plannerId?: number
+  favorite?: boolean
 }
 
-const DesignerDescription: React.SFC<Props> = ({designer, plannerId})=> {
+const DesignerDescription: React.SFC<Props> = ({designer, plannerId, favorite=true})=> {
 
   const { isLogin } = useUser()
   const options: ColProps = {
@@ -67,7 +68,7 @@ const DesignerDescription: React.SFC<Props> = ({designer, plannerId})=> {
                         />
                       </div>
                       <div style={{ fontSize: 13 }}><span>조회수: {planner.hit}&nbsp;&nbsp;|&nbsp;&nbsp;댓글수: {planner.Replies.length}</span></div>
-                      { isLogin ? <div className='favorite-wrapper'><FavoriteButton favorites={planner.Favorites} plannerId={planner.id}/></div> : null }
+                      { favorite && isLogin ? <div className='favorite-wrapper'><FavoriteButton favorites={planner.Favorites} plannerId={planner.id}/></div> : null }
                   </Card>
                   </Link>
                 </Col>

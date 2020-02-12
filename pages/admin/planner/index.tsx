@@ -14,14 +14,14 @@ type Props = {
 
 const AdminPlannerList: NextPage<Props> = ({planner_data})=> {
   
-  const [plannerData, setPlannerData] = React.useState(planner_data)
+  const [plannerData, setPlannerData] = React.useState(planner_data.sort((a, b) => b.id - a.id))
   const [loading, setLoading] = React.useState(false)
 
   const refusePayment = (id: number) => {
     setLoading(true)
     axios.patch(baseUrl + `/api/admin/planners/${id}/payment`, {payment_state: 2}).then( () => {
       axios.get(baseUrl + '/api/admin/planners').then( result => {
-        setPlannerData(result.data)
+        setPlannerData(result.data.sort((a, b) => b.id - a.id))
         setLoading(false)
       })
     })
@@ -30,7 +30,7 @@ const AdminPlannerList: NextPage<Props> = ({planner_data})=> {
   const approvePayment = (id: number) => {
     axios.patch(baseUrl + `/api/admin/planners/${id}/payment`, {payment_state: 3}).then( () => {
       axios.get(baseUrl + '/api/admin/planners').then( result => {
-        setPlannerData(result.data)
+        setPlannerData(result.data.sort((a, b) => b.id - a.id))
         setLoading(false)
       })
     })
