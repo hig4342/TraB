@@ -55,6 +55,13 @@ const Navbar: React.SFC = () => {
           <li className='menu-item'>
             <Link href='/board'><a className='main-item'>트래비 게시판</a></Link>
           </li>
+          {
+            isLogin ?
+              <li className='menu-item'>
+                <Link href='/auth/myfavorite'><a className='main-item'>내가 찜한 계획표</a></Link>
+              </li>
+            : null
+          }
           <li className='menu-item'>
             <PopupWrapper signin email enroll pending callback='/planner/write'>여행계획 판매하기</PopupWrapper>
           </li>
@@ -72,6 +79,7 @@ const Navbar: React.SFC = () => {
               <a className='main-item'>{user.nickname}</a>
               <ul className='submenu'>
                 <Link href='/auth/mypage'><a className='sub-item'>마이페이지</a></Link>
+                <Link href='/auth/myfavorite'><a className='sub-item'>찜목록</a></Link>
                 <a onClick={handleLogout} className='sub-item'>로그아웃</a>
                 {user.state_id === 9999 ? <Link href='/admin'><a className='sub-item'>관리자 페이지</a></Link> : null}
               </ul>

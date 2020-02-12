@@ -26,7 +26,7 @@ const MyFavorite: NextPage = ()=> {
 
   return (
     <div className='mypage-wrapper' style={{width: '100%'}}>
-    <h1 className='small-title'>찜한 계획표 목록</h1>
+    <h1 style={{margin: '2rem 0'}} className='small-title'>찜한 계획표 목록</h1>
     { isLogin ?
       <div className='mypage' style={{width: '100%'}}>
         <MyFavoritePlanner planners={planners} handlePlanners={handlePlanners}/>

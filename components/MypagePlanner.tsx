@@ -52,7 +52,7 @@ const MypagePlanner: React.SFC<Props> = ({planners})=> {
                       { planner.Rates.length !== 0 ? (planner.Rates.map(rate => rate.rate).reduce((accumulator, currentValue) => (accumulator + currentValue))/planner.Rates.length).toFixed(2) : 0}
                     </span>
                   </div>
-                  <div style={{ fontSize: 13 }}><span>조회수: {planner.hit}&nbsp;&nbsp;|&nbsp;&nbsp;댓글수: {planner.Replies.length}</span></div>
+                  <div className='hit-wrapper'><span>조회수: {planner.hit}&nbsp;&nbsp;|&nbsp;&nbsp;댓글수: {planner.Replies.length}</span></div>
                   { isLogin ? <div className='favorite-wrapper'><FavoriteButton favorites={planner.Favorites} plannerId={planner.id}/></div> : null }
                   <div>정산 여부 : {planner.payment_state === 1 ? '미확인' : planner.payment_state === 2 ? '정산 거부' : '정산 완료'}</div>
                 </Card>

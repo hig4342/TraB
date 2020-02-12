@@ -26,6 +26,15 @@
         top: 0;
         right: 0;
       }
+      .hit-wrapper {
+        span {
+          padding: 0 5px;
+          &:first-child {
+            padding-left: 0;
+            border-right: 1px solid rgba(0, 0, 0, 0.5);
+          }
+        }
+      }
     }
     @media (max-width: 575.98px) {
       .planner-card-cover {
@@ -120,8 +129,16 @@
         vertical-align: middle;
       }
     }
-    .ant-rate {
-      font-size: 18px;
+    .rate-wrapper {
+      .ant-rate {
+        font-size: 12px;
+      }
+      .rate-number {
+        display: none;
+      }
+    }
+    .hit-wrapper {
+      font-size: 11px;
     }
   }
 }

@@ -52,7 +52,7 @@ const MyFavoritePlanner: React.SFC<Props> = ({planners, handlePlanners})=> {
                       { planner.Rates.length !== 0 ? (planner.Rates.map(rate => rate.rate).reduce((accumulator, currentValue) => (accumulator + currentValue))/planner.Rates.length).toFixed(2) : 0}
                     </span>
                   </div>
-                  <div style={{ fontSize: 13 }}><span>조회수: {planner.hit}&nbsp;&nbsp;|&nbsp;&nbsp;댓글수: {planner.Replies.length}</span></div>
+                  <div className='hit-wrapper'><span>조회수: {planner.hit}</span><span>댓글수: {planner.Replies.length}</span></div>
                   { isLogin ? <div className='favorite-wrapper'><FavoriteButton favorites={planner.Favorites} plannerId={planner.id} handlePlanners={handlePlanners}/></div> : null }
                 </Card>
               </Link>
