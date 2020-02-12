@@ -102,7 +102,7 @@ const Navbar: React.SFC = () => {
                     <Col><Link href='/auth/mypage'><Button>마이페이지</Button></Link></Col>
                     <Col offset={1}><Button onClick={handleLogout}>로그아웃</Button></Col>
                   </Row>
-                  {user.state_id === 9999 ? <Link href='/admin'><Button onClick={handleLogout} className='sub-item'>관리자 페이지</Button></Link> : null}
+                  {user.state_id === 9999 ? <Link href='/admin'><Button onClick={onClose} className='sub-item'>관리자 페이지</Button></Link> : null}
                 </div>
             }
             onClose={onClose}

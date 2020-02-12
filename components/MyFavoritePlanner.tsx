@@ -17,10 +17,10 @@ const MyFavoritePlanner: React.SFC<Props> = ({planners, handlePlanners})=> {
   const { isLogin } = useUser()
   const options: ColProps = {
     className: "planner-col",
-    xs: { span: 10 },
+    xs: { span: 24 },
     sm: { span: 12 },
     md: { span: 8 },
-    lg: { span: 7 },
+    lg: { span: 6 },
     xl: { span: 6 },
   }
 

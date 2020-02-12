@@ -287,7 +287,7 @@ const MyPage: NextPage = ()=> {
                   />
                 </Modal>
               </Form.Item>
-              { user.state_id === 4 ?
+              { user.state_id === 4 || user.state_id === 9999 ?
                 <>
                 <Form.Item
                   {...itemLayout}
