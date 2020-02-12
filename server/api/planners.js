@@ -210,6 +210,12 @@ planners.get('/metadata', async ctx => {
 planners.get('/:id', async ctx => {
   const { id } = ctx.params
   
+  const counting = await Models.Planner.update({
+    hit: sequelize.literal('hit + 1')
+  }, {
+    where: {id: id}
+  })
+  
   const result = await Models.Planner.findOne({
     where: { 
       id: id

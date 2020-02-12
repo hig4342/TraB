@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Comment, List, Avatar, Rate, Button, Tooltip, Input } from 'antd'
+import { Comment, List, Avatar, Rate, Button, Tooltip, Input, Row, Col } from 'antd'
 import { Reply, Favorite, RateType } from 'type'
 import Link from 'next/link'
 import axios from 'axios'
@@ -176,32 +176,40 @@ const CommentList: React.SFC<Props> = ({PlannerId, comments, favorites, rates})=
         <div className='comment-write'>
           <Form
             onFinish={handleRate}
-            layout='inline'
             initialValues={{
               rate: rates.findIndex(rate => rate.id === user.id) !== -1 ? rates.find(rate => rate.id === user.id)?.rate : 0
             }}
             style={{ marginTop: '3rem', marginBottom: '1rem'}}
           >
-            <Form.Item>
-              <Button className='favorite-button' style={favoriteCSS} onClick={handleFavorite}>
-                {
-                  favorited ? 
-                  <HeartFilled />
-                  :
-                  <HeartOutlined />
-                }
-                찜하기
-              </Button>
-            </Form.Item>
-            <Form.Item
-              label='평점'
-              name='rate'
-            >
-              <Rate allowHalf/>
-            </Form.Item>
-            <Form.Item>
-              <Button htmlType='submit' type='primary'>확인</Button>
-            </Form.Item>
+            <Row>
+              <Col xs={24} sm={3}>
+                <Form.Item className='function-wrapper'>
+                  <Button className='favorite-button' style={favoriteCSS} onClick={handleFavorite}>
+                    {
+                      favorited ? 
+                      <HeartFilled />
+                      :
+                      <HeartOutlined />
+                    }
+                    찜하기
+                  </Button>
+                </Form.Item>
+              </Col>
+              <Col xs={18} sm={4}>
+                <Form.Item
+                  label='평점'
+                  name='rate'
+                  className='function-wrapper'
+                >
+                  <Rate allowHalf/>
+                </Form.Item>
+              </Col>
+              <Col xs={6} sm={2}>
+                <Form.Item className='function-wrapper'>
+                  <Button htmlType='submit' type='primary'>확인</Button>
+                </Form.Item>
+              </Col>
+            </Row>
           </Form>
           <Form
             form={form}
