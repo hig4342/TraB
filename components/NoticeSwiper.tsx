@@ -10,9 +10,10 @@ import '@assets/NoticeSwiper.less'
 type Props = {
   items: Board[]
   inline?: boolean
+  rounded?: boolean
 }
 
-const NoticeSwiper: React.SFC<Props> = ({items, inline=false})=> {
+const NoticeSwiper: React.SFC<Props> = ({items, inline=false, rounded=false})=> {
 
 
   const options: SwiperOptions = { 
@@ -36,7 +37,7 @@ const NoticeSwiper: React.SFC<Props> = ({items, inline=false})=> {
   return (
     <Swiper
       {...options}
-      containerClass={"notice-swiper swiper-container" + (inline ? ' inline' : '')}
+      containerClass={"notice-swiper swiper-container" + (inline ? ' inline' : '') + (rounded ? ' rounded' : '')}
     >
       {
         items.map((item, index) => {
