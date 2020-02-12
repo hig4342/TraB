@@ -12,10 +12,6 @@ module.exports = (sequelize, DataTypes) => {
     content: {
       allowNull: false,
       type: DataTypes.TEXT,
-    },
-    rate: {
-      allowNull: false,
-      type: DataTypes.FLOAT,
     }
   }, {});
   Reply.associate = function(models) {

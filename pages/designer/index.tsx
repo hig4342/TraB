@@ -2,7 +2,7 @@ import * as React from 'react'
 import axios from 'axios'
 import { NextPage } from 'next'
 import dynamic from 'next/dynamic'
-import { Board, User, Country } from 'type'
+import { Board, User } from 'type'
 import { RadioChangeEvent } from 'antd/lib/radio/interface'
 import CountrySelector from '@components/CountrySelector'
 import DesignerList from '@components/DesignerList'
@@ -18,11 +18,10 @@ const NoticeSwiper = dynamic(
 
 type Props = {
   advertisements: Board[]
-  countries: Country[]
   designers: User[]
 }
 
-const Designer: NextPage<Props> = ({ advertisements, designers, countries })=> {
+const Designer: NextPage<Props> = ({ advertisements, designers })=> {
 
   const [region, setRegion] = React.useState<'all' | 'domestic' | 'foreign'>('all')
   const [searchName, setSearchName] = React.useState('')
@@ -33,7 +32,7 @@ const Designer: NextPage<Props> = ({ advertisements, designers, countries })=> {
     setRegion(e.target.value)
   }
 
-  console.log(countries)
+  // console.log(countries)
 
   // const handleCountry = (e: RadioChangeEvent) => {
   //   console.log('radio checked', e.target.value);

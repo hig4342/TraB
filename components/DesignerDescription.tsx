@@ -30,7 +30,7 @@ const DesignerDescription: React.SFC<Props> = ({designer, plannerId})=> {
       <Row justify="center" align="middle">
         <Col xs={12} md={4}>
           <div className='image-wrapper'>
-            <img src={designer.profile_image || '/placeholder-image.jpg'}/>
+            <img src={designer.profile_image || '/defaultprofile.png'}/>
           </div>
         </Col>
         <Col xs={12} md={6}>

@@ -4,6 +4,7 @@ import { Row, Col, Card } from 'antd'
 import { ColProps } from 'antd/lib/grid'
 import Link from 'next/link'
 import * as Hangul from 'hangul-js';
+import '@assets/DesignerList.less'
 
 type Props = {
   designers: User[]
@@ -16,15 +17,15 @@ const DesignerList: React.SFC<Props> = ({designers, premium=false, searchName, r
 
   const options: ColProps = {
     className: "designer-col",
-    xs: { span: 24 },
-    sm: { span: 12 },
-    md: { span: 8 },
+    xs: { span: 12 },
+    sm: { span: 8 },
+    md: { span: 6 },
     lg: { span: 6 },
-    xl: { span: 6 },
+    xl: { span: 5 },
   }
 
   return (
-    <div className='example'>
+    <div className='designer-list'>
       <Row justify="start" align="middle" gutter={[16, 16]}>
         {designers.filter(designer => {
           if( designer.Planners.length === 0 ) return false
@@ -59,10 +60,11 @@ const DesignerList: React.SFC<Props> = ({designers, premium=false, searchName, r
               <Link href={`/designer/${designer.id}`}>
                 <Card
                   hoverable
+                  className='designer-card'
                   cover={
-                    <div style={{width: '100%', height: 160, overflow: 'hidden'}}><img
-                      alt="planner-image"
-                      src={designer.profile_image || '/placeholder-image.jpg'}
+                    <div className='designer-card-cover'><img
+                      alt="designer-image"
+                      src={designer.profile_image || '/defaultprofile.png'}
                       //onError={errorHandle}
                       style={{height: '100%', width: '100%'}}
                     /></div>
