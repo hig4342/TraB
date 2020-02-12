@@ -73,6 +73,8 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.BoardReply)
     User.hasMany(models.Reply)
     User.hasMany(models.Planner)
+    User.hasMany(models.Favorite)
+    User.hasMany(models.Rate)
   };
   return User;
 };

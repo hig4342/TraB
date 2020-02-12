@@ -144,7 +144,7 @@ const MyPage: NextPage = ()=> {
       xs: 24,
       sm: 3
     },
-    wrapperCol: {
+    wrapperCol: { 
       xs: 24,
       sm: 19
     }

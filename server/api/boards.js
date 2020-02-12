@@ -12,7 +12,8 @@ boards.post('/', async ctx => {
     title: title,
     content: content,
     UserId: UserId,
-    board_state: 3
+    board_state: 3,
+    visible: true
   })
 
   ctx.body = result
@@ -90,6 +91,29 @@ boards.post('/reply', async ctx => {
     content: content,
   })
 
+  ctx.body = result
+})
+
+boards.patch('/reply/:id', async ctx => {
+  const { id } = ctx.params
+  const { content } = ctx.request.body
+
+  const result = await Models.BoardReply.update({
+    content: content
+  }, {
+    where: {id: id}
+  })
+  
+  ctx.body = result
+})
+
+boards.delete('/reply/:id', async ctx => {
+  const { id } = ctx.params
+
+  const result = await Models.BoardReply.destroy({
+    where: {id: id}
+  })
+  
   ctx.body = result
 })
 

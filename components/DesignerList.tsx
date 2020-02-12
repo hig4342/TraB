@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { User } from 'type'
-import { Row, Col, Card, Rate } from 'antd'
+import { Row, Col, Card } from 'antd'
 import { ColProps } from 'antd/lib/grid'
 import Link from 'next/link'
 import * as Hangul from 'hangul-js';
@@ -54,14 +54,6 @@ const DesignerList: React.SFC<Props> = ({designers, premium=false, searchName, r
           })
           return result
         }).map( designer => {
-          let rate = 0
-          let count = 0
-          designer.Planners.forEach(planner => {
-            planner.Replies.forEach(reply => {
-              rate = rate + reply.rate
-              count = count + 1
-            })
-          })
           return (
             <Col {...options} key={designer.id}>
               <Link href={`/designer/${designer.id}`}>
@@ -78,7 +70,6 @@ const DesignerList: React.SFC<Props> = ({designers, premium=false, searchName, r
                 >
                   <Card.Meta title={designer.nickname} description={designer.email}/>
                   <p>설계한 계획표: {designer.Planners.length}</p>
-                  <div><Rate allowHalf disabled defaultValue={Math.round((count !== 0 ? rate/count : 0)*2)/2}/><span>&nbsp;&nbsp;{(count !== 0 ? rate/count : 0).toFixed(2)}</span></div>
                 </Card>
               </Link>
             </Col>

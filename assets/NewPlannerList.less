@@ -72,10 +72,22 @@
       overflow: hidden;
     }
     .ant-card-body {
+      position: relative;
+      padding: 5px;
       .ant-card-meta-title {
         margin-bottom: 2px;
       }
-      padding: 5px;
+      .rate-wrapper {
+        .rate-number {
+          margin-left: 5px;
+        }
+      }
+      .favorite-wrapper {
+        position: absolute;
+        font-size: 20px;
+        top: 0;
+        right: 0;
+      }
     }
     @media (max-width: 575.98px) {
       .planner-card-cover {
@@ -164,7 +176,7 @@
       white-space: nowrap;
       transform: translate3d(0,0,0);
       transform: translate3d(0,0,0);
-      max-height: 220px;
+      max-height: 250px;
       .planner-card-wrapper {
         display: inline-block;
         vertical-align: middle;

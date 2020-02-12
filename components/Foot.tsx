@@ -18,7 +18,6 @@ const Foot: React.SFC = () => {
           </div>
           <div>
             <span>개인정보 책임자: 김수환</span>
-            <span>통신판매업 등록 신고:</span>
           </div>
           <div>
             <span>고객 문의: 010-7506-3732</span>

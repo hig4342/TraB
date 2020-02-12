@@ -50,6 +50,12 @@ const AdminPost: NextPage<Props> = ({post})=> {
     setVisible(false)
   }
 
+  const handleDelete = () => {
+    axios.delete(baseUrl + `/api/admin/boards/${post.id}`).then( () => {
+      Router.push(`/admin/board/${post.board_state === 1 ? 'notice' : 'advertise'}`)
+    })
+  }
+
   const disabledDate = (current: moment.Moment) => {
     return current <= moment();
   }
@@ -147,7 +153,8 @@ const AdminPost: NextPage<Props> = ({post})=> {
           <EditorWrapper handleContents={handleContent} defaultContent={post.content}/>
         </Form.Item>
         <Form.Item>
-          <Button onClick={handleShow}>수정하기</Button>
+          <Button type='primary' onClick={handleShow}>수정하기</Button>
+          <Button type='danger' onClick={handleDelete}>삭제하기</Button>
           <Link href='/admin'><Button>취소하기</Button></Link>
           <Modal
             title='눌렀을때 미리보기 화면입니다.'

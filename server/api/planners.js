@@ -25,6 +25,10 @@ planners.get('/domestic', async ctx => {
     }, { 
       model: Models.User,
       attributes: ['email', 'nickname']
+    }, {
+      model: Models.Favorite
+    }, {
+      model: Models.Rate
     }]
   })
 
@@ -47,6 +51,10 @@ planners.get('/foreign', async ctx => {
     }, { 
       model: Models.User,
       attributes: ['email', 'nickname']
+    }, {
+      model: Models.Favorite
+    }, {
+      model: Models.Rate
     }]
   })
 
@@ -69,6 +77,10 @@ planners.get('/domestic/hot', async ctx => {
     }, { 
       model: Models.User,
       attributes: ['email', 'nickname']
+    }, {
+      model: Models.Favorite
+    }, {
+      model: Models.Rate
     }],
     limit: 4
   })
@@ -92,6 +104,10 @@ planners.get('/foreign/hot', async ctx => {
     }, { 
       model: Models.User,
       attributes: ['email', 'nickname']
+    }, {
+      model: Models.Favorite
+    }, {
+      model: Models.Rate
     }],
     limit: 4
   })
@@ -138,6 +154,10 @@ planners.get('/new', async ctx => {
     }, { 
       model: Models.User,
       attributes: ['email', 'nickname']
+    }, {
+      model: Models.Favorite
+    }, {
+      model: Models.Rate
     }],
     limit: 7
   })
@@ -157,6 +177,10 @@ planners.get('/new', async ctx => {
     }, { 
       model: Models.User,
       attributes: ['email', 'nickname']
+    }, {
+      model: Models.Favorite
+    }, {
+      model: Models.Rate
     }],
     limit: 7
   })
@@ -198,8 +222,8 @@ planners.get('/:id', async ctx => {
       model: Models.Reply,
       include: {
         model: Models.User,
-        attributes: ['email', 'nickname', 'profile_image'],
-      } 
+        attributes: ['id', 'email', 'nickname', 'profile_image']
+      }
     }, { 
       model: Models.User,
       attributes: ['email', 'nickname', 'sex', 'profile_image', 'profile'],
@@ -214,6 +238,10 @@ planners.get('/:id', async ctx => {
           model: Models.Reply
         }]
       }]
+    }, {
+      model: Models.Favorite
+    }, {
+      model: Models.Rate
     }]
   })
 
@@ -259,16 +287,100 @@ planners.post('/', async ctx => {
 })
 
 planners.post('/reply', async ctx => {
-  const { PlannerId, UserId, content, rate } = ctx.request.body
+  const { PlannerId, UserId, content } = ctx.request.body
 
   const result = await Models.Reply.create({
     PlannerId: PlannerId,
     UserId: UserId,
-    content: content,
-    rate: rate
+    content: content
   })
 
   ctx.body = result
+})
+
+planners.patch('/reply/:id', async ctx => {
+  const { id } = ctx.params
+  const { content } = ctx.request.body
+
+  const result = await Models.Reply.update({
+    content: content
+  }, {
+    where: {id: id}
+  })
+  
+  ctx.body = result
+})
+
+planners.delete('/reply/:id', async ctx => {
+  const { id } = ctx.params
+
+  const result = await Models.Reply.destroy({
+    where: {id: id}
+  })
+  
+  ctx.body = result
+})
+
+planners.patch('/favorite/:id', async ctx => {
+  const { id } = ctx.params
+  const { UserId, favorite } = ctx.request.body
+
+  const result1 = await Models.Favorite.findOne({
+    where: {
+      PlannerId: id,
+      UserId: UserId
+    }
+  })
+  let result2;
+  if( result1 === null ) {
+    result2 = await Models.Favorite.create({
+      PlannerId: id,
+      UserId: UserId,
+      favorite: favorite
+    })
+  } else {
+    result2 = await Models.Favorite.update({
+      favorite: favorite
+    }, {
+      where: {
+        PlannerId: id,
+        UserId: UserId
+      }
+    })
+  }
+
+  ctx.body = result2
+})
+
+planners.patch('/rate/:id', async ctx => {
+  const { id } = ctx.params
+  const { UserId, rate } = ctx.request.body
+
+  const result1 = await Models.Rate.findOne({
+    where: {
+      PlannerId: id,
+      UserId: UserId
+    }
+  })
+  let result2;
+  if( result1 === null ) {
+    result2 = await Models.Rate.create({
+      PlannerId: id,
+      UserId: UserId,
+      rate: rate
+    })
+  } else {
+    result2 = await Models.Rate.update({
+      rate: rate
+    }, {
+      where: {
+        PlannerId: id,
+        UserId: UserId
+      }
+    })
+  }
+
+  ctx.body = result2
 })
 
 module.exports = planners

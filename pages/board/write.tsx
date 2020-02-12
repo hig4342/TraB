@@ -5,8 +5,6 @@ import Link from 'next/link'
 import Router from 'next/router';
 import { Callbacks } from 'rc-field-form/lib/interface';
 import { Form, Input, Button, message } from 'antd'
-//import EditorWrapper from '@components/EditorWrapper'
-
 import dynamic from 'next/dynamic'
 import useUser from '@hooks/useUser';
 
@@ -41,7 +39,7 @@ const Write: NextPage = ()=> {
 
   const handleContents = (text: string) => {
     form.setFieldsValue({
-      contents: text
+      content: text
     })
   }
 

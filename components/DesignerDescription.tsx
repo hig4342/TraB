@@ -2,9 +2,11 @@ import * as React from 'react'
 import { User } from 'type'
 import Link from 'next/link'
 import { Row, Col, Descriptions, Card, Rate } from 'antd'
-import '@assets/DesignerDescription.less'
 import { ColProps } from 'antd/lib/col'
 import ITP from './ITP'
+import useUser from '@hooks/useUser'
+import FavoriteButton from '@components/FavoriteButton'
+import '@assets/DesignerDescription.less'
 
 type Props = {
   designer: User
@@ -13,6 +15,7 @@ type Props = {
 
 const DesignerDescription: React.SFC<Props> = ({designer, plannerId})=> {
 
+  const { isLogin } = useUser()
   const options: ColProps = {
     className: "planner-col",
     xs: { span: 10 },
@@ -58,8 +61,13 @@ const DesignerDescription: React.SFC<Props> = ({designer, plannerId})=> {
                       <Card.Meta title={`[${planner.City.city_name}] ` + planner.title} description={planner.Country.country_name} />
                       <span className='planner-title'>{designer.nickname}</span>
                       <ITP url={planner.blog_link}/>
-                      <div><Rate allowHalf disabled defaultValue={planner.Replies.length !== 0 ? planner.Replies.map(({rate}) => (rate)).reduce((a, b) => a+b)/planner.Replies.length : 0}/></div>
+                      <div className='rate-wrapper'>
+                        <Rate allowHalf disabled
+                          value={ planner.Rates.length !== 0 ? Math.floor(planner.Rates.map(rate => rate.rate).reduce((accumulator, currentValue) => (accumulator + currentValue))/planner.Rates.length*2)/2 : 0}
+                        />
+                      </div>
                       <div style={{ fontSize: 13 }}><span>조회수: {planner.hit}&nbsp;&nbsp;|&nbsp;&nbsp;댓글수: {planner.Replies.length}</span></div>
+                      { isLogin ? <div className='favorite-wrapper'><FavoriteButton favorites={planner.Favorites} plannerId={planner.id}/></div> : null }
                   </Card>
                   </Link>
                 </Col>

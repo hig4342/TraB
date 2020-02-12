@@ -9,6 +9,7 @@ import { Form, Input, Button, Checkbox, message } from 'antd'
 import UploadWrapper from '@components/UploadWrapper'
 import useUser from '@hooks/useUser'
 import { UploadFile } from 'antd/lib/upload/interface'
+import { Theme } from 'type'
 import '@assets/PlannerWrite.less'
 
 const baseUrl = process.env.NODE_ENV === 'production' ? 'https://trab.co.kr' : ''
@@ -18,7 +19,11 @@ const EditorWrapper = dynamic(
   { ssr: false }
 )
 
-const PlannerWrite: NextPage = ()=> {
+type Props = {
+  themes: Theme[];
+}
+
+const PlannerWrite: NextPage<Props> = ({themes})=> {
   const [form] = Form.useForm()
   const {user} = useUser()
   const [loading, setLoading] = React.useState(false)
@@ -33,7 +38,7 @@ const PlannerWrite: NextPage = ()=> {
       city_name: values.city,
       thumbnail: values.thumbnail,
       contents: values.contents,
-      themes_id: []
+      themes_id: values.themes_id,
     }
     axios.post(baseUrl + '/api/planners', formdata).then( () => {
       setLoading(false)
@@ -72,6 +77,9 @@ const PlannerWrite: NextPage = ()=> {
         layout='vertical'
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
+        initialValues={{
+          themes_id: []
+        }}
       >
         <Form.Item>
           <h1 className='big-title'>계획표 작성하기</h1>
@@ -137,11 +145,13 @@ const PlannerWrite: NextPage = ()=> {
         </Form.Item>
         <Form.Item
           label='테마'
-          name='theme_id'
+          name='themes_id'
           required={false}
           wrapperCol={{span: 24}}
         >
-
+          <Checkbox.Group
+            options={themes.map(theme => ({ label: theme.name, value: theme.id }))}
+          />
         </Form.Item>
         <Form.Item
           label='대표 사진'
@@ -173,8 +183,10 @@ const PlannerWrite: NextPage = ()=> {
 }
 
 PlannerWrite.getInitialProps = async () => {
+  const themes = await axios.get(baseUrl+'/api/themes')
+
   return {
-    
+    themes: themes.data
   }
 }
 

@@ -74,4 +74,14 @@ boards.post('/', async ctx => {
   ctx.body = result
 })
 
+boards.delete('/:id', async ctx => {
+  const { id } = ctx.params
+
+  const result = await Models.Board.destroy({
+    where: { id: id }
+  })
+
+  ctx.body = result
+})
+
 module.exports = boards

@@ -25,7 +25,7 @@ const Post: NextPage<Props> = ({post})=> {
         {post.board_state === 1 ? <Descriptions.Item className='content-wrapper' span={2}><div><img src={post.main_image}/></div></Descriptions.Item> : null }
         <Descriptions.Item className='content-wrapper' span={2}><div className='post-content'>{ ReactHtmlParser(post.content)}</div></Descriptions.Item>
       </Descriptions>
-      <BoardCommentList board_id={post.id} comments={post.BoardReplies}/>
+      <BoardCommentList board_id={post.id} comments={post.BoardReplies.sort((a, b) => (a.createdAt > b.createdAt ? 1 : -1))}/>
     </div>
   )
 }

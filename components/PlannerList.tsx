@@ -1,13 +1,15 @@
 import * as React from 'react'
 import Link from'next/link'
 import { CheckboxValueType } from 'antd/lib/checkbox/Group'
-import { Card, Rate, Row, Col } from 'antd'
+import { Card, Row, Col, Rate } from 'antd'
 import { ColProps } from 'antd/lib/grid'
 import { Planner } from 'type'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
-import '../assets/PlannerList.less'
 import ITP from '@components/ITP'
+import FavoriteButton from '@components/FavoriteButton'
+import useUser from '@hooks/useUser'
+import '../assets/PlannerList.less'
 
 type Props = {
   items: Planner[];
@@ -20,7 +22,8 @@ const PlannerList: React.SFC<Props> = ({items, country, city, themes})=> {
 
   const [length, setLength] = React.useState(12)
   const [visible, setVisible] = React.useState(items.length >= 12)
-
+  const { isLogin } = useUser()
+  
   const options: ColProps = {
     className: "planner-col",
     xs: { span: 24 },
@@ -69,8 +72,16 @@ const PlannerList: React.SFC<Props> = ({items, country, city, themes})=> {
                 <Card.Meta title={`[${item.City.city_name}] ` + item.title} description={item.Country.country_name} />
                 <span className='planner-title'>{item.User.nickname}</span>
                 <ITP url={item.blog_link}/>
-                <div className='rate-wrapper'><Rate allowHalf disabled defaultValue={item.Replies.length !== 0 ? Math.floor(item.Replies.map(({rate}) => (rate)).reduce((a, b) => a+b)/item.Replies.length*2)/2 : 0}/><span className='rate-number'>&nbsp;&nbsp;{item.Replies.length !== 0 ? (item.Replies.map(({rate}) => (rate)).reduce((a, b) => a+b)/item.Replies.length).toFixed(2) : 0}</span></div>
+                <div className='rate-wrapper'>
+                  <Rate allowHalf disabled
+                    value={ item.Rates.length !== 0 ? Math.floor(item.Rates.map(rate => rate.rate).reduce((accumulator, currentValue) => (accumulator + currentValue))/item.Rates.length*2)/2 : 0}
+                  />
+                  <span className='rate-number'>
+                    { item.Rates.length !== 0 ? (item.Rates.map(rate => rate.rate).reduce((accumulator, currentValue) => (accumulator + currentValue))/item.Rates.length).toFixed(2) : 0}
+                  </span>
+                </div>
                 <div className='count-wrapper' style={{ fontSize: 13 }}><span>조회수: {item.hit}&nbsp;&nbsp;|&nbsp;&nbsp;댓글수: {item.Replies.length}</span></div>
+                { isLogin ? <div className='favorite-wrapper'><FavoriteButton favorites={item.Favorites} plannerId={item.id}/></div> : null }
               </Card>
             </Link>
           </Col>

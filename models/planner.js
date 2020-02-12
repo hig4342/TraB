@@ -64,6 +64,8 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'CityId'
     })
     Planner.hasMany(models.Reply)
+    Planner.hasMany(models.Favorite)
+    Planner.hasMany(models.Rate)
   };
   return Planner;
 };

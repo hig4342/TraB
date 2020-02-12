@@ -5,7 +5,9 @@ import { Row, Col, Card, Rate } from 'antd'
 import { ColProps } from 'antd/lib/col'
 import ITP from '@components/ITP'
 import Link from 'next/link'
+import FavoriteButton from '@components/FavoriteButton'
 import '../assets/NewPlannerList.less'
+import useUser from '@hooks/useUser'
 
 const NoticeSwiper = dynamic(
   () => import('@components/NoticeSwiper'),
@@ -20,6 +22,7 @@ type Props = {
 
 const NewPlannerList: React.SFC<Props> = ({ domestic, foreign, advertisements })=> {
 
+  const { isLogin } = useUser()
   const options: ColProps = {
     className: "planner-col",
     xs: { span: 10 },
@@ -69,8 +72,16 @@ const NewPlannerList: React.SFC<Props> = ({ domestic, foreign, advertisements })
                     <Card.Meta title={`[${planner.City.city_name}] ` + planner.title} description={planner.Country.country_name} />
                     <span className='planner-title'>{planner.User.nickname}</span>
                     <ITP url={planner.blog_link}/>
-                    <div><Rate allowHalf disabled defaultValue={planner.Replies.length !== 0 ? planner.Replies.map(({rate}) => (rate)).reduce((a, b) => a+b)/planner.Replies.length : 0}/><span className='rate-number'>&nbsp;&nbsp;{planner.Replies.length !== 0 ? planner.Replies.map(({rate}) => (rate)).reduce((a, b) => a+b)/planner.Replies.length : 0}</span></div>
+                    <div className='rate-wrapper'>
+                      <Rate allowHalf disabled
+                        value={ planner.Rates.length !== 0 ? Math.floor(planner.Rates.map(rate => rate.rate).reduce((accumulator, currentValue) => (accumulator + currentValue))/planner.Rates.length*2)/2 : 0}
+                      />
+                      <span className='rate-number'>
+                        { planner.Rates.length !== 0 ? (planner.Rates.map(rate => rate.rate).reduce((accumulator, currentValue) => (accumulator + currentValue))/planner.Rates.length).toFixed(2) : 0}
+                      </span>
+                    </div>
                     <div style={{ fontSize: 13 }}><span>조회수: {planner.hit}&nbsp;&nbsp;|&nbsp;&nbsp;댓글수: {planner.Replies.length}</span></div>
+                    { isLogin ? <div className='favorite-wrapper'><FavoriteButton favorites={planner.Favorites} plannerId={planner.id}/></div> : null }
                   </Card>
                 </Link>
               </Col>
@@ -126,7 +137,7 @@ const NewPlannerList: React.SFC<Props> = ({ domestic, foreign, advertisements })
                   <Card.Meta title={`[${planner.City.city_name}] ` + planner.title} description={planner.Country.country_name} />
                   <span className='planner-title'>{planner.User.nickname}</span>
                   <ITP url={planner.blog_link}/>
-                  <div><Rate allowHalf disabled defaultValue={planner.Replies.length !== 0 ? Math.floor(planner.Replies.map(({rate}) => (rate)).reduce((a, b) => a+b)/planner.Replies.length*2)/2 : 0}/><span className='rate-number'>&nbsp;&nbsp;{planner.Replies.length !== 0 ? (planner.Replies.map(({rate}) => (rate)).reduce((a, b) => a+b)/planner.Replies.length).toFixed(2) : 0}</span></div>
+                  {/* <div><Rate allowHalf disabled defaultValue={planner.Replies.length !== 0 ? Math.floor(planner.Replies.map(({rate}) => (rate)).reduce((a, b) => a+b)/planner.Replies.length*2)/2 : 0}/><span className='rate-number'>&nbsp;&nbsp;{planner.Replies.length !== 0 ? (planner.Replies.map(({rate}) => (rate)).reduce((a, b) => a+b)/planner.Replies.length).toFixed(2) : 0}</span></div> */}
                   <div style={{ fontSize: 13 }}><span>조회수: {planner.hit}&nbsp;&nbsp;|&nbsp;&nbsp;댓글수: {planner.Replies.length}</span></div>
                 </Card>
               </Link>

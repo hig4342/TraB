@@ -20,7 +20,7 @@ const PlannerItem: NextPage<Props> = ({planner, themes})=> {
     <div className='planner' style={{width: '100%'}}>
       <DesignerDescription designer={planner.User} plannerId={planner.id}/>
       <PlannerContent planner={planner} themes={themes}/>
-      <CommentList PlannerId={planner.id} comments={planner.Replies}/>
+      <CommentList PlannerId={planner.id} comments={planner.Replies.sort((a, b) => (a.createdAt > b.createdAt ? 1 : -1))} favorites={planner.Favorites} rates={planner.Rates}/>
     </div>
   )
 }

@@ -17,7 +17,7 @@ export type Board = {
 export type BoardReply = {
   id: number;
   content: string;
-  createAt: Date;
+  createdAt: Date;
   User: User;
 }
 
@@ -74,15 +74,31 @@ export type Planner = {
   City: City;
   Country: Country;
   Replies: Reply[];
+  Rates: RateType[];
+  Favorites: Favorite[];
   User: User;
 }
 
 export type Reply = {
   id: number;
   content: string;
-  rate: number;
-  createAt: Date;
+  createdAt: Date;
   User: User;
+}
+
+export type RateType = {
+  id: number;
+  PlannerId: number;
+  UserId: number;
+  rate: number;
+}
+
+export type Favorite = {
+  id: number;
+  PlannerId: number;
+  UserId: number;
+  favorite: boolean;
+  Planners: Planner[];
 }
 
 export type Count = {
