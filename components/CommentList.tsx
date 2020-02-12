@@ -102,6 +102,9 @@ const CommentList: React.SFC<Props> = ({PlannerId, comments, favorites, rates})=
 
   React.useEffect(() => {
     setFavorited(favorites.findIndex(favorite => favorite.UserId === user.id && favorite.favorite) !== -1)
+    form.setFieldsValue({
+      rate: rates.findIndex(rate => rate.id === user.id) !== -1 ? rates.find(rate => rate.id === user.id)?.rate : 0
+    })
   }, [isLogin])
 
   const favoriteCSS: React.CSSProperties = {
