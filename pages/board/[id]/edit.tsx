@@ -7,7 +7,6 @@ import { Form, Button, Input } from 'antd'
 import EditorWrapper from '@components/EditorWrapper'
 import Link from 'next/link'
 import Router from 'next/router';
-import '@assets/Editpost.less'
 
 const baseUrl = process.env.NODE_ENV === 'production' ? 'https://trab.co.kr' : ''
 
