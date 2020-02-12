@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Comment, List, Avatar, Rate, Button, Tooltip, Input, Row, Col } from 'antd'
+import { Comment, List, Avatar, Rate, Button, Tooltip, Input, Row, Col, Popover } from 'antd'
 import { Reply, Favorite, RateType } from 'type'
 import Link from 'next/link'
 import axios from 'axios'
@@ -10,7 +10,7 @@ import { Form } from 'antd'
 import moment from 'moment'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons'
-import { HeartOutlined, HeartFilled } from '@ant-design/icons'
+import { HeartOutlined, HeartFilled, CheckCircleOutlined } from '@ant-design/icons'
 import '@assets/CommentList.less'
 
 const baseUrl = process.env.NODE_ENV === 'production' ? 'https://trab.co.kr' : ''
@@ -98,6 +98,7 @@ const CommentList: React.SFC<Props> = ({PlannerId, comments, favorites, rates})=
   const { user, isLogin } = useUser()
   const [reply, setReply] = React.useState(comments)
   const [favorited, setFavorited] = React.useState(favorites.findIndex(favorite => favorite.UserId === user.id && favorite.favorite) !== -1)
+  const [popover, setPopover] = React.useState(false)
   const [form] = Form.useForm()
 
   React.useEffect(() => {
@@ -130,6 +131,11 @@ const CommentList: React.SFC<Props> = ({PlannerId, comments, favorites, rates})=
     axios.patch(baseUrl + `/api/planners/rate/${PlannerId}`, {
       ...values,
       UserId: user.id,
+    }).then(() => {
+      setPopover(true)
+      setTimeout(() => {
+        setPopover(false)
+      }, 1000)
     })
   }
 
@@ -209,7 +215,16 @@ const CommentList: React.SFC<Props> = ({PlannerId, comments, favorites, rates})=
               </Col>
               <Col xs={6} sm={2}>
                 <Form.Item className='function-wrapper'>
-                  <Button htmlType='submit' type='primary'>확인</Button>
+                  <Popover
+                    visible={popover}
+                    content={
+                      <div>
+                        <span><CheckCircleOutlined style={{color: '#52c41a'}}/> 완료</span>
+                      </div>
+                    }
+                  >
+                    <Button htmlType='submit' type='primary'>확인</Button>
+                  </Popover>
                 </Form.Item>
               </Col>
             </Row>
