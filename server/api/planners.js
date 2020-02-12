@@ -242,6 +242,10 @@ planners.get('/:id', async ctx => {
           model: Models.Country
         }, {
           model: Models.Reply
+        }, {
+          model: Models.Favorite
+        }, {
+          model: Models.Rate
         }]
       }]
     }, {
