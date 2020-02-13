@@ -20,18 +20,17 @@ const Banner: React.SFC<Props> = ({ type }) => {
       </div>
     ) : type === 'designer' ? (
       <div className='banner-wrapper designer'>
-        <div className='banner-image'><img src='/domestic_banner.jpg'/></div>
+        <div className='banner-image'><img src='/designer_banner.png'/></div>
         <div className='banner-text'><span>TraB 설계자</span></div>
       </div>
     ) : type === 'favorite' ? (
       <div className='banner-wrapper favorite'>
-        <div className='banner-image'><img src='/domestic_banner.jpg'/></div>
+        <div className='banner-image'><img src='/favorite_banner.png'/></div>
         <div className='banner-text'><span>내가 찜한 계획표</span></div>
       </div>
     ) : (
       <div className='banner-wrapper board'>
-        <div className='banner-image'><img src='/domestic_banner.jpg'/></div>
-        <div className='banner-text'><span>TraB 게시판</span></div>
+        <div className='banner-image'><img src='/board_banner.jpg'/></div>
       </div>
     )
   )
