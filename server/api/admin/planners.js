@@ -140,7 +140,7 @@ planners.delete('/:id', async ctx => {
   const result2 = await Models.Rate.destroy({
     where: {PlannerId: id}
   })
-  const result3 = await Models.Favortie.destroy({
+  const result3 = await Models.Favorite.destroy({
     where: {PlannerId: id}
   })
   const result4 = await Models.Planner.destroy({
