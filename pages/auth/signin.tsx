@@ -24,8 +24,8 @@ const SigninPage: NextPage = () => {
       const user: User = jwtDecode(usertoken)
       onLogin(user)
       Router.push('/')
-    }).catch( err => {
-      console.log(err)
+    }).catch(() => {
+      message.error('이메일이 존재하지 않거나, 비밀번호가 틀렸습니다.')
     })
   };
 

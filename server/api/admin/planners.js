@@ -134,11 +134,20 @@ planners.patch('/:id/state', async ctx => {
 planners.delete('/:id', async ctx => {
   const { id } = ctx.params
   
-  const result = await Models.Planner.destroy({
+  const result1 = await Models.Reply.destroy({
+    where: {PlannerId: id}
+  })
+  const result2 = await Models.Rate.destroy({
+    where: {PlannerId: id}
+  })
+  const result3 = await Models.Favortie.destroy({
+    where: {PlannerId: id}
+  })
+  const result4 = await Models.Planner.destroy({
     where: {id: id}
   })
   
-  ctx.body = result
+  ctx.body = result4
 })
 
 module.exports = planners

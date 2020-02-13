@@ -55,13 +55,6 @@ const Navbar: React.SFC = () => {
           <li className='menu-item'>
             <Link href='/board'><a className='main-item'>트래비 게시판</a></Link>
           </li>
-          {
-            isLogin ?
-              <li className='menu-item'>
-                <Link href='/auth/myfavorite'><a className='main-item'>내가 찜한 계획표</a></Link>
-              </li>
-            : null
-          }
           <li className='menu-item'>
             <PopupWrapper signin email enroll pending callback='/planner/write'>여행계획 판매하기</PopupWrapper>
           </li>

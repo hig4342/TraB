@@ -33,7 +33,7 @@ const EditorWrapper: React.SFC<Props> = ({ hyperlink=false, handleContents, defa
         menubar: false,
         min_height: 500,
         plugins: [
-          'advlist lists autoresize', 
+          'advlist lists autoresize, paste', 
           'charmap emoticons',
           'searchreplace preview paste table',
           'image imagetools media' + (hyperlink ? ' link autolink' : ''),
@@ -70,6 +70,7 @@ const EditorWrapper: React.SFC<Props> = ({ hyperlink=false, handleContents, defa
         language: 'ko_KR',
         language_url: '/tinymce/langs/ko_KR.js',
         //images_upload_url: baseUrl+'/api/file/upload',
+        paste_data_images: true,
         imagetools_toolbar: "imageoptions",
         images_upload_handler: (blobInfo, success, failure) => {
           var xhr = new XMLHttpRequest();

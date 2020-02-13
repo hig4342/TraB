@@ -12,7 +12,8 @@ const auth = new Router({
 
 auth.post('/signin', passport.authenticate('local', {
   successRedirect: '/api/auth/signin/success',
-  failureRedirect: '/api/auth/signin/failure'
+  failureRedirect: '/api/auth/signin/failure',
+  failureMessage: true,
 }))
 
 auth.get('/signout', async ctx => {
@@ -46,9 +47,8 @@ auth.get('/signin/success', async ctx => {
 })
 
 auth.get('/signin/failure', async ctx => {
-  console.log("실패 테스트", ctx.session.passport.user)
   ctx.status = 401
-  ctx.body = 'failure'
+  ctx.body = ctx.session.messages
 })
 
 auth.post('/signup', async ctx => {

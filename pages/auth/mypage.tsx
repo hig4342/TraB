@@ -182,7 +182,7 @@ const MyPage: NextPage = ()=> {
             profile: user.profile
           }}
         >
-          <Row justify='center' align='top' gutter={[16, 16]}>
+          <Row justify='center' align='middle' gutter={[16, 16]}>
             <Col xs={24} md={8}>
               <Form.Item
                 name='profile_image'
