@@ -3,7 +3,7 @@ import * as React from 'react'
 import '@assets/Banner.less'
 
 type Props = {
-  type: 'domestic' | 'foreign' | 'favorite';
+  type: 'domestic' | 'foreign' | 'designer' | 'favorite' | 'board';
 }
 const Banner: React.SFC<Props> = ({ type }) => {
   return (
@@ -18,10 +18,20 @@ const Banner: React.SFC<Props> = ({ type }) => {
         <div className='banner-image'><img src='/foreign_banner.jpg'/></div>
         <div className='banner-text'><span>해외 여행계획표</span></div>
       </div>
-    ) : (
+    ) : type === 'designer' ? (
+      <div className='banner-wrapper designer'>
+        <div className='banner-image'><img src='/domestic_banner.jpg'/></div>
+        <div className='banner-text'><span>TraB 설계자</span></div>
+      </div>
+    ) : type === 'favorite' ? (
       <div className='banner-wrapper favorite'>
         <div className='banner-image'><img src='/domestic_banner.jpg'/></div>
         <div className='banner-text'><span>내가 찜한 계획표</span></div>
+      </div>
+    ) : (
+      <div className='banner-wrapper board'>
+        <div className='banner-image'><img src='/domestic_banner.jpg'/></div>
+        <div className='banner-text'><span>TraB 게시판</span></div>
       </div>
     )
   )

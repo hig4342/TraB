@@ -50,7 +50,7 @@ const FavoriteButton: React.SFC<Props> = ({favorites, plannerId, handlePlanners}
   }
 
   return (
-    <span className='favorite-button' onClick={handleFavorite} onMouseOver={handleFill} onMouseLeave={handleEmpty}>
+    <span className='favorite-button' onClick={handleFavorite} onMouseEnter={handleFill} onMouseLeave={handleEmpty}>
       {
         filled || favorited ?
         <HeartFilled style={favoriteCSS}/>

@@ -63,6 +63,7 @@ const EditorWrapper: React.SFC<Props> = ({ hyperlink=false, handleContents, defa
           toolbar2: 'image media',
           min_height: 300,
         },
+        toolbar_sticky: true,
         body_class: 'editor-body',
         content_css: '/tinymce/css/layout.css',
         statusbar: false,
@@ -71,6 +72,8 @@ const EditorWrapper: React.SFC<Props> = ({ hyperlink=false, handleContents, defa
         language_url: '/tinymce/langs/ko_KR.js',
         //images_upload_url: baseUrl+'/api/file/upload',
         paste_data_images: true,
+        paste_as_text: true,
+        paste_filter_drop: true,
         imagetools_toolbar: "imageoptions",
         images_upload_handler: (blobInfo, success, failure) => {
           var xhr = new XMLHttpRequest();

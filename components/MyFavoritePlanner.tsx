@@ -3,6 +3,7 @@ import { Planner } from 'type'
 import { Row, Col, Card, Rate } from 'antd'
 import Link from 'next/link'
 import ITP from './ITP'
+import * as Hangul from 'hangul-js';
 import { ColProps } from 'antd/lib/col'
 import FavoriteButton from '@components/FavoriteButton'
 import useUser from '@hooks/useUser'
@@ -11,8 +12,9 @@ import '@assets/MypagePlanner.less'
 type Props = {
   planners: Planner[]
   handlePlanners: () => void
+  searchText: string
 }
-const MyFavoritePlanner: React.SFC<Props> = ({planners, handlePlanners})=> {
+const MyFavoritePlanner: React.SFC<Props> = ({planners, handlePlanners, searchText})=> {
 
   const { isLogin } = useUser()
   const options: ColProps = {
@@ -27,7 +29,14 @@ const MyFavoritePlanner: React.SFC<Props> = ({planners, handlePlanners})=> {
   return (
     <div className='mypage-planner'>
       <Row justify='start' align="top" className='planner-list' gutter={[16, 16]}>
-          {planners.map(planner => (
+          {planners.filter(planner => {
+            if(!searchText) return true
+            return (
+              Hangul.search(planner.Country.country_name, searchText) === 0 ||
+              Hangul.search(planner.City.city_name, searchText) === 0 ||
+              Hangul.search(planner.title, searchText) === 0
+            )
+          }).map(planner => (
             <Col key={planner.id} {...options} className='planner-card-wrapper'>
               <Link href={`/planner/${planner.id}`}>
                 <Card

@@ -8,6 +8,7 @@ import { Board } from 'type'
 import moment from 'moment'
 import PopupWrapper from '@components/PopupWrapper'
 import useUser from '@hooks/useUser'
+import Banner from '@components/Banner'
 import '@assets/Board.less'
 moment.locale('ko-kr')
 
@@ -49,9 +50,9 @@ const BoardPage: NextPage<Props> = ({ advertisements, posts })=> {
 
   return (
     <div className='board' style={{ width: '100%' }}>
-      <NoticeSwiper items={advertisements} inline />
-      <h1 className='big-title'>트래비(TraB) 게시판</h1>
-      <h4 className='sub-title'>트래비(TraB) 팀에게 건의하실 사항이나, 공유하고 싶은 정보들을 자유롭게 게시 해 주시길 바랍니다!!</h4>
+      <Banner type='board'/>
+      <NoticeSwiper items={advertisements} inline rounded/>
+      {/* <h4 className='sub-title'>트래비(TraB) 팀에게 건의하실 사항이나, 공유하고 싶은 정보들을 자유롭게 게시 해 주시길 바랍니다!!</h4> */}
       <List
         loading={loading}
         dataSource={data}

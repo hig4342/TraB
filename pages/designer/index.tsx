@@ -6,8 +6,9 @@ import { Board, User } from 'type'
 import { RadioChangeEvent } from 'antd/lib/radio/interface'
 import CountrySelector from '@components/CountrySelector'
 import DesignerList from '@components/DesignerList'
+import Banner from '@components/Banner'
+import SearchBox from '@components/SearchBox'
 import '@assets/Designer.less'
-import { Input } from 'antd'
 
 const baseUrl = process.env.NODE_ENV === 'production' ? 'https://trab.co.kr' : ''
 
@@ -50,12 +51,10 @@ const Designer: NextPage<Props> = ({ advertisements, designers })=> {
 
   return (
     <div className='designer-list' style={{width: '100%'}}>
-      <NoticeSwiper items={advertisements} inline/>
+      <Banner type='designer'/>
+      <NoticeSwiper items={advertisements} inline rounded/>
       <div className='new-designer'>
-        <h1 className='big-title' style={{ marginBottom: '2rem'}}>트래비(TraB) 여행 설계자</h1>
-        <div className='search-bar'>
-          <Input.Search value={searchName} onChange={handleSearch} placeholder='닉네임을 검색하세요!'/>
-        </div>
+        <SearchBox searchText={searchName} handleSearch={handleSearch} placeholder='닉네임을 검색하세요!'/>
         <CountrySelector value={region} onChange={onChange}/>
         <DesignerList designers={designers} searchName={searchName} region={region}/>
       </div>
