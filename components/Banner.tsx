@@ -31,6 +31,7 @@ const Banner: React.SFC<Props> = ({ type }) => {
     ) : (
       <div className='banner-wrapper board'>
         <div className='banner-image'><img src='/board_banner.jpg'/></div>
+        <div className='banner-text'><span>TraB 게시판</span></div>
       </div>
     )
   )

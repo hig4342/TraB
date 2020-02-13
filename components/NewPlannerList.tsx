@@ -145,7 +145,7 @@ const NewPlannerList: React.SFC<Props> = ({ domestic, foreign, advertisements })
           ))
         }
         <Col {...options} key='more' className='more-card-wrapper'>
-          <Link href='/planner/domestic'>
+          <Link href='/planner/foreign'>
             <Card
               bordered={false}
               className='more-card'
