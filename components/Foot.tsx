@@ -36,7 +36,7 @@ const Foot: React.SFC = () => {
         <Col xs={24} md={8}>
           <div className='document-wrapper'>
             <a target='_blank' href='/Trab_personal_information.html'>개인정보 이용동의서</a>
-            <a style={{marginLeft: 20}} target='_blank' href=''>회사 소개</a>
+            <a style={{marginLeft: 20}} target='_blank' href='https://channeldeep.creatorlink.net'>회사 소개</a>
           </div>
         </Col>
         <Col xs={24} md={8}>
