@@ -5,6 +5,7 @@ import { Planner, Theme } from 'type'
 import DesignerDescription from '@components/DesignerDescription'
 import PlannerContent from '@components/PlannerContent'
 import CommentList from '@components/CommentList'
+import { Divider } from 'antd'
 
 
 const baseUrl = process.env.NODE_ENV === 'production' ? 'https://trab.co.kr' : ''
@@ -18,8 +19,10 @@ const PlannerItem: NextPage<Props> = ({planner, themes})=> {
 
   return (
     <div className='planner' style={{width: '100%'}}>
-      <DesignerDescription designer={planner.User} plannerId={planner.id}/>
       <PlannerContent planner={planner} themes={themes}/>
+      <Divider />
+      <DesignerDescription designer={planner.User} plannerId={planner.id}/>
+      <Divider />
       <CommentList PlannerId={planner.id} comments={planner.Replies.sort((a, b) => (a.createdAt > b.createdAt ? 1 : -1))} favorites={planner.Favorites} rates={planner.Rates}/>
     </div>
   )

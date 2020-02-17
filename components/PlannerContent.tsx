@@ -1,6 +1,6 @@
 import * as React from 'react'
 import ReactHtmlParser from 'react-html-parser'
-import { Descriptions } from 'antd'
+import { Descriptions, Avatar } from 'antd'
 import { Planner, Theme } from 'type'
 import '@assets/PlannerContent.less'
 import Link from 'next/link'
@@ -16,6 +16,7 @@ const PlannerContent: React.SFC<Props> = ({planner, themes}) => {
     <div className='planner'>
       <Descriptions className='planner-information' column={24} bordered>
         <Descriptions.Item label='제목' span={24}>{planner.title}</Descriptions.Item>
+        <Descriptions.Item label='설계자' span={24}><Avatar src={planner.User.profile_image || '/defaultprofile.png'}/> {planner.User.nickname}</Descriptions.Item>
         <Descriptions.Item label='나라' span={24}>{planner.Country.country_name}</Descriptions.Item>
         <Descriptions.Item label='도시' span={24}>{planner.City.city_name}</Descriptions.Item>
         <Descriptions.Item label='필터' span={24}>
