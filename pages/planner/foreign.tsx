@@ -71,7 +71,7 @@ const Foreign_Planner: NextPage<Props> = ({ advertisements, planners, countries,
         <FilterBox
           nation='foreign'
           items={countries}
-          themes={themes}
+          themes={themes.sort((a, _b) => (a.name === 'P(편)한 계획표' || a.name === 'ITP 여행계획표' ? -1 : 1))}
           country={country}
           handleCountry={handleCountry}
           city={city}

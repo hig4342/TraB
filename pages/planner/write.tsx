@@ -25,9 +25,15 @@ type Props = {
 
 const PlannerWrite: NextPage<Props> = ({themes})=> {
   const [form] = Form.useForm()
-  const {user} = useUser()
+  const {user, isLogin} = useUser()
   const [loading, setLoading] = React.useState(false)
 
+  React.useEffect(() => {
+    if(!isLogin) {
+      Router.prefetch('/')
+    }
+  }, [user])
+  
   const onFinish: Callbacks['onFinish'] = (values) => {
     setLoading(true)
     const country_name = values.country === '대한민국' ? '한국' : values.country
