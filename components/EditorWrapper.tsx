@@ -38,15 +38,13 @@ const EditorWrapper: React.SFC<Props> = ({ hyperlink=false, handleContents, defa
           'searchreplace preview paste table',
           'image imagetools media' + (hyperlink ? ' link autolink' : ''),
         ],
-        toolbar1: '\
-          fontselect fontsizeselect formatselect|\
-          bold italic underline strikethrough superscript subscript forecolor backcolor removeformat|',
-        toolbar2: (hyperlink ? 'link ' : '') +
-          'table insertfile image media template anchor charmap emoticons|\
-          alignleft aligncenter alignright alignjustify bullist numlist outdent indent|\
-          undo redo |\
-          preview',
-        toolbar3: 'explain',
+        toolbar: `
+          fontselect fontsizeselect formatselect|
+          bold italic underline strikethrough superscript subscript forecolor backcolor removeformat|
+          ${hyperlink ? 'link ' : ''} table insertfile image media template anchor charmap emoticons|
+          alignleft aligncenter alignright alignjustify bullist numlist outdent indent|
+          undo redo preview|
+          explain`,
         setup: function (editor) {
           editor.ui.registry.addButton('explain', {
             text: '<div class="explain-wrapper"><span>사진을 업로드 하려면 <img src="/image.svg"/> 버튼을 누르신 후 <strong>"업로드"</strong> 클릭 > 이미지 삽입 후 <strong>"넓이를 600"</strong> 이하로 맞춰주세요.</span></div>',
@@ -54,20 +52,19 @@ const EditorWrapper: React.SFC<Props> = ({ hyperlink=false, handleContents, defa
           });
         },
         mobile: {
-          toolbar1: 'styleselect|\
-          bold italic underline strikethrough superscript subscript forecolor backcolor removeformat|\
-          table insertfile template anchor charmap emoticons|\
-          alignleft aligncenter alignright alignjustify bullist numlist outdent indent|\
-          undo redo |\
-          preview',
-          toolbar2: 'image media',
+          width : '100%',
+          toolbar1: `image media undo redo | styleselect |
+          bold italic underline strikethrough superscript subscript forecolor backcolor removeformat table insertfile template anchor charmap emoticons|
+          alignleft aligncenter alignright alignjustify bullist numlist outdent indent preview`,
+          toolbar2: 'explain',
+          toolbar_drawer: 'sliding',
           min_height: 300,
         },
         toolbar_sticky: true,
         body_class: 'editor-body',
         content_css: '/tinymce/css/layout.css',
         statusbar: false,
-        toolbar_drawer: false,
+        toolbar_drawer: 'sliding',
         language: 'ko_KR',
         language_url: '/tinymce/langs/ko_KR.js',
         //images_upload_url: baseUrl+'/api/file/upload',

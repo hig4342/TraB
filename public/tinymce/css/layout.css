@@ -1,3 +1,7 @@
 .editor-body {
   width: 100%;
 }
+
+.editor-body .tox-toolbar__group {
+  background-color: black;
+}

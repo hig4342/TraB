@@ -52,7 +52,7 @@ const BoardPage: NextPage<Props> = ({ advertisements, posts })=> {
     <div className='board' style={{ width: '100%' }}>
       <Banner type='board'/>
       <NoticeSwiper items={advertisements} inline rounded/>
-      {/* <h4 className='sub-title'>트래비(TraB) 팀에게 건의하실 사항이나, 공유하고 싶은 정보들을 자유롭게 게시 해 주시길 바랍니다!!</h4> */}
+      <h4 className='sub-title'>트래비(TraB) 팀에게 건의하실 사항이나, <span>공유하고 싶은 정보들을 자유롭게 게시 해 주시길 바랍니다!!</span></h4>
       <List
         loading={loading}
         dataSource={data}

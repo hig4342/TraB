@@ -150,7 +150,7 @@ const PlannerWrite: NextPage<Props> = ({themes})=> {
           wrapperCol={{span: 24}}
         >
           <Checkbox.Group
-            options={themes.map(theme => ({ label: theme.name, value: theme.id }))}
+            options={themes.filter(theme => (theme.name !== 'P(편)한 계획표' && theme.name === 'ITP 여행계획표')).map(theme => ({ label: theme.name, value: theme.id }))}
           />
         </Form.Item>
         <Form.Item
