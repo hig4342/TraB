@@ -4,6 +4,7 @@ import { NextPage } from 'next'
 import { Planner, Theme } from 'type'
 import DesignerDescription from '@components/DesignerDescription'
 import AdminPlannerContent from '@components/AdminPlannerContent'
+import GoogleMaps from '@components/GoogleMaps'
 
 const baseUrl = process.env.NODE_ENV === 'production' ? 'https://trab.co.kr' : ''
 
@@ -18,6 +19,7 @@ const AdminPlanner: NextPage<Props> = ({planner, themes})=> {
     <div className='planner' style={{width: '100%'}}>
       <DesignerDescription designer={planner.User} plannerId={planner.id} favorite={false}/>
       <AdminPlannerContent planner={planner} themes={themes} />
+      <GoogleMaps />
     </div>
   )
 }

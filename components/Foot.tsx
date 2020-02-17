@@ -24,7 +24,7 @@ const Foot: React.SFC = () => {
             <span>카카오 플러스 친구: 트래비(TraB) 고객센터</span>
           </div>
           <div>
-            <span>이메일: trab2019@naver.com</span>
+            <span>이메일: trab_official@naver.com</span>
           </div>
           <div>
             <span>사업장 주소: 대전광역시 대덕구 한남로 12번길 창업마켓(창업존) 590203호</span>
