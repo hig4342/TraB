@@ -25,9 +25,9 @@ const GoogleMaps = () => {
           options={{
             controls: ["Point"],
             drawingMode: "Point",
-            featureFactory: geometry => {
-              console.log("geometry: ", geometry);
-            },
+            // featureFactory: geometry => {
+            //   console.log("geometry: ", geometry);
+            // },
             clickable: true,
             draggable: true,
           }}
