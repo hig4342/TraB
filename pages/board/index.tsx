@@ -55,12 +55,14 @@ const BoardPage: NextPage<Props> = ({ advertisements, posts })=> {
       <h4 className='sub-title'>트래비(TraB) 팀에게 건의하실 사항이나, <span>공유하고 싶은 정보들을 자유롭게 게시 해 주시길 바랍니다!!</span></h4>
       <List
         pagination={{
+          style: {
+            textAlign: "center"
+          },
           pageSize: 10
         }}
         loading={loading}
         dataSource={data}
         bordered
-        footer={<div><PopupWrapper signin email callback='/board/write'><Button size='large'>글쓰기</Button></PopupWrapper></div>}
         renderItem={item => (
           <Link href='/board/[id]' as={`/board/${item.id}`}>
             <List.Item className='board-item-wrapper'>
@@ -98,6 +100,7 @@ const BoardPage: NextPage<Props> = ({ advertisements, posts })=> {
           </Link>
         )}
       />
+      <div className='write-button-wrapper'><PopupWrapper signin email callback='/board/write'><Button size='large'>글쓰기</Button></PopupWrapper></div>
     </div>
   )
 }

@@ -291,10 +291,4 @@ const Designer_Register: NextPage = ()=> {
   )
 }
 
-Designer_Register.getInitialProps = async () => {
-  return {
-    
-  }
-}
-
 export default Designer_Register

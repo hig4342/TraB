@@ -2,7 +2,6 @@ footer{
   margin-top: 2rem;
   border-top: solid 1px rgb(210, 210, 210);
   .information {
-    margin-left: 4rem;
     padding: 1.5rem 0;
     span {
       margin-left: 1rem;
@@ -14,7 +13,7 @@ footer{
   @media (max-width: 575.98px) {
     .information {
       font-size: 11px;
-      margin-left: 0;
+      margin: 0;
       span {
         margin-left: 10px;
       }
@@ -26,6 +25,16 @@ footer{
     .mark-wrapper {
       margin-top: 1rem;
       margin-left: 10px;
+    }
+  }
+  @media (min-width: 768px) {
+    .information {
+      margin: 0 2rem;
+    }
+  }
+  @media (min-width: 1152px) {
+    .information {
+      margin: 0 4rem;
     }
   }
 }

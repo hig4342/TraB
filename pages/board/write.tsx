@@ -78,10 +78,4 @@ const Write: NextPage = ()=> {
   )
 }
 
-Write.getInitialProps = async () => {
-  return {
-    
-  }
-}
-
 export default Write

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Layout, Divider, BackTop } from 'antd'
+import { Layout, Divider, BackTop, message } from 'antd'
 import Link from 'next/link'
 import Router from 'next/router'
 import Navbar from '@components/Navbar'
@@ -56,6 +56,11 @@ const AppLayout: React.SFC = ({children}) => {
     }
   }
 
+  const handleCopy = () => {
+    alert('hello')
+    message.error('?')
+    return false
+  }
 
   return (
     <Layout>
@@ -79,7 +84,7 @@ const AppLayout: React.SFC = ({children}) => {
         loading ?
           <div className='loading-page'><div className='loading-wrapper'><LoadingOutlined /></div></div>
         :
-          <Content className="container" onWheel={closePopup}>
+          <Content className="container" onWheel={closePopup} onCopy={handleCopy} onContextMenu={handleCopy} onDragStart={handleCopy}>
             {children}
           </Content>
       }
