@@ -1,5 +1,45 @@
 .designer-description {
   margin-bottom: 2rem;
+  .description-row {
+    .description-col {
+      &:nth-child(1) {
+        -ms-flex-order: 1;
+        order: 1;
+      }
+      &:nth-child(2) {
+        -ms-flex-order: 2;
+        order: 2;
+      }
+      &:nth-child(3) {
+        -ms-flex-order: 3;
+        order: 3;
+      }
+      &:nth-child(4) {
+        -ms-flex-order: 4;
+        order: 4;
+      }
+    }
+    @media (max-width: 575.98px) {
+      .description-col {
+        &:nth-child(1) {
+          -ms-flex-order: 1;
+          order: 1;
+        }
+        &:nth-child(2) {
+          -ms-flex-order: 2;
+          order: 2;
+        }
+        &:nth-child(3) {
+          -ms-flex-order: 4;
+          order: 4;
+        }
+        &:nth-child(4) {
+          -ms-flex-order: 3;
+          order: 3;
+        }
+      }
+    }
+  }
   .image-wrapper {
     img {
       padding: 10px;
