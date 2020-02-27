@@ -46,7 +46,7 @@ const PlannerList: React.SFC<Props> = ({items, country, city, themes})=> {
   }
 
   const handleLength = () => {
-    setLength(length + 4)
+    setLength(length + 8)
     if(items.length <= length) {
       setVisible(false)
     }
