@@ -3,14 +3,14 @@ import axios from 'axios'
 import Router from 'next/router'
 import { NextPage } from 'next'
 import moment from 'moment'
-import { Form, Input, Button, DatePicker, Checkbox, Modal, Row, Col, Radio, message } from 'antd'
+import { Form, Input, Button, DatePicker, Checkbox, Row, Col, Radio, message } from 'antd'
 import { MailOutlined, LockOutlined } from '@ant-design/icons'
-import AddressFinder from '@components/AddressFinder'
+// import AddressFinder from '@components/AddressFinder'
 import '@assets/Signup.less'
 
 const Signup: NextPage = ()=> {
   const [form] = Form.useForm();
-  const [visible, setVisible] = React.useState(false);
+  // const [visible, setVisible] = React.useState(false);
 
   const onFinish = (values: any) => {
     const data = {
@@ -21,9 +21,12 @@ const Signup: NextPage = ()=> {
       phone: values.phone,
       birth: values.birth.format('YYYY-MM-DD'),
       sex: values.sex,
-      address_zonecode: values.address.zonecode,
-      address_fulladdress: values.address.fulladdress,
-      address_detailaddress: values.address.detailaddress
+      address_zonecode: 0,
+      address_fulladdress: '',
+      address_detailaddress: ''
+      // address_zonecode: values.address.zonecode,
+      // address_fulladdress: values.address.fulladdress,
+      // address_detailaddress: values.address.detailaddress
     }
     axios.post('/api/auth/signup', data).then( result => {
       if(result.status == 200) {
@@ -45,22 +48,22 @@ const Signup: NextPage = ()=> {
     return current > moment() || current < moment('1900/01/01');
   }
 
-  const handleOk = () => {
-    setVisible(true)
-  }
+  // const handleOk = () => {
+  //   setVisible(true)
+  // }
 
-  const handleCancel = () => {
-    setVisible(false)
-  }
+  // const handleCancel = () => {
+  //   setVisible(false)
+  // }
 
-  const handleAddress = (zonecode: string, fulladdress: string) => {
-    form.setFieldsValue({
-      address: {
-        zonecode: zonecode,
-        fulladdress: fulladdress
-      } 
-    })
-  }
+  // const handleAddress = (zonecode: string, fulladdress: string) => {
+  //   form.setFieldsValue({
+  //     address: {
+  //       zonecode: zonecode,
+  //       fulladdress: fulladdress
+  //     } 
+  //   })
+  // }
 
   return (
     <div className='signup-page'>
@@ -146,7 +149,7 @@ const Signup: NextPage = ()=> {
                   disabledDate={disabledDate}
                 />
               </Form.Item>
-              <Form.Item label='주소'>
+              {/* <Form.Item>
                 <Input.Group>
                   <Form.Item
                     name={['address', 'zonecode']}
@@ -184,7 +187,7 @@ const Signup: NextPage = ()=> {
                     handleAddress={handleAddress}
                   />
                 </Modal>
-              </Form.Item>
+              </Form.Item> */}
               <Form.Item
                 name='caution'
                 valuePropName='checked'

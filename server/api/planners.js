@@ -261,8 +261,9 @@ planners.get('/:id', async ctx => {
 planners.post('/', async ctx => {
   const {title, UserId, country_name, city_name, thumbnail, contents, themes_id} = ctx.request.body
   
+  const checked_country_name = country_name === '대한민국' ? '한국' : country_name
   let result1 = await Models.Country.findOne({
-    where: { country_name: country_name }
+    where: { country_name: checked_country_name }
   })
   if (result1 === null ) {
     result1 = await Models.Country.create({
@@ -293,6 +294,46 @@ planners.post('/', async ctx => {
     blog_name: '',
     blog_link: '',
   })
+  ctx.body = result
+})
+
+planners.put('/:id', async ctx => {
+  const { id } = ctx.params
+  const { title, country_name, city_name, thumbnail, contents, themes_id } = ctx.request.body
+
+  const checked_country_name = country_name === '대한민국' ? '한국' : country_name
+  let result1 = await Models.Country.findOne({
+    where: { country_name: checked_country_name }
+  })
+  if (result1 === null ) {
+    result1 = await Models.Country.create({
+      country_name: country_name
+    })
+  }
+  const CountryId = result1.dataValues.id
+
+  let result2 = await Models.City.findOne({
+    where: { city_name: city_name }
+  })
+  if (result2 === null ) {
+    result2 = await Models.City.create({
+      CountryId: CountryId,
+      city_name: city_name
+    })
+  }
+  const CityId = result2.dataValues.id
+
+  const result = await Models.Planner.update({
+    title: title,
+    CountryId: CountryId,
+    CityId: CityId,
+    thumbnail: thumbnail,
+    contents: contents,
+    themes_id: themes_id,
+  }, {
+    where: { id: id }
+  })
+  
   ctx.body = result
 })
 

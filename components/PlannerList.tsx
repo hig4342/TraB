@@ -21,7 +21,7 @@ type Props = {
 const PlannerList: React.SFC<Props> = ({items, country, city, themes})=> {
 
   const [length, setLength] = React.useState(12)
-  const [visible, setVisible] = React.useState(items.length >= 12)
+  const [visible, setVisible] = React.useState(items.length <= 12)
   const { isLogin } = useUser()
   
   const options: ColProps = {
@@ -47,7 +47,7 @@ const PlannerList: React.SFC<Props> = ({items, country, city, themes})=> {
 
   const handleLength = () => {
     setLength(length + 4)
-    if(items.length >= length) {
+    if(items.length <= length) {
       setVisible(false)
     }
   }
