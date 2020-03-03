@@ -2,9 +2,10 @@ import * as React from 'react'
 import axios from 'axios'
 import { NextPage } from 'next'
 import Link from 'next/link'
-import { Table, Button } from 'antd'
+import { Table, Button, Input } from 'antd'
 import { User } from 'type'
-import { ColumnsType } from 'antd/lib/table/interface'
+import { ColumnsType, FilterDropdownProps } from 'antd/lib/table/interface'
+import { SearchOutlined, UndoOutlined } from '@ant-design/icons'
 
 type Props = {
   designer: User[]
@@ -38,6 +39,43 @@ const AdminDesigners: NextPage<Props> = ({ designer, designerCount })=> {
     })
   }
 
+  const getColumnSearchProps = (dataIndex: string) => ({
+    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }: FilterDropdownProps) => (
+      <div style={{ padding: 8 }}>
+        <Input 
+          placeholder={`${dataIndex} 검색`}
+          value={selectedKeys[0]}
+          onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+          onPressEnter={confirm}
+          style={{ width: 208, marginBottom: 8, display: 'block' }}
+        />
+        <Button
+          type='primary'
+          onClick={confirm}
+          icon={<SearchOutlined />}
+          style={{ width: 100, marginRight: 8 }}
+        >
+          검색
+        </Button>
+        <Button
+          type='danger'
+          onClick={clearFilters}
+          icon={<UndoOutlined />}
+          style={{ width: 100 }}
+        >
+          초기화
+        </Button>
+      </div>
+    ),
+    filterIcon: (filtered: boolean) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+    onFilter: (value: any, record: any) => (
+      record[dataIndex]
+        .toString()
+        .toLowerCase()
+        .includes(value.toLowerCase())
+    )
+  })
+
   const columns: ColumnsType<User> = [{
     title: '번호',
     dataIndex: 'id',
@@ -47,7 +85,8 @@ const AdminDesigners: NextPage<Props> = ({ designer, designerCount })=> {
     title: '이름',
     dataIndex: 'name',
     key: 'name',
-    align: 'center'
+    align: 'center',
+    ...getColumnSearchProps('name')
   }, {
     title: '은행 / 계좌번호',
     key: 'account_num',

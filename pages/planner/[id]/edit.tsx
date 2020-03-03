@@ -123,7 +123,7 @@ const EditPlanner: NextPage<Props> = ({ planner, themes })=> {
           wrapperCol={{xs: 22, sm: 23}}
         >
           <Checkbox.Group
-            options={themes.filter(theme => (theme.name !== 'P(편)한 계획표' && theme.name !== 'ITP 여행계획표')).map(theme => ({ label: theme.name, value: theme.id }))}
+            options={themes.filter(theme => (theme.name !== 'Premium 계획표' && theme.name !== 'ITP 여행계획표')).map(theme => ({ label: theme.name, value: theme.id }))}
           />
         </Form.Item>
         <Form.Item

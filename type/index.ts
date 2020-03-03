@@ -73,6 +73,7 @@ export type Planner = {
   upload_state: number;
   payment_state: number;
   hit: number;
+  createdAt: Date;
   City: City;
   Country: Country;
   Replies: Reply[];

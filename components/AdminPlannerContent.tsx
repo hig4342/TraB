@@ -159,7 +159,7 @@ const AdminPlannerContent: React.SFC<Props> = ({planner, themes}) => {
           wrapperCol={{xs: 22, sm: 23}}
         >
           <Checkbox.Group
-            options={themes.sort((a, b) => (a.name === 'P(편)한 계획표' || a.name === 'ITP 여행계획표' ? b.name !== 'P(편)한 계획표' ? -1 : 1 : 1)).map(theme => ({ label: theme.name, value: theme.id }))}
+            options={themes.sort((a, b) => (a.name === 'Premium 계획표' || a.name === 'ITP 여행계획표' ? b.name !== 'Premium 계획표' ? -1 : 1 : 1)).map(theme => ({ label: theme.name, value: theme.id }))}
           />
         </Form.Item>
         {
@@ -204,7 +204,7 @@ const AdminPlannerContent: React.SFC<Props> = ({planner, themes}) => {
           </div>
           <div className='button-wrapper'>
             <Button type='danger' shape='round' onClick={rejectPlanner}>계획표 거부</Button>
-            <Button className='premium' shape='round' onClick={changePremium}>편한계획표 변경</Button>
+            <Button className='premium' shape='round' onClick={changePremium}>프리미엄 변경</Button>
             <Button className='itp' shape='round' onClick={changeItp}>ITP 변경</Button>
           </div>
           <div className='button-wrapper'>

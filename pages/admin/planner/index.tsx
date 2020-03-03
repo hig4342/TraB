@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Table, Button } from 'antd'
 import { Planner } from 'type'
 import { ColumnsType } from 'antd/lib/table/interface'
+import moment from 'moment'
 
 const baseUrl = process.env.NODE_ENV === 'production' ? 'https://trab.co.kr' : ''
 
@@ -37,10 +38,13 @@ const AdminPlannerList: NextPage<Props> = ({planner_data})=> {
   }
 
   const columns: ColumnsType<Planner> = [{
-    title: '번호',
-    dataIndex: 'id',
-    key: 'id',
-    align: 'center'
+    title: '올린 날짜',
+    dataIndex: 'createdAt',
+    key: 'createdAt',
+    align: 'center',
+    sorter: (a, b) => (moment(a.createdAt).unix() - moment(b.createdAt).unix()),
+    defaultSortOrder: 'descend',
+    render: (createdAt: Date) => (moment(createdAt).format('YYYY-MM-DD'))
   }, {
     title: '이름',
     dataIndex: ['User', 'nickname'],

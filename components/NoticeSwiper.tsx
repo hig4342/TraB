@@ -44,7 +44,7 @@ const NoticeSwiper: React.SFC<Props> = ({items, inline=false, rounded=false})=> 
           if(item.board_state === 1){
             return (
               <div className='item-wrapper' key={index}>
-                <Link href={`/board/${item.id}`}><img src={item.banner_image} /></Link>
+                <Link  href={`/board/${item.id}`}><img src={item.banner_image} /></Link>
               </div>
             )
           } else {
