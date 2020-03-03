@@ -28,6 +28,7 @@ const PlannerWrite: NextPage<Props> = ({themes})=> {
   const {user, isLogin} = useUser()
   const [loading, setLoading] = React.useState(false)
   const [current, setCurrent] = React.useState(0)
+  const [disabled, setDisabled] = React.useState(true)
 
   React.useEffect(() => {
     if(!isLogin) {
@@ -78,6 +79,7 @@ const PlannerWrite: NextPage<Props> = ({themes})=> {
 
   const next = () => {
     const num = current + 1
+    if( current === 1 ) setDisabled(false)
     setCurrent(num)
   }
   
@@ -91,7 +93,7 @@ const PlannerWrite: NextPage<Props> = ({themes})=> {
         <Steps type='navigation' current={current} onChange={handleStep}>
           <Steps.Step title='유의사항'/>
           <Steps.Step title='계획표 작성법'/>
-          <Steps.Step title='계획표 작성하기'/>
+          <Steps.Step title='계획표 작성하기' disabled={disabled}/>
         </Steps>
       </div>
       {
@@ -160,7 +162,6 @@ const PlannerWrite: NextPage<Props> = ({themes})=> {
             <Form.Item
               label='제목'
               name='title'
-              required={false}
               rules={[{ required: true, message: '제목을 입력하세요!' },]}
               wrapperCol={{xs: 24, sm: 12}}
             >
@@ -169,7 +170,6 @@ const PlannerWrite: NextPage<Props> = ({themes})=> {
             <Form.Item
               label='나라'
               name='country'
-              required={false}
               rules={[{ required: true, message: '나라를 입력하세요!' },]}
               wrapperCol={{xs: 24, sm: 12}}
             >
@@ -178,7 +178,6 @@ const PlannerWrite: NextPage<Props> = ({themes})=> {
             <Form.Item
               label='도시'
               name='city'
-              required={false}
               rules={[{ required: true, message: '도시를 입력하세요!' },]}
               wrapperCol={{xs: 24, sm: 12}}
             >
@@ -198,7 +197,6 @@ const PlannerWrite: NextPage<Props> = ({themes})=> {
               label='대표 사진'
               name='thumbnail'
               className='thumbnail-wrapper'
-              required={false}
               rules={[{ required: true, message: '썸네일에 들어갈 사진을 업로드해주세요.' },]}
               wrapperCol={{xs: 21, sm: 6}}
             >
