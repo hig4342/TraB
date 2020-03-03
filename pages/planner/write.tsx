@@ -88,7 +88,7 @@ const PlannerWrite: NextPage<Props> = ({themes})=> {
   return (
     <div className='planner-write' style={{width: '100%'}}>
       <div className='planner-write-steps'>
-        <Steps current={current} onChange={handleStep}>
+        <Steps type='navigation' current={current} onChange={handleStep}>
           <Steps.Step title='유의사항'/>
           <Steps.Step title='계획표 작성법'/>
           <Steps.Step title='계획표 작성하기'/>
