@@ -21,7 +21,7 @@ boards.post('/', async ctx => {
 
 boards.get('/notices', async ctx => {
   const result = await Models.Board.findAll({
-    order: [['id', 'DESC']],
+    order: [['id', 'ASC']],
     where: { board_state: 1, visible: true }
   })
 
@@ -31,7 +31,7 @@ boards.get('/notices', async ctx => {
 boards.get('/advertisements', async ctx => {
   const { region } = ctx.query
   const result = await Models.Board.findAll({
-    order: [['id', 'DESC']],
+    order: [['id', 'ASC']],
     where: {
       board_state: 2,
       visible: true,
