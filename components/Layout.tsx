@@ -21,6 +21,20 @@ const AppLayout: React.SFC = ({children}) => {
   const [loading, setLoading] = React.useState(false)
   const [toolbarClass, setToolbarClass] = React.useState('toolbar-wrapper')
 
+  React.useEffect(() => {
+    if(window) {
+      window.addEventListener('contextmenu', (e) => {
+        alert('복사금지')
+        e.preventDefault()
+      }, false);
+      window.addEventListener('selectstart', (e) => {
+        e.preventDefault()
+      }, false);
+      window.addEventListener('dragstart', (e) => {
+        e.preventDefault()
+      }, false);
+    }
+  }, [])
   Router.events.on('routeChangeStart', _url => {
     setLoading(true)
   })
