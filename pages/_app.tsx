@@ -36,6 +36,8 @@ class MyApp extends App {
           <meta property="og:url" content="http://trab.co.kr" />
           <meta name='twitter:title' content='트래비(TraB)' />
           <meta name='twitter:image' content='https://trab.co.kr/logo.png' />
+          <script async src="https://www.googletagmanager.com/gtag/js?id=UA-161600552-1"></script>
+          <script src='/analytics.js'/>
         </Head>
         <Layout>
           <Component {...pageProps} />
